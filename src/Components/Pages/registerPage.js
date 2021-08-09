@@ -1,10 +1,10 @@
 import React from 'react';
-import Navbar from '../Headers/LoginSignup/Navbar'
+import SignupHeader from '../Headers/SignupHeader';
 
 const RegisterPage = () => {
   return (
     <div>
-      <Navbar />
+      <SignupHeader />
     </div>
   )
 }
