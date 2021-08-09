@@ -30,4 +30,25 @@ a {
   text-decoration: none;
 }
 
+.register-form {
+  margin: 10rem 4rem;
+}
+
+input {
+  margin-bottom: 0.5rem;
+}
+
+.input {
+  position: relative;
+}
+.input__field {
+  box-sizing: border-box;
+  display: block;
+  width: 15rem;
+  height: 2.2rem;
+  border: 3px solid #B6B6B6;
+  border-radius: 4px;
+  padding: 0.5rem;
+}
+
 /*# sourceMappingURL=style.css.map */

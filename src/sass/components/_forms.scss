@@ -1,0 +1,21 @@
+@import '../utils/variables';
+
+.register-form{
+  margin: 10rem 4rem;
+}
+input {
+  margin-bottom: 0.5rem;
+}
+.input {
+  position: relative;
+  &__field {
+    box-sizing: border-box;
+    display: block;
+    width: 15rem;
+    height: 2.2rem;
+    border: 3px solid $border-color;
+    border-radius: 4px;
+    padding: .5rem;
+  }
+
+}
