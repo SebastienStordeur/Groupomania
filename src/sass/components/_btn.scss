@@ -1,0 +1,12 @@
+@import '../utils/variables';
+
+.btn {
+  height: 2.2rem;
+  width: 9rem;
+  border: 2px solid $border-color;
+  border: 4px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}

@@ -44,7 +44,9 @@ const RegisterForm = () => {
           required
         />
       </label>
-      <button type="submit" className="register-btn btn">S'inscrire</button>
+      <div className="btn-box register-box-btn">
+        <button type="submit" className="register-btn btn">S'inscrire</button>
+      </div>
     </div>
   );
 };

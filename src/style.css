@@ -13,6 +13,7 @@
 }
 .signup-header nav ul li {
   margin: 0 2rem;
+  color: #273746;
 }
 
 * {
@@ -53,6 +54,11 @@ input {
   padding: 0.5rem;
 }
 
+.btn-box {
+  display: flex;
+  justify-content: center;
+}
+
 .register-body {
   display: flex;
   justify-content: center;
@@ -69,6 +75,17 @@ input {
   height: 100%;
   position: absolute;
   object-fit: cover;
+}
+
+.btn {
+  height: 2.2rem;
+  width: 9rem;
+  border: 2px solid #B6B6B6;
+  border: 4px;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=style.css.map */
