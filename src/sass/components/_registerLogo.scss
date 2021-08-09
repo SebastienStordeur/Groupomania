@@ -1,0 +1,17 @@
+.register-body {
+  display: flex;
+  justify-content: center;
+  margin-top: 6.5rem;
+  &__logo-container {
+    position: relative;
+    margin-top: 4rem;
+    width: 25rem;
+    height: 25rem;
+    .register-logo-img {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      object-fit: cover;
+    }
+  }
+}

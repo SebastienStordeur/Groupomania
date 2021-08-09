@@ -2,9 +2,6 @@ import React from "react";
 import '../../style.css';
 
 const RegisterForm = () => {
-
-
-
   return (
     <div className="register-form">
       <label className="input" value="Nom de famille">
@@ -47,7 +44,7 @@ const RegisterForm = () => {
           required
         />
       </label>
-      <button type="submit">S'inscrire</button>
+      <button type="submit" className="register-btn btn">S'inscrire</button>
     </div>
   );
 };
