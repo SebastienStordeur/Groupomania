@@ -1,5 +1,5 @@
 import React from "react";
-import logo from '../../images/icon-above-font.png';
+import logo from '../../../images/icon-above-font.png';
 
 const MainLogo = () => {
   return (

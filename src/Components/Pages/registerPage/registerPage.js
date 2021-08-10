@@ -1,6 +1,6 @@
 import React from 'react';
-import SignupHeader from '../Headers/SignupHeader';
-import RegisterBody from '../body/registerBody';
+import SignupHeader from './header/SignupHeader';
+import RegisterBody from './registerBody';
 
 const RegisterPage = () => {
   return (

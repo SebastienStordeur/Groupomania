@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 //Pages 
-import RegisterPage from './Components/Pages/registerPage';
+import RegisterPage from './Components/Pages/registerPage/registerPage';
 
 function App() {
   return (

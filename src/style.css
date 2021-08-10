@@ -1,19 +1,35 @@
 .signup-header {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   height: 4rem;
-  background-color: #FFD7D7;
+  background-color: #FD2D01;
   font-family: "Poppins", sans-serif;
   font-size: 20px;
   font-weight: 500;
+}
+.signup-header nav {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 6rem;
 }
 .signup-header nav ul {
   display: flex;
 }
 .signup-header nav ul li {
-  margin: 0 2rem;
-  color: #273746;
+  margin: 0 0.5rem;
+}
+
+.logo-container {
+  height: 4rem;
+  width: 4rem;
+  position: relative;
+}
+
+.logo-header {
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 
 * {
@@ -80,12 +96,25 @@ input {
 .btn {
   height: 2.2rem;
   width: 9rem;
-  border: 2px solid #B6B6B6;
-  border: 4px;
+  border: 2px solid #FFFFFF;
+  border-radius: 4px;
   font-family: "Poppins", sans-serif;
   font-size: 15px;
   font-weight: 500;
   cursor: pointer;
+}
+
+.register-page-btn {
+  background-color: #FD2D01;
+  width: 6rem;
+  color: #FFFFFF;
+}
+
+.signup-btn {
+  width: 8rem;
+  border: 2px solid #FD2D01;
+  background-color: #FFFFFF;
+  color: #FD2D01;
 }
 
 /*# sourceMappingURL=style.css.map */

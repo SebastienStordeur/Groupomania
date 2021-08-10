@@ -3,10 +3,23 @@
 .btn {
   height: 2.2rem;
   width: 9rem;
-  border: 2px solid $border-color;
-  border: 4px;
+  border: 2px solid $white;
+  border-radius: 4px;
   font-family: 'Poppins', sans-serif;
   font-size: 15px;
   font-weight: 500;
   cursor: pointer;
+}
+
+.register-page-btn {
+  background-color: $secondary-color;
+  width: 6rem;
+  color: $white;
+}
+
+.signup-btn {
+  width: 8rem;
+  border: 2px solid $secondary-color;
+  background-color: $white;
+  color: $secondary-color;
 }

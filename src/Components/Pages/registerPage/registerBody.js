@@ -1,7 +1,7 @@
 import React from 'react'
-import '../../style.css';
-import RegisterForm from '../forms/RegisterForm';
-import MainLogo from '../SignupRegisterPages/MainLogo';
+import '../../../style.css';
+import RegisterForm from './RegisterForm';
+import MainLogo from './MainLogo';
 
 const RegisterBody = () => {
   return (

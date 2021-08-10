@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "./LoginSignup/Navbar";
-import '../../style.css';
+import Navbar from "./Navbar";
+import '../../../../style.css';
 
 const SignupHeader = () => {
   return (
