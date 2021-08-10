@@ -3,7 +3,7 @@ import '../../../style.css';
 
 const RegisterForm = () => {
   return (
-    <div className="register-form">
+    <form className="register-form">
       <label className="input" value="Nom de famille">
         <input
           className="input__field lastname-input"
@@ -47,7 +47,7 @@ const RegisterForm = () => {
       <div className="btn-box register-box-btn">
         <button type="submit" className="register-btn btn">S'inscrire</button>
       </div>
-    </div>
+    </form>
   );
 };
 

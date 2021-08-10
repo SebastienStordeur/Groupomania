@@ -47,6 +47,7 @@ a {
   text-decoration: none;
 }
 
+/***************register form *************/
 .register-form {
   margin: 10rem 4rem;
 }
@@ -73,6 +74,11 @@ input {
 .btn-box {
   display: flex;
   justify-content: center;
+}
+
+/****** signup form *****/
+.signup-form {
+  margin: 14rem 4rem;
 }
 
 .register-body {

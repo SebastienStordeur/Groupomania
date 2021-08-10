@@ -12,5 +12,4 @@ const RegisterBody = () => {
   )
 }
 
-
 export default RegisterBody;
