@@ -1,15 +1,16 @@
-import React, {useState} from "react";
+import React, {useEffect} from "react";
 import "../../../style.css";
 import { AiFillEye} from "react-icons/ai";
 
 const RegisterForm = () => {
 
   const showPassword = (e) => {
-    //const psw = document.querySelector('.password1')
     const psw = e.target.parentNode.parentNode.firstChild
+    e.preventDefault();
     if (psw.type === "password") psw.type = "text"
     else psw.type = "password"
   }
+
 
   return (
     <form className="register-form">
