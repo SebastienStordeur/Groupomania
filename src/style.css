@@ -37,9 +37,16 @@ a {
 
 /***************register form *************/
 .register-form {
+  display: flex;
+  flex-direction: column;
   margin: 10rem 4rem;
 }
 
+@media (max-width: 800px) {
+  .register-form {
+    margin: 10rem auto 5rem auto;
+  }
+}
 input {
   margin-bottom: 0.5rem;
   font-family: "Poppins", sans-serif;
@@ -64,11 +71,21 @@ input {
   justify-content: center;
 }
 
+@media (max-width: 800px) {
+  .register-form {
+    justify-content: center;
+  }
+}
 /****** signup form *****/
 .signup-form {
   margin: 14rem 4rem;
 }
 
+@media (max-width: 800px) {
+  .signup-form {
+    margin: 10rem auto 5rem auto;
+  }
+}
 .register-body {
   display: flex;
   justify-content: center;
@@ -87,6 +104,17 @@ input {
   object-fit: cover;
 }
 
+@media (max-width: 800px) {
+  .register-body {
+    margin-top: -5rem;
+    flex-direction: column-reverse;
+  }
+  .register-body__logo-container {
+    width: 20rem;
+    height: 20rem;
+    margin: -2rem auto 0 auto;
+  }
+}
 .btn {
   height: 2.2rem;
   width: 9rem;
