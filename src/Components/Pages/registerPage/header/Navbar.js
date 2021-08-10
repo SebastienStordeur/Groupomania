@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <ul className="navbar__list">
-        <Link to="/register">
+        <Link to="/">
           <li><button className="btn register-page-btn">S'inscrire</button></li>
         </Link>
         <Link to="/signup">
