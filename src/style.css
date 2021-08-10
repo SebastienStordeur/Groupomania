@@ -11,25 +11,13 @@
 .signup-header nav {
   display: flex;
   justify-content: space-between;
-  margin-right: 6rem;
+  margin-right: 1rem;
 }
 .signup-header nav ul {
   display: flex;
 }
 .signup-header nav ul li {
   margin: 0 0.5rem;
-}
-
-.logo-container {
-  height: 4rem;
-  width: 4rem;
-  position: relative;
-}
-
-.logo-header {
-  position: absolute;
-  width: 100%;
-  height: 100%;
 }
 
 * {
