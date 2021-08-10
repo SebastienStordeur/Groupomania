@@ -12,7 +12,7 @@
   }
 }
 input {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   font-family: "Poppins", sans-serif;
   font-size: 14px;
 }
@@ -32,7 +32,11 @@ input {
   display: flex;
   justify-content: center;
 }
-
+.show-hide-icon {
+  position: absolute;
+  margin-top: -2.5rem;
+  margin-left: 16rem;
+}
 @media (max-width: 800px) {
   .register-form {
     justify-content: center;

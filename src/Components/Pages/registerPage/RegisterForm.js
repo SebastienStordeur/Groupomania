@@ -4,8 +4,9 @@ import { AiFillEye} from "react-icons/ai";
 
 const RegisterForm = () => {
 
-  const showPassword = () => {
-    const psw = document.querySelector('.password1')
+  const showPassword = (e) => {
+    //const psw = document.querySelector('.password1')
+    const psw = e.target.parentNode.parentNode.firstChild
     if (psw.type === "password") psw.type = "text"
     else psw.type = "password"
   }
@@ -55,7 +56,7 @@ const RegisterForm = () => {
           required
         />
         <div className="show-hide-icon">
-          <AiFillEye style={{ cursor: "pointer" }} />
+          <AiFillEye style={{ cursor: "pointer" }} className="show-psw" onClick={showPassword}/>
         </div>
       </label>
       <div className="btn-box register-box-btn">
