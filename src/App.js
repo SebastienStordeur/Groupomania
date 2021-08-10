@@ -1,17 +1,21 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-//Pages 
-import RegisterPage from './Components/Pages/registerPage/registerPage';
-import SignupPage from './Components/Pages/signupPage/SignupPage';
+//Pages
+import RegisterPage from "./Components/Pages/registerPage/registerPage";
+import SignupPage from "./Components/Pages/signupPage/SignupPage";
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Switch>
-          <Route exact path='/'><RegisterPage /></Route>
-          <Route path='/signup'><SignupPage /></Route>
+          <Route exact path="/">
+            <RegisterPage />
+          </Route>
+          <Route path="/signup">
+            <SignupPage />
+          </Route>
         </Switch>
       </Router>
     </div>

@@ -1,7 +1,15 @@
-import React from "react";
-import '../../../style.css';
+import React, {useState} from "react";
+import "../../../style.css";
+import { AiFillEye} from "react-icons/ai";
 
 const RegisterForm = () => {
+
+  const showPassword = () => {
+    const psw = document.querySelector('.password1')
+    if (psw.type === "password") psw.type = "text"
+    else psw.type = "password"
+  }
+
   return (
     <form className="register-form">
       <label className="input" value="Nom de famille">
@@ -35,6 +43,9 @@ const RegisterForm = () => {
           placeholder="Mot de passe"
           required
         />
+        <div className="show-hide-icon">
+          <AiFillEye style={{ cursor: "pointer" }} className="show-psw" onClick={showPassword}/>
+        </div>
       </label>
       <label className="input">
         <input
@@ -43,9 +54,14 @@ const RegisterForm = () => {
           placeholder="Confirmez le mot de passe"
           required
         />
+        <div className="show-hide-icon">
+          <AiFillEye style={{ cursor: "pointer" }} />
+        </div>
       </label>
       <div className="btn-box register-box-btn">
-        <button type="submit" className="register-btn btn">S'inscrire</button>
+        <button type="submit" className="register-btn btn">
+          S'inscrire
+        </button>
       </div>
     </form>
   );
