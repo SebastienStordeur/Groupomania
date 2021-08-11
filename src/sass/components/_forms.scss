@@ -36,7 +36,7 @@ input {
   position: absolute;
   margin-top: -2.5rem;
   margin-left: 16rem;
-  z-index: 2;
+  z-index: 99;
 }
 @media (max-width: 800px) {
   .register-form {
