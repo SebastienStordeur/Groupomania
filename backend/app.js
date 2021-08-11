@@ -8,7 +8,7 @@ const app = express();
 //routes
 
 //Database
-const mySQLConnecton = mysql.createConnection({
+const mySQLConnection = mysql.createConnection({
   host: "localhost",
   user: process.env.DB_USER,
   password: process.env.DB_PSW,
@@ -16,9 +16,9 @@ const mySQLConnecton = mysql.createConnection({
   multipleStatements: true
 })
 
-mySQLConnecton.connect((error) => {
+mySQLConnection.connect((error) => {
   if(!error) console.log("connected")
-  else console.log("connection failed")
+  else console.log("connection failed" + error)
 })
 
 app.use(bodyParser.json());
