@@ -1,13 +1,13 @@
 import React from "react";
 import MainLogo from "../registerPage/MainLogo";
-import SignupForm from "./SignupForm";
+import LoginForm from "./LoginForm";
 
-const SignupBody = () => {
+const LoginBody = () => {
   return (
     <section className="register-body">
       <MainLogo />
-      <SignupForm />
+      <LoginForm />
     </section>
   );
 };
-export default SignupBody;
+export default LoginBody;

@@ -1,7 +1,7 @@
 import React from "react";
 import { AiFillEye} from "react-icons/ai";
 
-const SignupForm = () => {
+const LoginForm = () => {
   const showPassword = (e) => {
     const psw = e.target.parentNode.parentNode.firstChild;
     e.preventDefault();
@@ -41,4 +41,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default LoginForm;

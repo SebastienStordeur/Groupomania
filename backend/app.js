@@ -23,4 +23,7 @@ mySQLConnection.connect((error) => {
 
 app.use(bodyParser.json());
 
+//Routes
+app.use("/api/auth", userRoutes); 
+
 module.exports = app;

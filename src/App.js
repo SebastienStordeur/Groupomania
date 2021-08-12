@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 //Pages
 import RegisterPage from "./Components/Pages/registerPage/registerPage";
-import SignupPage from "./Components/Pages/signupPage/SignupPage";
+import LoginPage from "./Components/Pages/loginPage/LoginPage";
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
             <RegisterPage />
           </Route>
           <Route path="/signup">
-            <SignupPage />
+            <LoginPage />
           </Route>
         </Switch>
       </Router>
