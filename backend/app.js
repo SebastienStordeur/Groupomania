@@ -6,6 +6,8 @@ require('dotenv').config({path: './config/.env'})
 const app = express();
 
 //routes
+const userRoutes = require('./routes/userRoutes');
+
 
 //Database
 const mySQLConnection = mysql.createConnection({
@@ -20,6 +22,8 @@ mySQLConnection.connect((error) => {
   if(!error) console.log("connected")
   else console.log("connection failed" + error)
 })
+
+
 
 app.use(bodyParser.json());
 

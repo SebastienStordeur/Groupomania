@@ -19,6 +19,8 @@
     "mysql": "^2.18.1",
     "nodemon": "^2.0.12",
     "password-validator": "^5.1.1",
+    "sequelize": "^6.6.5",
+    "sequelize-cli": "^6.2.0",
     "validator": "^13.6.0"
   }
 }
