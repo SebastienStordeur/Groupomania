@@ -24,10 +24,13 @@ mySQLConnection.connect((error) => {
 })
 
 
-
+//Request parsing
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //Routes
-app.use("/api/auth", userRoutes); 
+app.use("/api/auth", userRoutes);
+
+
 
 module.exports = app;
