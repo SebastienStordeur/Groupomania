@@ -19,9 +19,9 @@ const mySQLConnection = mysql.createConnection({
 })
 
 mySQLConnection.connect((error) => {
-  if(!error) console.log("connected")
+  if(!error) console.log("connected to the database")
   else console.log("connection failed" + error)
-})
+}) 
 
 
 //Request parsing

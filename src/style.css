@@ -146,4 +146,43 @@ input {
   color: #FD2D01;
 }
 
+.main-header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 4rem;
+  background-color: #FD2D01;
+}
+
+.icons-container {
+  display: flex;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
+.menu-icn {
+  margin: 0 1rem;
+}
+
+.search-form {
+  position: relative;
+  margin-top: auto;
+}
+.search-form label {
+  display: none;
+}
+.search-form__input {
+  padding-left: 4px;
+  height: 2.2rem;
+  width: 13rem;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+.search-form__icn {
+  position: absolute;
+  margin-top: 0.6rem;
+  margin-left: 11.5rem;
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=style.css.map */

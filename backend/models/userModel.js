@@ -7,10 +7,12 @@ User.init(
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
+      autoIncrement: true,
+      allowNull: false
     },
     lastName: DataTypes.STRING,
     firstName: DataTypes.STRING,
-    email: DataTypes.STRING,
+    email: DataTypes.STRING, unique: true,
     password: DataTypes.STRING,
   },
   {
@@ -21,5 +23,7 @@ User.init(
     tableName: "users"
   }
 );
+
+User.sync()
 
 module.exports = { User };
