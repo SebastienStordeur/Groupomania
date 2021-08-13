@@ -4,11 +4,42 @@ import { AiFillEye} from "react-icons/ai";
 
 const RegisterForm = () => {
 
+  const form = document.querySelector('.register-form');
+  const lastNameValue = document.querySelector('.lastname-input').value;
+  const firstNameValue = document.querySelector('.firstname-input').value;
+  const emailValue = document.querySelector('.email-input').value;
+
+  const letters=/^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
+  const emailRegex= /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+
   const showPassword = (e) => {
     const psw = e.target.parentNode.parentNode.firstChild
     e.preventDefault();
     if (psw.type === "password") psw.type = "text"
     else psw.type = "password"
+  }
+
+  const registerFormChecking = () => {
+
+    lettersChecking();
+    emailChecking();
+
+
+    const lettersChecking = () => {
+      if(letters.test(lastNameValue) && letters.test(firstNameValue)) return true
+      else {
+        alert('Caractères interdits dans les champs Nom et/ou Prénom');
+        return false;
+      }
+    }
+    const emailChecking = () => {
+      if(emailRegex.test(emailValue)) return true;
+      else {
+        alert('Veuillez vérifier votre email');
+        return false;
+      }
+    }
+
   }
 
   return (
