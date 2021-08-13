@@ -151,6 +151,7 @@ input {
   justify-content: space-around;
   align-items: center;
   height: 4rem;
+  width: 100%;
   background-color: #FD2D01;
 }
 
@@ -183,6 +184,31 @@ input {
   margin-top: 0.6rem;
   margin-left: 11.5rem;
   cursor: pointer;
+}
+
+.account-info {
+  width: 25%;
+  height: 25rem;
+  margin-top: 4rem;
+  padding-top: 0.5rem;
+  background-color: grey;
+}
+.account-info__title {
+  text-align: center;
+}
+.account-info__container-photo {
+  position: relative;
+  margin: 2rem 1.5rem;
+  background-color: white;
+  height: 5rem;
+  width: 5rem;
+  border-radius: 50%;
+}
+.account-info__photo {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 
 /*# sourceMappingURL=style.css.map */
