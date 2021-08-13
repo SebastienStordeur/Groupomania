@@ -7,6 +7,7 @@ const app = express();
 
 //routes
 const userRoutes = require('./routes/userRoutes');
+const postRoutes = require('./routes/postRoutes');
 
 
 //Database
@@ -30,7 +31,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //Routes
 app.use("/api/auth", userRoutes);
-
+app.use("/api/post", postRoutes);
 
 
 module.exports = app;

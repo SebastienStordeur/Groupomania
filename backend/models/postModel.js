@@ -1,4 +1,3 @@
-const { STRING, VARCHAR } = require('mysql/lib/protocol/constants/types');
 const { Sequelize, Model, DataTypes } = require('sequelize');
 const sequelize = new Sequelize("sqlite::memory");
 
@@ -10,11 +9,23 @@ Post.init(
       primaryKey: true,
       allowNull: false
     },
-    Author: DataTypes.STRING(), 
-    content: DataTypes.TEXT(300),
-    imageUrl: DataTypes.VARCHAR(),
-    
+    Author: DataTypes.STRING(),         //nom et prénom de celui qui post
+    content: DataTypes.TEXT(300),       //texte du poste
+    imageUrl: DataTypes.STRING(),       //image additionnelle non requise
+    likes: DataTypes.NUMBER(),
+    dislikes: DataTypes.NUMBER(),
+    userLikes: DataTypes.ARRAY(),
+    userDislikes: DataTypes.ARRAY()
+  },    
+  {
+    sequelize,
     timestamps: true,
-    
+    updatedAt: 'updateTimeStamp',
+    modelName: "Post",
+    tableName="posts"
+  }  
+);
 
-  })
+Post.sync();
+
+module.exports = { Post };
