@@ -24,3 +24,4 @@ yarn-error.log*
 
 /backend/config
 /backend/node_modules
+/backend/images
