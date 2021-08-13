@@ -3,14 +3,14 @@ import "../../../style.css";
 import { AiFillEye} from "react-icons/ai";
 
 const RegisterForm = () => {
-
+/* 
   const form = document.querySelector('.register-form');
   const lastNameValue = document.querySelector('.lastname-input').value;
   const firstNameValue = document.querySelector('.firstname-input').value;
   const emailValue = document.querySelector('.email-input').value;
 
   const letters=/^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
-  const emailRegex= /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+  const emailRegex= /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i */
 
   const showPassword = (e) => {
     const psw = e.target.parentNode.parentNode.firstChild
@@ -19,11 +19,9 @@ const RegisterForm = () => {
     else psw.type = "password"
   }
 
-  const registerFormChecking = () => {
+  /* const registerFormChecking = () => {
 
-    lettersChecking();
-    emailChecking();
-
+    if(lettersChecking() && emailChecking()) return true
 
     const lettersChecking = () => {
       if(letters.test(lastNameValue) && letters.test(firstNameValue)) return true
@@ -39,8 +37,19 @@ const RegisterForm = () => {
         return false;
       }
     }
+    const passwordChecking = () => {
 
-  }
+    }
+  } */
+//Creation de l'objet à envoyer au back
+/*   if(registerFormChecking()) {
+    contact = {
+      lastname: lastNameValue,
+      firstName: firstNameValue,
+      email: emailValue,
+      password: emailValue,
+    }
+  } */
 
   return (
     <form className="register-form">
