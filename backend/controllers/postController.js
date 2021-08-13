@@ -1,8 +1,7 @@
 const { Post } = require('../models/postModel');
-const fs = require('fs');
+const fs = require('fs')
 
 exports.createPost = (req,res,next) => {
-  
   const postObject = JSON.parse(req.body.post);
   delete postObject.id;
   const post = new Post({
@@ -14,4 +13,8 @@ exports.createPost = (req,res,next) => {
   post.save()
     .then(() => res.status(201).JSON({ message: "Post crée" }))
     .catch(error => res.status(400).JSON({ message: "Impossible de créer ce post" + error }));
+}
+
+exports.updatePost = (req,res,next) => {
+  
 }

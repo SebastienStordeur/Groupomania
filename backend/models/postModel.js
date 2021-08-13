@@ -14,15 +14,15 @@ Post.init(
     imageUrl: DataTypes.STRING(),       //image additionnelle non requise
     likes: DataTypes.NUMBER(),
     dislikes: DataTypes.NUMBER(),
-    userLikes: DataTypes.ARRAY(),
-    userDislikes: DataTypes.ARRAY()
+/*     userLikes: DataTypes.ARRAY(),
+    userDislikes: DataTypes.ARRAY() */
   },    
   {
     sequelize,
     timestamps: true,
     updatedAt: 'updateTimeStamp',
     modelName: "Post",
-    tableName="posts"
+    tableName: "posts"
   }  
 );
 
