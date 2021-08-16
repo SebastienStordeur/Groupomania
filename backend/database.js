@@ -1,4 +1,4 @@
-/* const Sequelize = require("sequelize");
+const Sequelize = require("sequelize");
 require("dotenv").config({ path: "./config/.env" });
 
 const sequelize = new Sequelize({
@@ -9,6 +9,7 @@ const sequelize = new Sequelize({
   multipleStatements: true,
 });
 
+
+
 module.exports = sequelize;
 global.sequelize = sequelize;
- */

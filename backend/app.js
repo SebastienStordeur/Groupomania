@@ -1,6 +1,7 @@
 const express = require('express');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
+const helmet = require('helmet');
 require('dotenv').config({path: './config/.env'})
 
 const app = express();
@@ -11,7 +12,7 @@ const postRoutes = require('./routes/postRoutes');
 
 
 //Database
-const mySQLConnection = mysql.createConnection({
+/* const mySQLConnection = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PSW,
@@ -22,8 +23,8 @@ const mySQLConnection = mysql.createConnection({
 mySQLConnection.connect((error) => {
   if(!error) console.log("connected to the database")
   else console.log("connection failed" + error)
-}) 
-
+})  */
+app.use(helmet());
 
 //Request parsing
 app.use(bodyParser.json());

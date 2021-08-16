@@ -4,19 +4,6 @@ const jwt = require('jsonwebtoken');
 const { User } = require('../models/userModel');
 
 exports.register = (req,res,next) => {
-/*   create: (data, callback) => {
-    `insert into users(firstName, lastName, email, password)`, 
-    [
-      data.firstName,
-      data.lastName,
-      data.email,
-      data.password
-    ],
-    (error, results, fields) => {
-      if (error) callback(error)
-      return callback(null, results)
-    }
-  } */
   bcrypt.hash(req.body.password, 10)
     .then(hash => {
       const user = new User({
@@ -53,9 +40,9 @@ exports.getProfile = (req,res, next) => {
     .catch(error => res.status(404).json({ message: "Impossible de trouver ce profile" + error }));
 }
 
-/* exports.modifyProfile = (req,res,next) => {
+exports.updateProfile = (req,res,next) => {
   User.updateOne({ id: req.params.id })
     .then((user) => {
-      con
+      
     })
-} */
+}

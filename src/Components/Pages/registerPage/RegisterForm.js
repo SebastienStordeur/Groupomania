@@ -12,7 +12,6 @@ const RegisterForm = () => {
     else psw.type = "password"
   }
 
-
   let lastNameValue = document.querySelector('.lastname-input').value;
   let firstNameValue = document.querySelector('.firstname-input').value;
   let emailValue = document.querySelector('.email-input').value;
@@ -20,10 +19,12 @@ const RegisterForm = () => {
   let password2Value = document.querySelector('.password2').value;
 
   //Check form and forbid some character to prevent security breach
-  const registerFormChecking = () => {
+  const registerFormChecking = (e) => {
 
     const letters=/^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
     const emailRegex= /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+
+    e.preventDefault();
 
     //Input validation for lastname and firstname
     const lettersChecking = () => {
@@ -53,6 +54,27 @@ const RegisterForm = () => {
     if(lettersChecking() && emailChecking() && passwordChecking()) return true
   }
 
+    //Post form function
+  const postRegisterForm = () => {
+    let contact = JSON.parse(localStorage.getItem('RegisterForm'));
+    const promise = fetch('http://localhost:5000/api/auth/register', {
+      method: "POST",
+      body: JSON.stringify(contact),
+      headers: {
+        "Content-Type" : "application/json"
+      },
+    })
+    //Response
+    promise.then(async(response) => {
+      try {
+        localStorage.clear();
+        //const responseContent = await response.json();
+      } catch(error) {
+        alert("Une erreur s'est produite");
+      }
+    })
+  }
+
   //Creation de l'objet à envoyer au back
   if(registerFormChecking()) {
     const contact = {
@@ -62,15 +84,11 @@ const RegisterForm = () => {
       password: password2Value,
     }
   localStorage.setItem('RegisterForm', JSON.stringify(contact));
-  //post data
+  postRegisterForm()
   }
 
-  //Post form function
-
-
-
   return (
-    <form className="register-form" onSubmit={registerFormChecking}>
+    <form className="register-form" onSubmit={registerFormChecking()}>
       <label className="input" value="Nom de famille">
         <input
           className="input__field lastname-input"
