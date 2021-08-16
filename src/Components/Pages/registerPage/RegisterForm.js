@@ -1,11 +1,10 @@
 import React from "react";
 import "../../../style.css";
-import { AiFillEye} from "react-icons/ai";
+import { AiFillEye } from "react-icons/ai";
 
 const RegisterForm = () => {
 
-
-
+  //Show password function onClick on the eye icon
   const showPassword = (e) => {
     const psw = e.target.parentNode.parentNode.firstChild
     e.preventDefault();
@@ -13,19 +12,20 @@ const RegisterForm = () => {
     else psw.type = "password"
   }
 
-   const registerFormChecking = () => {
 
-    let lastNameValue = document.querySelector('.lastname-input').value;
-    let firstNameValue = document.querySelector('.firstname-input').value;
-    let emailValue = document.querySelector('.email-input').value;
-    let password1Value = document.querySelector('.password1').value;
+  let lastNameValue = document.querySelector('.lastname-input').value;
+  let firstNameValue = document.querySelector('.firstname-input').value;
+  let emailValue = document.querySelector('.email-input').value;
+  let password1Value = document.querySelector('.password1').value;
+  let password2Value = document.querySelector('.password2').value;
 
-  
+  //Check form and forbid some character to prevent security breach
+  const registerFormChecking = () => {
+
     const letters=/^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
     const emailRegex= /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
 
-    
-
+    //Input validation for lastname and firstname
     const lettersChecking = () => {
       if(letters.test(lastNameValue) && letters.test(firstNameValue)) return true
       else {
@@ -33,6 +33,7 @@ const RegisterForm = () => {
         return false;
       }
     }
+    //Input validation for email
     const emailChecking = () => {
       if(emailRegex.test(emailValue)) return true;
       else {
@@ -40,22 +41,33 @@ const RegisterForm = () => {
         return false;
       }
     }
+    //password validation, checking if both inputs values are the same
     const passwordChecking = () => {
-
+      if (password1Value === password2Value) return true;
+      else {
+        alert('Les mots de passe ne correspondent pas');
+        return false;
+      }
     }
-
-    //if all 3 checking function have returned true, then true
+    //if all 3 checking function have returned true, then true (used for submitting the form)
     if(lettersChecking() && emailChecking() && passwordChecking()) return true
-  } 
-//Creation de l'objet à envoyer au back
-/*    if(registerFormChecking()) {
+  }
+
+  //Creation de l'objet à envoyer au back
+  if(registerFormChecking()) {
     const contact = {
       lastname: lastNameValue,
       firstName: firstNameValue,
       email: emailValue,
-      password: emailValue,
+      password: password2Value,
     }
-  }  */
+  localStorage.setItem('RegisterForm', JSON.stringify(contact));
+  //post data
+  }
+
+  //Post form function
+
+
 
   return (
     <form className="register-form" onSubmit={registerFormChecking}>
