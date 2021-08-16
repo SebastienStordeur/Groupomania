@@ -3,14 +3,8 @@ import "../../../style.css";
 import { AiFillEye} from "react-icons/ai";
 
 const RegisterForm = () => {
-/* 
-  const form = document.querySelector('.register-form');
-  const lastNameValue = document.querySelector('.lastname-input').value;
-  const firstNameValue = document.querySelector('.firstname-input').value;
-  const emailValue = document.querySelector('.email-input').value;
 
-  const letters=/^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
-  const emailRegex= /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i */
+
 
   const showPassword = (e) => {
     const psw = e.target.parentNode.parentNode.firstChild
@@ -19,9 +13,18 @@ const RegisterForm = () => {
     else psw.type = "password"
   }
 
-  /* const registerFormChecking = () => {
+   const registerFormChecking = () => {
 
-    if(lettersChecking() && emailChecking()) return true
+    let lastNameValue = document.querySelector('.lastname-input').value;
+    let firstNameValue = document.querySelector('.firstname-input').value;
+    let emailValue = document.querySelector('.email-input').value;
+    let password1Value = document.querySelector('.password1').value;
+
+  
+    const letters=/^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
+    const emailRegex= /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+
+    
 
     const lettersChecking = () => {
       if(letters.test(lastNameValue) && letters.test(firstNameValue)) return true
@@ -40,19 +43,22 @@ const RegisterForm = () => {
     const passwordChecking = () => {
 
     }
-  } */
+
+    //if all 3 checking function have returned true, then true
+    if(lettersChecking() && emailChecking() && passwordChecking()) return true
+  } 
 //Creation de l'objet à envoyer au back
-/*   if(registerFormChecking()) {
-    contact = {
+/*    if(registerFormChecking()) {
+    const contact = {
       lastname: lastNameValue,
       firstName: firstNameValue,
       email: emailValue,
       password: emailValue,
     }
-  } */
+  }  */
 
   return (
-    <form className="register-form">
+    <form className="register-form" onSubmit={registerFormChecking}>
       <label className="input" value="Nom de famille">
         <input
           className="input__field lastname-input"
@@ -100,7 +106,7 @@ const RegisterForm = () => {
         </div>
       </label>
       <div className="btn-box register-box-btn">
-        <button type="submit" className="register-btn btn">
+        <button type="submit" className="register-btn btn" onClick={registerFormChecking}>
           S'inscrire
         </button>
       </div>

@@ -53,9 +53,9 @@ exports.getProfile = (req,res, next) => {
     .catch(error => res.status(404).json({ message: "Impossible de trouver ce profile" + error }));
 }
 
-exports.modifyProfile = (req,res,next) => {
+/* exports.modifyProfile = (req,res,next) => {
   User.updateOne({ id: req.params.id })
     .then((user) => {
       con
     })
-}
+} */
