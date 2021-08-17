@@ -10,7 +10,7 @@ const LoginForm = () => {
   };
 
   return (
-    <form className="signup-form">
+    <form className="login-form">
       <label className="input" value="Adresse mail">
         <input
           className="input__field email-input"

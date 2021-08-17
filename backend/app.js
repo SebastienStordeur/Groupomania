@@ -12,6 +12,8 @@ const postRoutes = require('./routes/postRoutes');
 
 
 //Database
+require('./database');
+
 /* const mySQLConnection = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -25,7 +27,7 @@ mySQLConnection.connect((error) => {
   else console.log("connection failed" + error)
 })  */
 app.use(helmet());
-
+ 
 //Request parsing
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

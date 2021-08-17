@@ -20,10 +20,11 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
   dialect: "mysql",
 });
 try {
-  await.sequelize.authentificate();
+  sequelize.authentificate();
   console.log("Connecté à la DB");
 } catch(error) {
   console.log('Impossible de se connecter à la DB' + error);
 }
 
 module.exports = sequelize;
+global.sequelize = sequelize;

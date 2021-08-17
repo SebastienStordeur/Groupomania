@@ -11,13 +11,9 @@ const MainContent = () => {
           className="post-form__input"
           placeholder="Quelque chose à partager ?"
         ></input>
-        <div className="btn-box">
-          <button className="post-form__img-btn small-btn" type="button">
+        <div className="icon-box">
             <BsImageFill />
-          </button>
-          <button className="post-form__submit-btn small-btn" type="submit">
             <BiSend />
-          </button>
         </div>
       </form>
 
@@ -31,11 +27,11 @@ const MainContent = () => {
           </div>
         </div>
         <div className="post-content__content">
-          Ceci est du contenu Add potential image container here
+          <p>Ceci est du contenu Add potential image container here</p>
         </div>
         <div className="post-content__like-box">
-          <BiHeart />
-          <RiDislikeLine />
+          <BiHeart className="like-heart like" size={26} />
+          <RiDislikeLine className="dislike-heart dislike" size={26} />
         </div>
       </div>
     </section>
