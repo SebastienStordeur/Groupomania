@@ -1,11 +1,13 @@
 import React from 'react'
 import AccountInfo from './AccountInfo'
+import MainContent from './MainContent'
 
 const DashboardBody = () => {
   return (
-    <div>
+    <main className="dashboard-main">
       <AccountInfo />
-    </div>
+      <MainContent />
+    </main>
   )
 }
 
