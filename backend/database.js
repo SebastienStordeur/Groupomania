@@ -8,9 +8,6 @@ require("dotenv").config({ path: "./config/.env" });
   password: process.env.DB_PSW,
   multipleStatements: true,
 });
-
-
-
 module.exports = sequelize;
 global.sequelize = sequelize;
  */
@@ -27,4 +24,4 @@ try {
 }
 
 module.exports = sequelize;
-global.sequelize = sequelize;
+global.sequelize = sequelize; 

@@ -24,6 +24,6 @@ User.init(
   }
 );
 
-User.sync()
+//User.sync()
 
 module.exports = { User };

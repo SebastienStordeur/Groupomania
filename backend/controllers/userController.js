@@ -1,22 +1,36 @@
 const bcrypt = require('bcrypt');
-const mySQLConnection = require('../app');
 const jwt = require('jsonwebtoken');
 const { User } = require('../models/userModel');
+const mySQLConnection = require('../mysqlConnection');
 
 exports.register = (req,res,next) => {
-  bcrypt.hash(req.body.password, 10)
-    .then(hash => {
-      const user = new User({
+  console.log(req.body);
+  //bcrypt.hash(req.body.password, 10)
+    const user = new User({
         lastName: req.body.lastName,
         firstName: req.body.firstName,
         email: req.body.email,
-        password: hash
+        password: req.body.password
       });
-      user.save()
+
+      console.log(user);
+
+      mySQLConnection.query('INSERT INTO users (lastName, firstName, email, password) VALUES (?,?,?,?)', 
+      [
+        user.lastName,
+        user.firstName,
+        user.email,
+        user.password
+      ],
+      function(err, rows, fields) {
+        if (err) throw err;
+        console.log(rows);
+      });
+      /* user.save()
       .then(() => res.status(201).json({ message: "Utilisateur crée." }))
-      .catch(error => res.status(400).json({ message: "Impossible de créer l'utilisateur " + error }));
-    })
-}
+      .catch(error => res.status(400).json({ message: "Impossible de créer l'utilisateur " + error })); */
+    }
+
 
 exports.login = (req,res,next) => {
   User.findOne({ email: req.body.email })

@@ -47,33 +47,33 @@ const RegisterForm = () => {
         return false;
       }
     }
-
     //if all 3 checking function have returned true, then true (used for submitting the form)
-    if(letterChecking() && emailChecking() && passwordChecking()) return true  
+    if(letterChecking() && emailChecking() && passwordChecking()) return true
+
+    //POST Form function
+    const postRegisterForm = () => {
+      let registerForm = JSON.parse(localStorage.getItem('RegisterForm'));
+      const promise = fetch('http://localhost:5000/api/auth/register', {
+        method: 'POST',
+        body: JSON.stringify(registerForm),
+        headers: {
+          "Content-Type" : "application/json",
+        },
+      })
+      //Response
+      promise.then(async(response) => {
+        try {
+          localStorage.clear();
+          //const responseContent = await response.json();
+        } catch(error) {
+          alert("Une erreur s'est produite");
+        }
+      })
+    }
   }
+
 
  /*  
-
-    //Post form function
-  const postRegisterForm = () => {
-    let contact = JSON.parse(localStorage.getItem('RegisterForm'));
-    const promise = fetch('http://localhost:5000/api/auth/register', {
-      method: "POST",
-      body: JSON.stringify(contact),
-      headers: {
-        "Content-Type" : "application/json"
-      },
-    })
-    //Response
-    promise.then(async(response) => {
-      try {
-        localStorage.clear();
-        //const responseContent = await response.json();
-      } catch(error) {
-        alert("Une erreur s'est produite");
-      }
-    })
-  }
 
   //Creation de l'objet à envoyer au back
   if(registerFormChecking()) {
@@ -88,7 +88,7 @@ const RegisterForm = () => {
   }  */
 
   return (
-    <form className="register-form" >
+    <form className="register-form" onSubmit={checkRegisterForm}>
       <label className="input" value="Nom de famille" htmlFor="lastname"></label>
         <input
           className="input__field lastname-input"
