@@ -23,7 +23,7 @@ mySQLConnection.connect((error) => {
     console.log("The solution is: ", rows[0].solution);
   }) */
 
-app.use(helmet());
+//app.use(helmet());
  
 //Request parsing
 app.use(bodyParser.json());
