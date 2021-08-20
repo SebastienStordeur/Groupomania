@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const app = express();
 
+app.use(helmet());
 //routes
 const userRoutes = require('./routes/userRoutes');
 const postRoutes = require('./routes/postRoutes');
@@ -16,14 +17,19 @@ mySQLConnection.connect((error) => {
   else console.log("connection failed" + error)
 }) 
 
-/* mySQLConnection.query(
-  "SELECT * FROM `users`",
-  function (err, rows, fields) {
-    if (err) throw err;
-    console.log("The solution is: ", rows[0].solution);
-  }) */
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*"); //Access the API from any origin
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
+  ); //Add headers to requests to the API
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+  ); //Methods allowed
+  next();
+});
 
-//app.use(helmet());
  
 //Request parsing
 app.use(bodyParser.json());

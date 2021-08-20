@@ -7,15 +7,15 @@ exports.register = (req,res,next) => {
   console.log(req.body);
   //bcrypt.hash(req.body.password, 10)
     const user = new User({
-        lastName: req.body.lastName,
-        firstName: req.body.firstName,
-        email: req.body.email,
-        password: req.body.password
-      });
+      lastName: req.body.lastName,
+      firstName: req.body.firstName,
+      email: req.body.email,
+      password: req.body.password
+    });
 
-      console.log(user);
+    console.log(user);
 
-      mySQLConnection.query('INSERT INTO users (lastName, firstName, email, password) VALUES (?,?,?,?)', 
+    mySQLConnection.query('INSERT INTO users (lastName, firstName, email, password) VALUES (?,?,?,?)', 
       [
         user.lastName,
         user.firstName,

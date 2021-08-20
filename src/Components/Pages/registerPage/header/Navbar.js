@@ -9,7 +9,7 @@ const Navbar = () => {
         <Link to="/">
           <li><button className="btn register-page-btn">S'inscrire</button></li>
         </Link>
-        <Link to="/signup">
+        <Link to="/login">
           <li><button className="btn signup-btn">Se connecter</button></li>
         </Link>
       </ul>

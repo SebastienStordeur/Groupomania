@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../../style.css";
 import { AiFillEye } from "react-icons/ai";
 
@@ -20,6 +20,7 @@ const RegisterForm = () => {
   const sendRegisterForm = (e) => {
     e.preventDefault();
   
+  //CHECKING FORM CONTENT 
     const checkRegisterForm = () => {
       /* e.preventDefault(); */
       const letterRegex = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
@@ -48,20 +49,9 @@ const RegisterForm = () => {
           return false;
         }
       };
-      //if all 3 checking function have returned true, then true (used for submitting the form)
       if (letterChecking() && emailChecking() && passwordChecking()) return true;
     };
     
-    //If form datas are ok, then create register object to send it to the back
-    if(checkRegisterForm()) {
-      let register = {
-        lastname: lastname,
-        firstname: firstname,
-        email: email,
-        password: password2
-      }
-      console.log(register)
-    }
 
     //POST Form function
     const postRegisterForm = () => {
@@ -76,13 +66,28 @@ const RegisterForm = () => {
       //Response
       promise.then(async (response) => {
         try {
-          //localStorage.clear();
+          localStorage.clear();
           const responseContent = await response.json();
           console.log(responseContent);
         } catch (error) {
           alert("Une erreur s'est produite");
         }
       });
+
+    //If form datas are ok, then create register object to send it to the back
+    if(checkRegisterForm()) {
+      let register = {
+        lastname: lastname,
+        firstname: firstname,
+        email: email,
+        password: password2
+      }
+      console.log(register)
+      localStorage.setItem("RegisterForm", JSON.stringify(register))
+      postRegisterForm();
+    }
+
+    
     };
     postRegisterForm();
     //Creation de l'objet à envoyer au back
