@@ -10,9 +10,9 @@ const LoginForm = () => {
     else psw.type = "password";
   };
 
-  /* //const emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+  const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
 
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const login = (e) => {
@@ -29,16 +29,16 @@ const LoginForm = () => {
       return <Redirect to="/dashboard" />;
     }
   }
- */
+
   return (
-    <form className="login-form" /* onSubmit={login} */>
+    <form className="login-form" onSubmit={login}>
       <label className="input" value="Adresse mail">
         <input
           className="input__field email-input"
           type="text"
           placeholder="Email"
-          /* value={email} */
-          //onChange={(e) => setEmail(e.target.value)}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
         />
       </label>
@@ -47,8 +47,8 @@ const LoginForm = () => {
           className="input__field password-input" 
           type="password"
           placeholder="Mot de passe"
-          /* value={password} */
-          //onChange={(e) => setPassword(e.target.value)}
+          value={password} 
+          onChange={(e) => setPassword(e.target.value)}
           required
         />
         <div className="show-hide-icon">
@@ -60,7 +60,7 @@ const LoginForm = () => {
         </div>
       </label>
       <div className="btn-box">
-        <button className="btn signup-button" /* onClick={login} */>Se connecter</button>
+        <button className="btn signup-button" onClick={login}>Se connecter</button>
       </div>
     </form>
   );

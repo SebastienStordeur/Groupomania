@@ -25,9 +25,8 @@ exports.register = (req,res,next) => {
         if (err) throw err;
         console.log(rows);
       });
-      /* user.save()
-      .then(() => res.status(201).json({ message: "Utilisateur crée." }))
-      .catch(error => res.status(400).json({ message: "Impossible de créer l'utilisateur " + error })); */
+      then(() => res.status(201).json({ message: "Utilisateur crée." }))
+      .catch(error => res.status(400).json({ message: "Impossible de créer l'utilisateur " + error }));
     }
 
 

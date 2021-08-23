@@ -7,8 +7,21 @@ const ModalPost = () => {
     modal.style.display = "none";
   };
 
-  const [message, setMessage] = useState('');
-  const [image, setImage] = useState('');
+  /*   const importImage = (file) => {
+      var input = file.target;
+
+      var reader = new FileReader();
+      reader.onload = function() {
+        var dataURL = reader.result;
+        var output = document.querySelector('.output');
+        output.src= dataURL;
+      
+      reader.readAsDataURL(input.file[0]);
+    };
+  } */
+
+  const [message, setMessage] = useState("");
+  const [image, setImage] = useState("");
 
   return (
     <div className="modal modal-post">
@@ -22,9 +35,13 @@ const ModalPost = () => {
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Tapez ici votre message"
         />
-        <button className="input-box__btn add-image-btn">
-          Ajouter une image
-        </button>
+        <input
+          className="input-box__btn add-image-btn"
+          type="file"
+          accept="image/*"
+          placeholder="Fichier"
+        />
+        {/* //<div className="output"></div> */}
         <input
           className="input-box__img-input"
           type="text"
