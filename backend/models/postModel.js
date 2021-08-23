@@ -1,4 +1,4 @@
-const { Sequelize, Model, DataTypes } = require('sequelize');
+/* const { Sequelize, Model, DataTypes } = require('sequelize');
 const sequelize = new Sequelize("sqlite::memory");
 
 class Post extends Model {}
@@ -16,7 +16,7 @@ Post.init(
     dislikes: DataTypes.NUMBER(),
 /*     userLikes: DataTypes.ARRAY(),
     userDislikes: DataTypes.ARRAY() */
-  },    
+/*   },    
   {
     sequelize,
     timestamps: true,
@@ -28,4 +28,4 @@ Post.init(
 
 Post.sync();
 
-module.exports = { Post };
+module.exports = { Post }; */ 

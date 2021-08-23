@@ -2,37 +2,37 @@
 
 .dashboard-main {
   display: flex;
+  justify-content: center;
   margin-top: 6rem;
 }
 
 .main-content-section {
-  margin-left: 2rem;
-  width: 40%;
+  width: 50%;
   border-radius: 1px solid black;
 }
-.post-form {
-  display: flex;
-  justify-content: center;
-  &__input {
-    width: 25rem;
-    height: 3rem;
-    padding: 6px;
-    border: 3px solid $border-color;
-    border-radius: 6px;
-  }
+
+.post-btn {
+  height: 2.5rem;
+  width: 12rem;
+  background-color: $secondary-color ;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 6px;
+  margin: auto;
 }
-.icon-box {
-  display: flex;
-  flex-direction: column;
-  margin-top: -1.1rem;
-  margin-left: 0.75rem;
+
+
+//modal post 
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 10rem;
+  width: 80%;
+  height: 40%;
 }
-.small-btn {
-  display: flex;
-  align-items: center;
-  margin-top: 0.2rem;
-  height: 1.4rem;
-} 
+
 //Post content
 .post-content {
   margin: 1.25rem auto;

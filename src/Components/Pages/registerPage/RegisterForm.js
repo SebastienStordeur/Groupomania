@@ -16,18 +16,22 @@ const RegisterForm = () => {
   const [email, setEmail] = useState("");
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
+  const [user, setUser] = useState([]);
 
   const sendRegisterForm = (e) => {
     e.preventDefault();
-  
-  //CHECKING FORM CONTENT 
+
+    //CHECKING FORM CONTENT
     const checkRegisterForm = () => {
       /* e.preventDefault(); */
-      const letterRegex = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
-      const emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+      const letterRegex =
+        /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
+      const emailRegex =
+        /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
       //Input validation for Lastname and Firstname
       const letterChecking = () => {
-        if (letterRegex.test(lastname) && letterRegex.test(firstname)) return true;
+        if (letterRegex.test(lastname) && letterRegex.test(firstname))
+          return true;
         else {
           alert("caractère interdit dans les champs Nom et/ou Prénom"); //Will be changed for something more visual
           return false;
@@ -49,9 +53,9 @@ const RegisterForm = () => {
           return false;
         }
       };
-      if (letterChecking() && emailChecking() && passwordChecking()) return true;
+      if (letterChecking() && emailChecking() && passwordChecking())
+        return true;
     };
-    
 
     //POST Form function
     const postRegisterForm = () => {
@@ -73,36 +77,21 @@ const RegisterForm = () => {
           alert("Une erreur s'est produite");
         }
       });
-
-    //If form datas are ok, then create register object to send it to the back
-    if(checkRegisterForm()) {
-      let register = {
-        lastname: lastname,
-        firstname: firstname,
-        email: email,
-        password: password2
-      }
-      console.log(register)
-      localStorage.setItem("RegisterForm", JSON.stringify(register))
-      postRegisterForm();
-    }
-
-    
     };
-    postRegisterForm();
-    //Creation de l'objet à envoyer au back
-  /*   if (checkRegisterForm()) {
-      const registerFormContent = {
-        lastname: lastname,
-        firstName: firstname,
-        email: email,
-        password: password2,
-      };
-      localStorage.setItem("RegisterForm", JSON.stringify(registerFormContent));
-      postRegisterForm();
-    } */
-  
-}
+
+      //If form datas are ok, then create register object to send it to the back
+      if (checkRegisterForm()) {
+        let register = {
+          lastname: lastname,
+          firstname: firstname,
+          email: email,
+          password: password2,
+        };
+        console.log(register);
+        localStorage.setItem("RegisterForm", JSON.stringify(register));
+        postRegisterForm();
+      }
+  };
 
   return (
     <form className="register-form" onSubmit={sendRegisterForm}>
@@ -180,7 +169,11 @@ const RegisterForm = () => {
         </div>
       </label>
       <div className="btn-box register-box-btn">
-        <button type="submit" className="register-btn btn" onClick={sendRegisterForm}>
+        <button
+          type="submit"
+          className="register-btn btn"
+          onClick={sendRegisterForm}
+        >
           S'inscrire
         </button>
       </div>
