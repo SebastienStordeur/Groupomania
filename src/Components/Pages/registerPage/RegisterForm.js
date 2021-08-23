@@ -16,7 +16,6 @@ const RegisterForm = () => {
   const [email, setEmail] = useState("");
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
-  const [user, setUser] = useState([]);
 
   const sendRegisterForm = (e) => {
     e.preventDefault();

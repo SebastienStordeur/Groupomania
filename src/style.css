@@ -286,7 +286,7 @@ input {
 .input-box__message {
   margin-top: 0.25rem;
   max-width: 80%;
-  height: 2.2rem;
+  height: 10rem;
   resize: none;
   padding-left: 8px;
   padding-top: 8px;
