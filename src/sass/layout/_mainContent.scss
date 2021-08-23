@@ -20,18 +20,11 @@
   font-weight: 600;
   border-radius: 6px;
   margin: auto;
+  cursor: pointer;
 }
 
 
-//modal post 
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  padding-top: 10rem;
-  width: 80%;
-  height: 40%;
-}
+
 
 //Post content
 .post-content {

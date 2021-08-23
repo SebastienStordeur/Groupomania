@@ -5,12 +5,19 @@ import { BiSend, BiHeart } from "react-icons/bi";
 import { RiDislikeLine } from "react-icons/ri";
 
 const MainContent = () => {
+
+  const openModal = () => {
+    const modal = document.querySelector('.modal');
+    modal.style.display = "block";
+  }
+
+
   return (
     <section className="main-content-section">
-      <button className="button post-btn">
+      <button className="button post-btn" onClick={openModal}>
         Créer un nouveau post
       </button>
-
+    <ModalPost style={{display: "none"}} />
 
       <div className="post-content">
         <div className="post-content__user-info">
