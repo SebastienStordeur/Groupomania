@@ -1,7 +1,6 @@
 import React from "react";
 import ModalPost from "./ModalPost";
-import { BsImageFill } from "react-icons/bs";
-import { BiSend, BiHeart } from "react-icons/bi";
+import { BiHeart } from "react-icons/bi";
 import { RiDislikeLine } from "react-icons/ri";
 
 const MainContent = () => {
@@ -11,7 +10,7 @@ const MainContent = () => {
     modal.style.display = "block";
   }
 
-
+// verif image ou text is here
   return (
     <section className="main-content-section">
       <button className="button post-btn" onClick={openModal}>

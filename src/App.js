@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import RegisterPage from "./Components/Pages/registerPage/registerPage";
 import LoginPage from "./Components/Pages/loginPage/LoginPage";
 import DashboardPage from "./Components/Pages/Dashboard/DashboardPage";
+import ProfilePage from "./Components/Pages/Profile/ProfilePage";
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
           </Route>
           <Route path="/dashboard">
             <DashboardPage />
+          </Route>
+          <Route path="/profile">
+            <ProfilePage />
           </Route>
         </Switch>
       </Router>
