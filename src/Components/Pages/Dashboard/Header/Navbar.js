@@ -7,9 +7,11 @@ import { FaUserFriends } from "react-icons/fa"
 const Navbar = () => {
   return (
     <div className="icons-container">
-      <AiFillHome size={32} className="home-icn menu-icn"/>
+      <Link to="/dashboard">
+        <AiFillHome size={32} className="home-icn menu-icn"/>
+      </Link>
       <Link to='/profile'>
-      <FaUserFriends size={32} className="friend-icn menu-icn"/>
+        <FaUserFriends size={32} className="friend-icn menu-icn"/>
       </Link>
       <IoIosNotifications size={32} className="notif-icn menu-icn"/>
     </div>

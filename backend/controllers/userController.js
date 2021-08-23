@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { User } = require('../models/user');
+const {User} = require('../models/user');
 const mySQLConnection = require('../mysqlConnection');
 
 exports.register = (req,res,next) => {
@@ -11,8 +11,7 @@ exports.register = (req,res,next) => {
       firstName: req.body.firstName,
       email: req.body.email,
       password: req.body.password
-    });
-
+    })
     console.log(user);
 
     mySQLConnection.query('INSERT INTO users (lastName, firstName, email, password) VALUES (?,?,?,?)', 
