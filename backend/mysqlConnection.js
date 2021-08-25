@@ -1,4 +1,4 @@
-const mysql = require('mysql');
+/* const mysql = require('mysql');
 require('dotenv').config({path: './config/.env'})
 
 const mySQLConnection = mysql.createConnection({
@@ -9,4 +9,4 @@ const mySQLConnection = mysql.createConnection({
   multipleStatements: true
 })
 
-module.exports = mySQLConnection;
+module.exports = mySQLConnection; */

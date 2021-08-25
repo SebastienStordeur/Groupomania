@@ -4,18 +4,24 @@ const helmet = require('helmet');
 const app = express();
 
 app.use(helmet());
+
+//Database
+const db = require("./models")
+db.sequelize.sync();
+
+
 //routes
 const userRoutes = require('./routes/userRoutes');
 const postRoutes = require('./routes/postRoutes');
 
 
-//Database
-const mySQLConnection = require('./mysqlConnection');
+
+/* const mySQLConnection = require('./mysqlConnection');
 
 mySQLConnection.connect((error) => {
   if(!error) console.log("connected to the database")
   else console.log("connection failed" + error)
-}) 
+})  */
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*"); //Access the API from any origin
