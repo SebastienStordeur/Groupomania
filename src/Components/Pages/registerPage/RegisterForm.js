@@ -81,8 +81,8 @@ const RegisterForm = () => {
       //If form datas are ok, then create register object to send it to the back
       if (checkRegisterForm()) {
         let register = {
-          lastname: lastname,
-          firstname: firstname,
+          lastName: lastname,
+          firstName: firstname,
           email: email,
           password: password2,
         };
