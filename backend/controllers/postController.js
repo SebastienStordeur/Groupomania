@@ -1,18 +1,16 @@
-const { Post } = require('../models/postModel');
-const fs = require('fs')
+const db = require('../models');
+const Post = db.posts;
 
 exports.createPost = (req,res,next) => {
-  const postObject = JSON.parse(req.body.post);
-  delete postObject.id;
-  const post = new Post({
-    ...body.postObject,
-    imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
-    likes: 0,
-    dislikes: 0,
-  });
-  post.save()
-    .then(() => res.status(201).JSON({ message: "Post crée" }))
-    .catch(error => res.status(400).JSON({ message: "Impossible de créer ce post" + error }));
+
+  const post = {
+    title: req.body.title,
+    content: req.body.content,
+  }
+
+  Post.create(post)
+    .then(() => res.status(201).json({ message: "Post crée" }))
+    .catch(error => res.status(400).json({ message: "Impossible de créer ce post" + error }));
 }
 
 exports.updatePost = (req,res,next) => {
