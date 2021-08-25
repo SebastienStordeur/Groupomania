@@ -5,10 +5,8 @@ const User = db.users;
 const Op = db.Sequelize.Op
 //const User = require('../models/user');
 
-
 //Register a new User 
 exports.register = (req, res) => {
-
   //Create User
   const user = {
     lastName : req.body.lastName,
@@ -18,10 +16,9 @@ exports.register = (req, res) => {
   };
 
   //Save in database
-  User.register(user)
-    .then(() => res.status(201).JSON({ message : "Utilisateur crée."}))
-    .catch( error => res.status(500).JSON({ message : "Impossible de créer l'utilisateur." + error}));
-
+  User.create(user)
+    .then(() => res.status(201).json({ message : "Utilisateur crée."}))
+    .catch( error => res.status(500).json({ message : "Impossible de créer l'utilisateur." + error}));
 }
 
 
