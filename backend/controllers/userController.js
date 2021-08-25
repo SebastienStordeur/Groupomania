@@ -8,17 +8,22 @@ const Op = db.Sequelize.Op
 //Register a new User 
 exports.register = (req, res) => {
   //Create User
-  const user = {
-    lastName : req.body.lastName,
-    firstName : req.body.firstName,
-    email : req.body.email,
-    password : req.body.password
-  };
-
-  //Save in database
+  bcrypt.hash(req.body.password, 15) //hash password
+    .then(hash => {
+      const user = {
+        lastName : req.body.lastName,
+        firstName : req.body.firstName,
+        email : req.body.email,
+        password : hash
+      }
+        //Save in database
   User.create(user)
-    .then(() => res.status(201).json({ message : "Utilisateur crée."}))
-    .catch( error => res.status(500).json({ message : "Impossible de créer l'utilisateur." + error}));
+  .then(() => res.status(201).json({ message : "Utilisateur crée."}))
+  .catch( error => res.status(500).json({ message : "Impossible de créer l'utilisateur." + error}));
+    })
+  
+
+
 }
 
 /* exports.login = (req,res,next) => {
