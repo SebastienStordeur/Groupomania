@@ -25,9 +25,38 @@ const LoginForm = () => {
         return false;
       }
     };
-    if (emailChecking())  {
-      return <Redirect to="/dashboard" />;
+
+    const postLogin = () => {
+      let credentials = JSON.parse(localStorage.getItem('credentials'))
+      //Promise
+      const promise = fetch("http://localhost:5000/api/auth/login", {
+        method: 'POST',
+        body: JSON.stringify(credentials),
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
+      //Response
+      promise.then( async(response) => {
+        try {
+          localStorage.clear();
+          const responseContent = await response.json();
+          console.log(responseContent);
+        } catch(error) {
+          console.log(error);
+        }
+      });
     }
+
+    if (emailChecking())  {
+      let credentials = {
+        email: email,
+        password: password
+      };
+      console.log(credentials);
+      localStorage.setItem('credentials', JSON.stringify(credentials));
+      postLogin()
+    };
   }
 
   return (
