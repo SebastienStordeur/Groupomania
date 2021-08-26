@@ -30,14 +30,14 @@ const LoginForm = () => {
       let credentials = JSON.parse(localStorage.getItem('credentials'))
       //Promise
       const promise = fetch("http://localhost:5000/api/auth/login", {
-        method: 'POST',
+        method: "POST",
         body: JSON.stringify(credentials),
         headers: {
-          "Content-type": "application/json",
+          "Content-Type" : "application/json"
         },
       });
       //Response
-      promise.then( async(response) => {
+      promise.then(async (response) => {
         try {
           localStorage.clear();
           const responseContent = await response.json();

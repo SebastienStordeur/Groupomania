@@ -32,7 +32,7 @@ const RegisterForm = () => {
         if (letterRegex.test(lastname) && letterRegex.test(firstname))
           return true;
         else {
-          alert("caractère interdit dans les champs Nom et/ou Prénom"); //Will be changed for something more visual
+          alert("Caractère(s) interdit(s) dans les champs Nom et/ou Prénom"); //Will be changed for something more visual
           return false;
         }
       };
@@ -63,7 +63,7 @@ const RegisterForm = () => {
         method: "POST",
         body: JSON.stringify(registerForm),
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type" : "application/json"
         },
       });
       //Response
