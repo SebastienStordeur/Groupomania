@@ -1,5 +1,6 @@
 const db = require('../models');
 const Post = db.posts;
+const Op = db.Sequelize.Op
 
 
 //Create a post
@@ -27,4 +28,10 @@ exports.deletePost = (req,res) => {
   })
     .then(() => res.status(201).json({ message: "Post supprimé."}))
     .catch(error => res.status(400).json({ message: "Impossible de supprimer ce post. " + error}));
+}
+
+exports.getAllPost = (req,res) => {
+  Post.findAll({ where: req.body.title }) //condition possède un titre
+    .then((data) => res.status(201).json({ data }))
+    .catch(error => res.status(500).json({ message: "Rien à afficher. " + error }))
 }
