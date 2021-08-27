@@ -2,7 +2,7 @@ module.exports = (sequelize, Sequelize) => {
   const Post = sequelize.define("post", {
     author: {
       type: Sequelize.STRING,
-      required: true
+      required: false
     },
     title: {
       type: Sequelize.STRING(30),

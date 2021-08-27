@@ -9,13 +9,21 @@ const MainContent = () => {
     modal.style.display = "block";
   };
 
-  // verif image ou text is here
+  fetch("http://localhost:5000/api/post/", { method: "GET" })
+    .then((response) => {
+      response.json().then((data) => {
+        console.log(data)
+      })
+    })
+    .catch(() => { document.querySelector('.post-container').innerHTML = "Rien à afficher." })
+
   return (
     <section className="main-content-section">
       <button className="button post-btn" onClick={openModal}>
         Créer un nouveau post
       </button>
       <ModalPost style={{ display: "none" }} />
+      <div className="post-container"></div>
     </section>
   );
 };
