@@ -4,27 +4,7 @@ const Post = (post) => {
 
   const { title, content } = post;
 
-  const submitPost = () => {
-    const postContent = JSON.parse(localStorage.getItem('post'));
-    //promise
-    const promise = fetch("http://localhost:5000/api/post/", {
-      method: "POST",
-      body: JSON.stringify(postContent),
-      headers: {
-        "Content-Type" : "application/json"
-      },
-    });
-    //response
-    promise.then(async (response) => {
-      try {
-        localStorage.clear();
-        const responseContent = await response.json();
-        console.log(responseContent);
-      } catch(error) {
-        console.log(error);
-      }
-    })
-  }
+  
 
   return (
     <div className="post-content">

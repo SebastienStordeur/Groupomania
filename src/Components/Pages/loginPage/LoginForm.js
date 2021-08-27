@@ -44,7 +44,7 @@ const LoginForm = () => {
           console.log(responseContent);
         } catch(error) {
           console.log(error);
-        }
+        };
       });
     }
 
