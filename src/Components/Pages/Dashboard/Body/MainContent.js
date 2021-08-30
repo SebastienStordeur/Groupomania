@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ModalPost from "./ModalPost";
+import { BiHeart } from 'react-icons/bi';
+import { RiDislikeLine } from 'react-icons/ri';
 
 const MainContent = () => {
   
@@ -12,10 +14,10 @@ const MainContent = () => {
   const getPosts = async () => {
     const response = await fetch('http://localhost:5000/api/post/');
     const posts = await response.json();
+    //console.log(posts)
     setPosts(posts);
-    console.log(posts)
+    //console.log(posts)
   }
-
   useEffect(() => {
     getPosts();
   }, []);
@@ -26,7 +28,6 @@ const MainContent = () => {
         Créer un nouveau post
       </button>
       <ModalPost style={{ display: "none" }} />
-
       <div className="post-container">
         {posts.map((post) => {
           const { id, title, content, author } = post;

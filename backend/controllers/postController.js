@@ -35,3 +35,9 @@ exports.getAllPost = (req,res) => {
     .then((data) => res.status(201).json({ data }))
     .catch(error => res.status(500).json({ message: "Rien à afficher. " + error }))
 }
+
+exports.likePost = (req,res) => {
+  Post.findOne({ where: {id: req.params.id } })
+    .then(() => res.status(200).json({ message : 'ok'}))
+    .catch(error => res.status(400).json({message: "Impossible d'apporter un changement. " + error}))
+}

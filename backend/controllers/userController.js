@@ -45,7 +45,7 @@ exports.login = (req, res) => {
     })
     .catch((error) => res.status(500).json({ message: "Impossible de vous connecter " + error }));
 };
-/*
+
 exports.getProfile = (req,res, next) => {
   User.findOne({ id: req.params.id }) 
     .then((user) => res.status(200).json(user))
@@ -57,4 +57,4 @@ exports.updateProfile = (req,res,next) => {
     .then((user) => {
       
     })
-} */
+} 

@@ -11,6 +11,6 @@ router.put('/:id', postController.updatePost);
 router.delete('/:id', postController.deletePost);
 
 //Likes && dislikes
-//router.post('/:id/like', postController.likePost);
+router.post('/:id/like', postController.likePost);
 
 module.exports = router;
