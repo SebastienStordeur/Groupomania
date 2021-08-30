@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import ModalPost from "./ModalPost";
-import { BiHeart } from "react-icons/bi";
-import { RiDislikeLine } from "react-icons/ri";
 
 const MainContent = () => {
   
@@ -11,7 +9,6 @@ const MainContent = () => {
   };
 
   const [posts, setPosts] = useState([]);
-
   const getPosts = async () => {
     const response = await fetch('http://localhost:5000/api/post/');
     const posts = await response.json();
@@ -47,11 +44,15 @@ const MainContent = () => {
                 <h3>{title}</h3>
                 <p>{content}</p>
               </div>
+              <div className="post-content__like-box">
+                <BiHeart className="like-heart like" size={26} />
+                <RiDislikeLine className="dislike-heart dislike" size={26} />
+              </div>
             </div>
           );
-        })}
-        
+        })} 
       </div>
+
     </section>
   );
 };
