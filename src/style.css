@@ -275,7 +275,7 @@ input {
 .input-box {
   display: flex;
   flex-direction: column;
-  margin-top: 1rem;
+  margin-top: 3rem;
   margin-left: 1rem;
 }
 .input-box label {
@@ -325,6 +325,17 @@ input {
   font-weight: 600;
   background-color: #FD2D01;
   cursor: pointer;
+}
+
+.input-title {
+  max-width: 80%;
+  padding-left: 8px;
+  border: 3px solid #FFD7D7;
+  border-radius: 6px;
+  outline: none;
+}
+.input-title ::placeholder {
+  font-family: "Poppins", sans-serif;
 }
 
 .profile-section-info {

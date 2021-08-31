@@ -5,8 +5,13 @@ const Op = db.Sequelize.Op
 
 //Create a post
 exports.createPost = (req,res) => {
+/*   const postObject = JSON.parse(req.body.post);
+  delete postObject.id; */
   const post = {
-    ...req.body
+    ...req.body,
+    /* imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`, */
+    likes: 0,
+    dislikes: 0,
   }
 
   Post.create(post)

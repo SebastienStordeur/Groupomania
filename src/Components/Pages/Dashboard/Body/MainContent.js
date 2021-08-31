@@ -14,9 +14,9 @@ const MainContent = () => {
   const getPosts = async () => {
     const response = await fetch('http://localhost:5000/api/post/');
     const posts = await response.json();
-    //console.log(posts)
+    console.log(posts)
     setPosts(posts);
-    //console.log(posts)
+    console.log(posts)
   }
   useEffect(() => {
     getPosts();
@@ -29,29 +29,29 @@ const MainContent = () => {
       </button>
       <ModalPost style={{ display: "none" }} />
       <div className="post-container">
-        {posts.map((post) => {
-          const { id, title, content, author } = post;
-          return (
-            <div className="post-content" key={id}>
+        {/* {posts.data.map((post) => { */}
+          {/* const { id, title, content, author } = post; */}
+         {/*  return ( */}
+            <div className="post-content" /* key={id} */>
               <div className="post-content__user-info">
                 <div className="post-content__photo-container">
                    
                 </div>
                 <div className="post-content__name">
-                  <h3>{author}</h3>
+                  <h3>{/* {author} */}</h3>
                 </div>
               </div>
               <div className="post-content__content">
-                <h3>{title}</h3>
-                <p>{content}</p>
+                {/* <h3>{title}</h3>
+                <p>{content}</p> */}
               </div>
               <div className="post-content__like-box">
                 <BiHeart className="like-heart like" size={26} />
                 <RiDislikeLine className="dislike-heart dislike" size={26} />
               </div>
             </div>
-          );
-        })} 
+       {/*    );
+        })}  */}
       </div>
 
     </section>
