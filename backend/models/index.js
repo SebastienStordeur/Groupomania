@@ -24,3 +24,12 @@ db.posts = require("./postModel.js")(sequelize, Sequelize);
 
 
 module.exports = db;
+
+//Each user can get many posts
+db.users.belongsToMany(db.posts, {
+  through: "User_post",
+  as: "users",
+  foreignKey: "user_id"
+});
+/* 
+posts.hasOne(users, ) */
