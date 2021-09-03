@@ -31,5 +31,9 @@ db.users.belongsToMany(db.posts, {
   as: "users",
   foreignKey: "user_id"
 });
-/* 
-posts.hasOne(users, ) */
+
+db.posts.belongsToMany(db.users, {
+  through: "User_post",
+  as: "posts",
+  foreignKey: "post_id"
+}) 
