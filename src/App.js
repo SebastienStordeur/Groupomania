@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Switch } from "react-router-dom";
 
 //Pages
 import RegisterPage from "./Components/Pages/registerPage/registerPage";
@@ -7,25 +7,32 @@ import LoginPage from "./Components/Pages/loginPage/LoginPage";
 import DashboardPage from "./Components/Pages/Dashboard/DashboardPage";
 import ProfilePage from "./Components/Pages/Profile/ProfilePage";
 
+//Routes
+import PrivateRoute from "./privateRoute";
+import PublicRoute from "./PublicRoute";
+
 function App() {
   return (
     <div className="App">
-      <Router>
+      <BrowserRouter>
         <Switch>
-          <Route exact path="/">
+          <PublicRoute restricted={false} component={RegisterPage} path="/" exact />
+{/*           <Route exact path="/">
             <RegisterPage />
-          </Route>
-          <Route path="/login">
+          </Route> */}
+          <PublicRoute restricted={false} component={LoginPage} path="/login" exact />
+{/*           <Route path="/login">
             <LoginPage />
-          </Route>
-          <Route path="/dashboard">
+          </Route> */}
+          <PrivateRoute component={DashboardPage} path="/dashboard" exact />
+{/*           <Route path="/dashboard">
             <DashboardPage />
-          </Route>
+          </Route> */}
           <Route path="/profile">
             <ProfilePage />
           </Route>
         </Switch>
-      </Router>
+      </BrowserRouter>
     </div>
   );
 }
