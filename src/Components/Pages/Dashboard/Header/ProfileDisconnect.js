@@ -1,9 +1,13 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
+import { logout } from '../../../../utils/index';
 
 const ProfileDisconnect = () => {
   return (
     <div>
-      <h2>Deconnexion</h2>
+      <Link to="/">
+        <h2 style={{ cursor:'pointer'}} onClick={logout}>Deconnexion</h2>
+      </Link>
     </div>
   )
 }

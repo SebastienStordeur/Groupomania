@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Switch } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 //Pages
 import RegisterPage from "./Components/Pages/registerPage/registerPage";
@@ -8,7 +8,7 @@ import DashboardPage from "./Components/Pages/Dashboard/DashboardPage";
 import ProfilePage from "./Components/Pages/Profile/ProfilePage";
 
 //Routes
-import PrivateRoute from "./privateRoute";
+import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 
 function App() {

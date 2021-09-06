@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { AiFillEye} from "react-icons/ai";
-import { Redirect } from "react-router";
+import { Redirect } from "react-router-dom";
+import {login} from '../../../utils/index';
 
-const LoginForm = () => {
+const LoginForm = (props) => {
   const showPassword = (e) => {
     const psw = e.target.parentNode.parentNode.firstChild;
     e.preventDefault();
@@ -15,7 +16,7 @@ const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const login = (e) => {
+  const loginFunction = (e) => {
     e.preventDefault();
     
     const emailChecking = () => {
@@ -39,7 +40,7 @@ const LoginForm = () => {
       //Response
       promise.then(async (response) => {
         try {
-          localStorage.clear();
+          localStorage.removeItem('credentials');
           const responseContent = await response.json();
           console.log(responseContent);
         } catch(error) {
@@ -55,12 +56,16 @@ const LoginForm = () => {
       };
       console.log(credentials);
       localStorage.setItem('credentials', JSON.stringify(credentials));
-      postLogin()
+      postLogin();
+      login();
+      
+      /* props.history.push('/dashboard'); */
+      <Redirect to="/dashboard" />
     };
   }
 
   return (
-    <form className="login-form" onSubmit={login}>
+    <form className="login-form" onSubmit={loginFunction}>
       <label className="input" value="Adresse mail">
         <input
           className="input__field email-input"
@@ -89,7 +94,7 @@ const LoginForm = () => {
         </div>
       </label>
       <div className="btn-box">
-        <button className="btn signup-button" onClick={login}>Se connecter</button>
+        <button className="btn signup-button" onClick={loginFunction}>Se connecter</button>
       </div>
     </form>
   );
