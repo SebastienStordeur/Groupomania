@@ -4,6 +4,7 @@ const helmet = require('helmet');
 const app = express();
 const flash = require('express-flash');
 const session = require('express-session');
+const passport = require('passport')
 
 require('dotenv').config({path: './config/.env'})
 app.use(helmet());
@@ -52,5 +53,14 @@ app.post('/login', passport.authenticate('local', {
   //failureFlash: true  //display message in case of error
 }))
 
+function checkAuthenticated(req,res,next) {
+  if(req.isAuthenticated()) return next();
+  res.redirect('/login');
+}
+
+function checkNotAuthenticated(req, res, next) {
+  if(req.isAuthenticated()) res.redirect('/dashboard');
+  next();
+}
 
 module.exports = app;

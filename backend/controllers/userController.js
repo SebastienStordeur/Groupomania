@@ -33,8 +33,8 @@ exports.register = (req, res) => {
 };
 
 //Login
-/* exports.login = (req, res) => {
-  User.findOne({ email: req.body.email })
+ exports.login = (req, res) => {
+  User.findOne({ where: { email: req.body.email } })
     .then((user) => {
       if (!user) return res.status(401).json({ message: "Impossible de trouver cet utilisateur." });
       bcrypt.compare(req.body.password, user.password)
@@ -52,9 +52,11 @@ exports.register = (req, res) => {
         .catch((error) => res.status(500).json({ error }));
     })
     .catch((error) => res.status(500).json({ message: "Impossible de vous connecter " + error }));
-}; */
+}; 
 
-exports.login = async (req,res, p)
+/* exports.login = async (req,res, next) => {
+
+} */
 
 exports.logout = (req, res) => {
   req.logOut();

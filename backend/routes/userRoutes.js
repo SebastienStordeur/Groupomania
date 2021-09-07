@@ -12,4 +12,6 @@ router.put('/:id', userController.updateProfile);
  */
 //Need auth + multer
 
+
+// need add function authenticated. from app.js pour l'instant
 module.exports = router;
