@@ -4,6 +4,14 @@ const db = require("../models");
 const User = db.users;
 const Op = db.Sequelize.Op;
 
+const passport = require('passport');
+const initializePassport = require('../middleware/passport-config');
+
+initializePassport(passport, email => {
+  return User.find(user => user.email === email), 
+  id => User.find(user => user.id === id)
+});
+
 //Register a new User
 exports.register = (req, res) => {
   //Create User
@@ -25,7 +33,7 @@ exports.register = (req, res) => {
 };
 
 //Login
-exports.login = (req, res) => {
+/* exports.login = (req, res) => {
   User.findOne({ email: req.body.email })
     .then((user) => {
       if (!user) return res.status(401).json({ message: "Impossible de trouver cet utilisateur." });
@@ -44,7 +52,15 @@ exports.login = (req, res) => {
         .catch((error) => res.status(500).json({ error }));
     })
     .catch((error) => res.status(500).json({ message: "Impossible de vous connecter " + error }));
-};
+}; */
+
+exports.login = async (req,res, p)
+
+exports.logout = (req, res) => {
+  req.logOut();
+  req.redirect('/login');
+}
+
 
 exports.getProfile = (req,res, next) => {
   User.findOne({ id: req.params.id }) 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { logout } from '../../../../utils/index';
+import { logout } from '../../../../utils/loginLogout';
 
 const ProfileDisconnect = () => {
   return (

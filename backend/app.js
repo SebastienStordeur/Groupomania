@@ -2,7 +2,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const app = express();
+const flash = require('express-flash');
+const session = require('express-session');
 
+require('dotenv').config({path: './config/.env'})
 app.use(helmet());
 
 //Database
@@ -34,6 +37,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //Routes
 app.use("/api/auth", userRoutes);
 app.use("/api/post", postRoutes);
+app.use(flash());
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.post('/login', passport.authenticate('local', {
+  successRedirect: '/dashboard',
+  failureRedirect: '/login',
+  //failureFlash: true  //display message in case of error
+}))
 
 
 module.exports = app;

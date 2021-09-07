@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AiFillEye} from "react-icons/ai";
 import { Redirect } from "react-router-dom";
-import {login} from '../../../utils/index';
+import {login} from '../../../utils/loginLogout';
 
 const LoginForm = (props) => {
   const showPassword = (e) => {
@@ -43,8 +43,10 @@ const LoginForm = (props) => {
           localStorage.removeItem('credentials');
           const responseContent = await response.json();
           console.log(responseContent);
+          return true
         } catch(error) {
           console.log(error);
+          return false;
         };
       });
     }
@@ -56,8 +58,11 @@ const LoginForm = (props) => {
       };
       console.log(credentials);
       localStorage.setItem('credentials', JSON.stringify(credentials));
-      postLogin();
-      login();
+      postLogin()
+      if (!postLogin()){
+        login();
+      }
+      
       
       /* props.history.push('/dashboard'); */
       <Redirect to="/dashboard" />
