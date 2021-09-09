@@ -35,7 +35,7 @@ const ModalPost = () => {
       //response
       promise.then(async (response) => {
         try {
-          localStorage.clear();
+          localStorage.removeItem('post');
           const responseContent = await response.json();
           console.log(responseContent);
         } catch (error) {
