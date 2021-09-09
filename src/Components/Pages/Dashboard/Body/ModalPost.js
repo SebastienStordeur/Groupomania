@@ -47,6 +47,7 @@ const ModalPost = () => {
     
     if (checkPost()) {
       let insidePost = {
+        author: "bravo",
         title: title,
         content: message,
         imageUrl: image

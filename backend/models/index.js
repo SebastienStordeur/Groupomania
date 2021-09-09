@@ -23,12 +23,11 @@ db.users = require("./user.js")(sequelize, Sequelize);
 db.posts = require("./postModel.js")(sequelize, Sequelize);
 db.comments = require("./commentModel.js")(sequelize, Sequelize);
 
-
-module.exports = db;
-
 //Liaison entre table users et posts (ajout de userId dans la table post)
 db.users.hasMany(db.posts);
 
 //Liaison posts/comments et users/comments
-db.posts.hasOne(db.comments);
+db.posts.hasMany(db.comments);
 db.users.hasOne(db.comments);
+
+module.exports = db;
