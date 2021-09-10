@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import "../../../style.css";
 import { AiFillEye } from "react-icons/ai";
+import ConfirmRegister from "./ConfirmRegister";
+import DenyRegister from "./DenyRegister";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
 const RegisterForm = () => {
   //Show password function onClick on the eye icon
@@ -89,6 +92,11 @@ const RegisterForm = () => {
         console.log(register);
         localStorage.setItem("RegisterForm", JSON.stringify(register));
         postRegisterForm();
+        
+        //setTimeout(document.querySelector('.confirm-panel').style.display = "block", 3000);
+        <Redirect to="/login" />
+      } else {
+        document.querySelector('.deny-panel').style.display = "block";
       }
   };
 
@@ -176,6 +184,8 @@ const RegisterForm = () => {
           S'inscrire
         </button>
       </div>
+      <ConfirmRegister />
+      <DenyRegister />
     </form>
   );
 };

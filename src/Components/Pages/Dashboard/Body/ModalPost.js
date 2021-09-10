@@ -50,14 +50,14 @@ const ModalPost = () => {
         author: "bravo",
         title: title,
         content: message,
-        imageUrl: image
+        imageUrl: image,
+        userId: 1
       };
       console.log(insidePost);
       localStorage.setItem("post", JSON.stringify(insidePost));
       console.log(checkPost())
       postPost();
     }
-    
   };
 
   return (

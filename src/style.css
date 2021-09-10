@@ -375,4 +375,24 @@ input {
   margin: 1rem 1rem;
 }
 
+.panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2rem;
+  margin-top: 1rem;
+  font-size: 12px;
+  font-family: "Poppins", sans-serif;
+}
+
+.confirm-panel {
+  display: none;
+  background-color: lightgreen;
+}
+
+.deny-panel {
+  display: none;
+  background-color: #F08080;
+}
+
 /*# sourceMappingURL=style.css.map */

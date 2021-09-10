@@ -26,11 +26,16 @@ exports.register = (req, res) => {
       };
       //Save in database
       User.create(user)
-        .then(() => res.status(201).json({ message: "Utilisateur crée." }))
-        .catch((error) => res.status(500).json({ message: "Impossible de créer l'utilisateur. " + error })
+        .then(() => {
+          res.status(201).json({ message: "Utilisateur crée." });
+        })
+        .catch((error) => {
+          res.status(500).json({ message: "Impossible de créer l'utilisateur. " + error })
+        }
         );
     });
-};
+}; 
+
 
 //Login
  exports.login = (req, res) => {

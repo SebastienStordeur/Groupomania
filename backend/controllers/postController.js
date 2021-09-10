@@ -1,5 +1,6 @@
 const db = require('../models');
 const Post = db.posts;
+const Comment = db.comments;
 const Op = db.Sequelize.Op
 
 
@@ -17,14 +18,6 @@ exports.createPost = (req,res) => {
   Post.create(post)
     .then(() => res.status(201).json({ message: "Post crée" }))
     .catch(error => res.status(400).json({ message: "Impossible de créer ce post" + error }));
-}
-
-exports.updatePost = (req,res) => {
-  Post.update( req.body, {
-    where: { id: req.params.id }
-  })
-    .then(() => res.status(200).json({ message: "Post mis à jour" }))
-    .catch( error => res.status(400).json({ message : "Impossible de mettre à jour ce post. " + error }));
 }
 
 exports.deletePost = (req,res) => {
@@ -45,4 +38,8 @@ exports.likePost = (req,res) => {
   Post.findOne({ where: {id: req.params.id } })
     .then(() => res.status(200).json({ message : 'ok'}))
     .catch(error => res.status(400).json({message: "Impossible d'apporter un changement. " + error}))
+}
+
+exports.comments = (req,res) => {
+
 }

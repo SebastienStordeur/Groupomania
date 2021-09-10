@@ -7,10 +7,13 @@ router.get('/', postController.getAllPost);
 //router.get('/:id', postController.getThisPost); 
 
 router.post('/',  postController.createPost);
-router.put('/:id', postController.updatePost);
 router.delete('/:id', postController.deletePost);
 
 //Likes && dislikes
 router.post('/:id/like', postController.likePost);
+
+//Comments
+router.post('/:id/comment', postController.comments)
+
 
 module.exports = router;
