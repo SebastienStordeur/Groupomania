@@ -1,23 +1,15 @@
-import React, { useState, useEffect } from "react";
-import ModalPost from "./ModalPost";
-import AddComment from "./AddComment";
-import ModalGetComment from "./ModalGetComment";
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router';
+import AddComment from '../Dashboard/Body/AddComment';
+import ModalGetComment from '../Dashboard/Body/ModalGetComment';
 import { BiHeart } from 'react-icons/bi';
 import { RiDislikeLine } from 'react-icons/ri';
-import { ImSpinner3 } from 'react-icons/im';
 
-const MainContent = () => {
-  
-  const openModal = () => {
-    const modal = document.querySelector(".modal");
-    modal.style.display = "block";
-  };
 
-  //Close any kind of modal if clicked outside of it
-/*   const closeModal = () => {
-    const modals = document.querySelectorAll('.modal');
-    modals.style.display = 'none';
-  } */
+const PostFromUser = () => {
+
+  const { userId } = useParams();
+  const [posts, setPosts] = useState([]);
 
   const openAddComment = () => {
     document.querySelector('.add-comment-modal').style.display = "block";
@@ -27,28 +19,20 @@ const MainContent = () => {
     document.querySelector('.modal-get-comments').style.display = "block";
   }
 
-  const [posts, setPosts] = useState([]);
 
-  const getPosts = async () => {
-    const response = await fetch('http://localhost:5000/api/post/');
+  const getPosts = async() => {
+    const response = await fetch(`http://localhost:5000/api/post/${userId}`);
     const posts = await response.json();
-    setPosts(posts.data);
+    console.log(posts);
+    setPosts(posts.data)
   }
 
   useEffect(() => {
     getPosts();
-  }, []); 
-
+  }, []);
 
   return (
-    <section className="main-content-section" /* onClick={closeModal} */>
-      <button className="button post-btn" onClick={openModal}>
-        Créer un nouveau post
-      </button>
-      <button className="button act-btn" onClick={getPosts}>
-        <ImSpinner3 size={24}/>
-      </button>
-      <ModalPost style={{ display: "none" }} />
+    <section>
       <div className="post-container">
         {posts.map((post) => { 
            const { id, title, content, author, likes, dislikes } = post; 
@@ -80,7 +64,7 @@ const MainContent = () => {
       </div>
 
     </section>
-  );
-};
+  )
+}
 
-export default MainContent;
+export default PostFromUser

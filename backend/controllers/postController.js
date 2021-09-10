@@ -34,6 +34,12 @@ exports.getAllPost = (req,res) => {
     .catch(error => res.status(500).json({ message: "Rien à afficher. " + error }))
 }
 
+exports.getPostWithUserId = (req,res) => {
+  Post.findAll({ where: { userId: 1 } })
+    .then((data) => res.status(201).json({ data }))
+    .catch(error => res.status(500).json({ message: "Rien à afficher" + error }));
+}
+
 exports.likePost = (req,res) => {
   Post.findOne({ where: {id: req.params.id } })
     .then(() => res.status(200).json({ message : 'ok'}))

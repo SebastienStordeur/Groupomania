@@ -28,9 +28,10 @@ function App() {
 {/*           <Route path="/dashboard">
             <DashboardPage />
           </Route> */}
-          <Route path="/profile">
+          <PrivateRoute component={ProfilePage} path="/profile:id" exact />
+{/*           <Route path="/profile">
             <ProfilePage />
-          </Route>
+          </Route> */}
         </Switch>
       </BrowserRouter>
     </div>

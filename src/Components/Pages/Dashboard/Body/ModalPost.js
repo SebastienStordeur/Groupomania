@@ -51,7 +51,7 @@ const ModalPost = () => {
         title: title,
         content: message,
         imageUrl: image,
-        userId: 1
+        userId: 12
       };
       console.log(insidePost);
       localStorage.setItem("post", JSON.stringify(insidePost));

@@ -38,6 +38,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //Routes
 app.use("/api/auth", userRoutes);
 app.use("/api/post", postRoutes);
+
 app.use(flash());
 app.use(session({
   secret: process.env.SESSION_SECRET,
@@ -53,14 +54,8 @@ app.post('/login', passport.authenticate('local', {
   //failureFlash: true  //display message in case of error
 }))
 
-function checkAuthenticated(req,res,next) {
-  if(req.isAuthenticated()) return next();
-  res.redirect('/login');
-}
 
-function checkNotAuthenticated(req, res, next) {
-  if(req.isAuthenticated()) res.redirect('/dashboard');
-  next();
-}
+
+
 
 module.exports = app;
