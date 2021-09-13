@@ -2,6 +2,7 @@ const db = require('../models');
 const Post = db.posts;
 const Comment = db.comments;
 const Op = db.Sequelize.Op
+const fs = require("fs")
 
 
 //Create a post
@@ -10,7 +11,7 @@ exports.createPost = (req,res) => {
   delete postObject.id; */
   const post = {
     ...req.body,
-    /* imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`, */
+     //imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`, 
     likes: 0,
     dislikes: 0,
   }

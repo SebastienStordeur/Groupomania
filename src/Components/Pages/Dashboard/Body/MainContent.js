@@ -51,7 +51,7 @@ const MainContent = () => {
       <ModalPost style={{ display: "none" }} />
       <div className="post-container">
         {posts.map((post) => { 
-           const { id, title, content, author, likes, dislikes } = post; 
+           const { id, title, content, author, likes, dislikes, imageUrl } = post; 
            return ( 
             <div className="post-content"  key={id} >
               <div className="post-content__user-info">
@@ -62,6 +62,7 @@ const MainContent = () => {
               <div className="post-content__content">
                 <h3>{title}</h3>
                 <p>{content}</p> 
+                <img src={imageUrl} alt="image" />
               </div>
               <div className="post-content__like-box">
                 <BiHeart className="like-heart like" size={26} />

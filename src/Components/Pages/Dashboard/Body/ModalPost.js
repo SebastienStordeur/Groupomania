@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ImCross } from "react-icons/im";
+import Axios from 'axios';
 
 const ModalPost = () => {
   const closeModal = () => {
@@ -7,9 +8,20 @@ const ModalPost = () => {
     modal.style.display = "none";
   };
 
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState();
   const [message, setMessage] = useState("");
-  const [image, setImage] = useState("");
+  const [file, setFile] = useState("");
+
+  const send = (event) => {
+    const data = new FormData();
+    data.append("title", title);
+    data.append("file", file);
+
+    Axios.post(
+      "https://localhost:5000/api/post/",
+      data.then((res) => console.log(res)).catch((err) => console.log(err))
+    );
+  };
 
   const post = (e) => {
     e.preventDefault();
@@ -35,7 +47,7 @@ const ModalPost = () => {
       //response
       promise.then(async (response) => {
         try {
-          localStorage.removeItem('post');
+          localStorage.removeItem("post");
           const responseContent = await response.json();
           console.log(responseContent);
         } catch (error) {
@@ -44,21 +56,29 @@ const ModalPost = () => {
       });
     };
 
-    
     if (checkPost()) {
       let insidePost = {
         author: "bravo",
         title: title,
         content: message,
-        imageUrl: image,
-        userId: 12
+        userId: 1,
       };
       console.log(insidePost);
       localStorage.setItem("post", JSON.stringify(insidePost));
-      console.log(checkPost())
+      console.log(checkPost());
       postPost();
     }
   };
+
+/*   const onFileAdded = (event) => {
+    const file = event.target.files[0];
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      toString(reader.result);
+    };
+    reader.readAsDataURL(file);
+  }; */
 
   return (
     <div className="modal modal-post">
@@ -86,11 +106,13 @@ const ModalPost = () => {
           type="file"
           accept="image/*"
           placeholder="Fichier"
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
+          value={file}
+          onChange={ (e) => {
+            setFile(e.target.files[0]);
+          }} 
         />
 
-        <button className="submit-post input-box__submit-btn" onClick={post}>
+        <button className="submit-post input-box__submit-btn" onClick={send}>
           Poster
         </button>
       </form>

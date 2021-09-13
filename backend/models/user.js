@@ -26,6 +26,9 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING(64),
       required: true,
       min: 8
+    },
+    imageUrl: {
+      type: Sequelize.STRING()
     }
   });
 
