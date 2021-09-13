@@ -2,15 +2,13 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const db = require("../models");
 const User = db.users;
-const Op = db.Sequelize.Op;
-
 const passport = require('passport');
-const initializePassport = require('../middleware/passport-config');
+/* const initializePassport = require('../middleware/passport-config');
 
 initializePassport(passport, email => {
   return User.find(user => user.email === email), 
   id => User.find(user => user.id === id)
-});
+}); */
 
 //Register a new User
 exports.register = (req, res) => {
@@ -38,7 +36,7 @@ exports.register = (req, res) => {
 
 
 //Login
- exports.login = (req, res) => {
+/*  exports.login = (req, res) => {
   User.findOne({ where: { email: req.body.email } })
     .then((user) => {
       if (!user) return res.status(401).json({ message: "Impossible de trouver cet utilisateur." });
@@ -57,11 +55,23 @@ exports.register = (req, res) => {
         .catch((error) => res.status(500).json({ error }));
     })
     .catch((error) => res.status(500).json({ message: "Impossible de vous connecter " + error }));
-}; 
+};   */
 
-/* exports.login = async (req,res, next) => {
+ exports.login = (req, res, next) => {
+  console.log(req.body)
+  passport.authenticate("local", (err, user, info) => {
+    if (err) throw err;
+    if (!user) res.send("Impossible de trouver cet utilisateur");
+    else {
+      req.logIn(user, (err) => {
+        if(err) throw err;
+        res.send("Authentification réussie." );
+        console.log(req.user);
+      });
+    }
+  });
+};
 
-} */
 
 exports.logout = (req, res) => {
   req.logOut();

@@ -1,16 +1,16 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const helmet = require('helmet');
-const app = express();
-const flash = require('express-flash');
-const session = require('express-session');
-const passport = require('passport');
-const path = require("path");
-const cookieParser = require('cookie-parser');
 const cors = require('cors');
-
+const bodyParser = require('body-parser');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const passport = require('passport');
+const helmet = require('helmet');
+const path = require("path");
 
 require('dotenv').config({path: './config/.env'})
+
+const app = express();
+
 app.use(helmet());
 
 //Database
@@ -19,7 +19,7 @@ db.sequelize.sync();
 
 //headers
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*"); //Access the API from any origin
+  res.setHeader("Access-Control-Allow-Origin", '*'); //Access the API from any origin
   res.setHeader(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
@@ -29,54 +29,35 @@ app.use((req, res, next) => {
     "GET, POST, PUT, DELETE, PATCH, OPTIONS"
   ); //Methods allowed
   next();
-});
+});  
 
-//Request parsing
+//Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   cors({
-    orgin: 'http://localhost:3000', //Localtion of the react app we're conencting to
+    origin: 'http://localhost:3000', //Localtion of the react app we're conencting to
     credentials: true,
   })
-);
+);  
 app.use(
   session({
-    secret: "secretcode",
+    secret: process.env.SECRET_CODE,
     resave: true,
     saveUninitialized: true,
   })
 );
-app.use(cookieParser("secretcode"));
+app.use(cookieParser(process.env.SECRET_CODE));
 app.use(passport.initialize());
 app.use(passport.session());
-require("./middleware/passport-config")(passport);
+require('./middleware/passport-config')(passport);
 
-
-app.use("/images", express.static(path.join(__dirname, "images")));
+app.use("/images", express.static(path.join(__dirname, 'images')));
 
 //Routes
 const userRoutes = require('./routes/userRoutes');
 const postRoutes = require('./routes/postRoutes');
-app.use("/api/auth", userRoutes);
-app.use("/api/post", postRoutes);
-
-app.use(flash());
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false,
-}));
-
-
-app.post('/login', passport.authenticate('local', {
-  successRedirect: '/dashboard',
-  failureRedirect: '/login',
-  //failureFlash: true  //display message in case of error
-}))
-
-
-
-
+app.use('/api/auth', userRoutes);
+app.use('/api/post', postRoutes);
 
 module.exports = app;

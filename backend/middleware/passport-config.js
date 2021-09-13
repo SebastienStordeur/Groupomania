@@ -1,10 +1,12 @@
-const User = require('../models/user');
+//const User = require('../models/user');
+const db = require("../models");
+const User = db.users;
 const bcrypt = require('bcrypt');
-const LocalStrategy = require('passport-local').Strategy;
+const localStrategy = require('passport-local').Strategy;
 
 module.exports = function(passport) {
   passport.use(
-    new LocalStrategy((email, password, done) => {
+    new localStrategy((email, password, done) => {
       User.findOne({ email: email }, (err, user) => {
         if(err) throw err;
         if(!user) return done(null, false);
