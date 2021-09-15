@@ -44,17 +44,7 @@ const LoginForm = () => {
 
   }
 
-  const [data, setData] = useState(null)
-  const getUser = () => {
-    Axios({
-      method: 'GET',
-      withCredentials: true,
-      url: "http://localhost:5000/user"
-    }).then((res) => setData(res.data));
-  };
-
   return (
-    <>
     <form className="login-form" onSubmit={loginFunction}>
       <label className="input" value="Adresse mail">
         <input
@@ -87,15 +77,6 @@ const LoginForm = () => {
         <button className="btn signup-button" onClick={loginFunction}>Se connecter</button>
       </div>
     </form>
-
-<div>
-<h1>Get User</h1>
-<button onClick={getUser}>Submit</button>
-{
-  data ? <h1>Welcome back {data.username}</h1>: null
-}
-</div>
-</>
   );
 };
 

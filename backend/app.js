@@ -42,13 +42,15 @@ app.use(
 );  
 app.use(
   session({
-    secret: 'secret',
+    secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,
-    //maxAge: 
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24 // = 1day
+    },
   })
 );
-app.use(cookieParser('secret'));
+app.use(cookieParser(process.env.SESSION_SECRET));
 app.use(passport.initialize());
 app.use(passport.session());
 require('./middleware/passport-config')(passport);
