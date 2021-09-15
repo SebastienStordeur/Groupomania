@@ -2,7 +2,6 @@ const db = require("../models");
 const User = db.users;
 const bcrypt = require("bcrypt");
 const localStrategy = require("passport-local").Strategy;
-const { register } = require("../controllers/userController");
 
 module.exports = function (passport) {
 
@@ -14,7 +13,6 @@ module.exports = function (passport) {
       },
       function (username, password, done) {
         User.findOne({ where: { email: username } }).then((user) => {
-          //if (err) throw err;
           if (!user) return done(null, false);
           bcrypt.compare(password, user.password, (err, result) => {
             if (err) throw err;

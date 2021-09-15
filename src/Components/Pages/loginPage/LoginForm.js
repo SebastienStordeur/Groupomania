@@ -14,7 +14,6 @@ const LoginForm = () => {
     else psw.type = "password";
   };
 
-
   const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
 
   const [email, setEmail] = useState('');
@@ -22,7 +21,6 @@ const LoginForm = () => {
 
   const loginFunction = (e) => {
     e.preventDefault();
-    
     //Check email format
     const emailChecking = () => {
       if (emailRegex.test(email)) return true;
@@ -32,6 +30,7 @@ const LoginForm = () => {
       }
     };
 
+    if(emailChecking) {
       Axios({
         method: 'POST',
         data: {
@@ -39,10 +38,10 @@ const LoginForm = () => {
           password: password
         },
         withCredentials: true, 
-        url: "http://localhost:5000/api/auth/login"
+        url: "http://localhost:5000/api/auth/login",
       }).then((res) => console.log(res));
-
-  }
+    };
+  };
 
   return (
     <form className="login-form" onSubmit={loginFunction}>

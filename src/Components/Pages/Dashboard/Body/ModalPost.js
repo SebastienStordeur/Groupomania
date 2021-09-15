@@ -8,21 +8,9 @@ const ModalPost = () => {
     modal.style.display = "none";
   };
 
-  const [title, setTitle] = useState();
-  const [message, setMessage] = useState();
-  const [file, setFile] = useState();
-
-/*   const send = event => {
-    const data = new FormData();
-    data.append('title', title);
-    data.append('message', message)
-    data.append('file', file);
-
-    Axios.post(
-      "https://localhost:5000/api/post/", data)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-  }; */
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [file, setFile] = useState('');
 
   const post = (e) => {
     e.preventDefault();
@@ -35,40 +23,14 @@ const ModalPost = () => {
       else return true;
     };
 
-    const postPost = () => {
-      const postContent = JSON.parse(localStorage.getItem("post"));
-      //promise
-      const promise = fetch("http://localhost:5000/api/post/", {
-        method: "POST",
-        body: JSON.stringify(postContent),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      //response
-      promise.then(async (response) => {
-        try {
-          localStorage.removeItem("post");
-          const responseContent = await response.json();
-          console.log(responseContent);
-        } catch (error) {
-          console.log(error);
-        }
-      });
-    };
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('content', content);
+    formData.append('image', file);
 
-    if (checkPost()) {
-      let insidePost = {
-        author: "bravo",
-        title: title,
-        content: message,
-        //userId: 1,
-      };
-      console.log(insidePost);
-      localStorage.setItem("post", JSON.stringify(insidePost));
-      console.log(checkPost());
-      postPost();
-    }
+    Axios.post('http://localhost:5000/api/post', formData, {
+      headers: { 'Content-Type': 'multipart/form-data'}
+    })
   };
 
   return (
@@ -87,8 +49,8 @@ const ModalPost = () => {
         <textarea
           className="input-box__message"
           type="text"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
           placeholder="Tapez ici votre message"
           required
         />
@@ -97,7 +59,6 @@ const ModalPost = () => {
           type="file"
           accept="image/*"
           placeholder="Fichier"
-         
           onChange={ (e) => {
             setFile(e.target.files[0]);
           }} 

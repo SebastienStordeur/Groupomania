@@ -11,10 +11,12 @@ exports.createPost = (req,res) => {
   console.log(req.file)
     const post = {
       ...req.body,
+    imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
     likes: 0,
     dislikes: 0,
     }
-    //Post.setUser(User)
+
+  //Post.setUser(User.id)
   Post.create(post)
     .then(() => res.status(201).json({ message: "Post crée" }))
     .catch(error => res.status(400).json({ message: "Impossible de créer ce post" + error }));

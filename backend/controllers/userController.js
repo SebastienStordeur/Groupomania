@@ -5,8 +5,7 @@ const passport = require('passport');
 
 //Register a new User
 exports.register = (req, res) => {
-  bcrypt
-    .hash(req.body.password, 15)
+  bcrypt.hash(req.body.password, 15)
     .then((hash) => {
       const user = {
         lastName: req.body.lastName,
@@ -14,7 +13,6 @@ exports.register = (req, res) => {
         email: req.body.email,
         password: hash,
       };
-      //Save in database
       User.create(user)
         .then(() => {
           res.status(201).json({ message: "Utilisateur crée." });
@@ -37,6 +35,7 @@ exports.register = (req, res) => {
         if(err) throw err;
         res.send('Authentification réussie.');
         console.log(req.user);
+        console.log(user.dataValues.id)
       });
     }
   })(req, res, next)
