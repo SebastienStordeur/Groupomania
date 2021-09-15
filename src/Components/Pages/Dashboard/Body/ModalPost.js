@@ -9,19 +9,20 @@ const ModalPost = () => {
   };
 
   const [title, setTitle] = useState();
-  const [message, setMessage] = useState("");
-  const [file, setFile] = useState("");
+  const [message, setMessage] = useState();
+  const [file, setFile] = useState();
 
-  const send = (event) => {
+/*   const send = event => {
     const data = new FormData();
-    data.append("title", title);
-    data.append("file", file);
+    data.append('title', title);
+    data.append('message', message)
+    data.append('file', file);
 
     Axios.post(
-      "https://localhost:5000/api/post/",
-      data.then((res) => console.log(res)).catch((err) => console.log(err))
-    );
-  };
+      "https://localhost:5000/api/post/", data)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  }; */
 
   const post = (e) => {
     e.preventDefault();
@@ -61,7 +62,7 @@ const ModalPost = () => {
         author: "bravo",
         title: title,
         content: message,
-        userId: 1,
+        //userId: 1,
       };
       console.log(insidePost);
       localStorage.setItem("post", JSON.stringify(insidePost));
@@ -69,16 +70,6 @@ const ModalPost = () => {
       postPost();
     }
   };
-
-/*   const onFileAdded = (event) => {
-    const file = event.target.files[0];
-
-    const reader = new FileReader();
-    reader.onload = () => {
-      toString(reader.result);
-    };
-    reader.readAsDataURL(file);
-  }; */
 
   return (
     <div className="modal modal-post">
@@ -106,13 +97,13 @@ const ModalPost = () => {
           type="file"
           accept="image/*"
           placeholder="Fichier"
-          value={file}
+         
           onChange={ (e) => {
             setFile(e.target.files[0]);
           }} 
         />
 
-        <button className="submit-post input-box__submit-btn" onClick={send}>
+        <button className="submit-post input-box__submit-btn" onClick={post}>
           Poster
         </button>
       </form>

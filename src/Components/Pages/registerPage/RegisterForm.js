@@ -25,20 +25,20 @@ const RegisterForm = () => {
 
     //CHECKING FORM CONTENT
     const checkRegisterForm = () => {
-      /* e.preventDefault(); */
-      const letterRegex =
-        /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
-      const emailRegex =
-        /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+
+      const letterRegex = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
+      const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+
       //Input validation for Lastname and Firstname
       const letterChecking = () => {
-        if (letterRegex.test(lastname) && letterRegex.test(firstname))
+        if(letterRegex.test(lastname) && letterRegex.test(firstname))
           return true;
         else {
           alert("Caractère(s) interdit(s) dans les champs Nom et/ou Prénom"); //Will be changed for something more visual
           return false;
         }
       };
+
       //Input validation for email
       const emailChecking = () => {
         if (emailRegex.test(email)) return true;
@@ -47,6 +47,7 @@ const RegisterForm = () => {
           return false;
         }
       };
+
       //password validation, checking if both inputs values are the same
       const passwordChecking = () => {
         if (password1 === password2) return true;
@@ -88,13 +89,12 @@ const RegisterForm = () => {
           firstName: firstname,
           email: email,
           password: password2,
-          //imageUrl: 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png'
         };
         console.log(register);
         localStorage.setItem("RegisterForm", JSON.stringify(register));
         postRegisterForm();
         
-        //setTimeout(document.querySelector('.confirm-panel').style.display = "block", 3000);
+        document.querySelector('.confirm-panel').style.display = "block";
         <Redirect to="/login" />
       } else {
         document.querySelector('.deny-panel').style.display = "block";

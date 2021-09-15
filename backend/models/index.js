@@ -4,8 +4,6 @@ const Sequelize = require("sequelize");
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
   dialect: dbConfig.dialect,
-  operatorsAliases: false,
-
   pool: {
     max: dbConfig.pool.max,
     min: dbConfig.pool.min,
@@ -19,15 +17,20 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.users = require("./user.js")(sequelize, Sequelize);
+db.users = require("./UserModel.js")(sequelize, Sequelize);
 db.posts = require("./postModel.js")(sequelize, Sequelize);
 db.comments = require("./commentModel.js")(sequelize, Sequelize);
+db.roles = require('./RoleModel.js')(sequelize, Sequelize);
 
 //Liaison entre table users et posts (ajout de userId dans la table post)
 db.users.hasMany(db.posts);
+db.posts.belongsTo(db.users);
 
 //Liaison posts/comments et users/comments
 db.posts.hasMany(db.comments);
 db.users.hasOne(db.comments);
+
+//Liaison role/user
+db.roles.hasOne(db.users);
 
 module.exports = db;

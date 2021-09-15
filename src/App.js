@@ -24,14 +24,14 @@ function App() {
 {/*           <Route path="/login">
             <LoginPage />
           </Route> */}
-          <PrivateRoute component={DashboardPage} path="/dashboard" exact />
-{/*           <Route path="/dashboard">
+          {/* <PrivateRoute component={DashboardPage} path="/dashboard" exact /> */}
+           <Route path="/dashboard">
             <DashboardPage />
-          </Route> */}
-          <PrivateRoute component={ProfilePage} path="/profile:id" exact />
-{/*           <Route path="/profile">
+          </Route> 
+          {/* <PrivateRoute component={ProfilePage} path="/profile:id" exact /> */}
+        <Route path="/profile:id">
             <ProfilePage />
-          </Route> */}
+          </Route> 
         </Switch>
       </BrowserRouter>
     </div>

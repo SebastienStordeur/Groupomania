@@ -1,5 +1,6 @@
 const db = require('../models');
 const Post = db.posts;
+const User = db.users;
 const Comment = db.comments;
 const Op = db.Sequelize.Op
 const fs = require("fs")
@@ -7,15 +8,13 @@ const fs = require("fs")
 
 //Create a post
 exports.createPost = (req,res) => {
-/*   const postObject = JSON.parse(req.body.post);
-  delete postObject.id; */
-  const post = {
-    ...req.body,
-     //imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`, 
+  console.log(req.file)
+    const post = {
+      ...req.body,
     likes: 0,
     dislikes: 0,
-  }
-
+    }
+    //Post.setUser(User)
   Post.create(post)
     .then(() => res.status(201).json({ message: "Post crée" }))
     .catch(error => res.status(400).json({ message: "Impossible de créer ce post" + error }));
@@ -47,6 +46,12 @@ exports.likePost = (req,res) => {
     .catch(error => res.status(400).json({message: "Impossible d'apporter un changement. " + error}))
 }
 
-exports.comments = (req,res) => {
-
+exports.createComment = (req,res) => {
+  console.log(req.body);
+  const comment = {
+    ...req.body
+  };
+  Comment.create(comment)
+    .then(() => res.status(201).json({ message: "Commentaire crée" }))
+    .catch(error => res.status(400).json({ message: "Impossible de créer ce commentaire" + error }));
 }

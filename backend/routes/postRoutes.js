@@ -13,7 +13,7 @@ router.delete('/:id', postController.deletePost);
 router.post('/:id/like', postController.likePost);
 
 //Comments
-router.post('/:id/comment', postController.comments)
+router.post('/:id/comment', postController.createComment)
 
 
 module.exports = router;

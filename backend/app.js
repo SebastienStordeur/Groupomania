@@ -18,41 +18,46 @@ const db = require("./models")
 db.sequelize.sync();
 
 //headers
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", '*'); //Access the API from any origin
+ app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
-  ); //Add headers to requests to the API
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization'
+  );
   res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
-  ); //Methods allowed
+    'Access-Control-Allow-Methods',
+    'GET, POST, PUT, DELETE, PATCH, OPTIONS'
+  );
   next();
-});  
+});   
 
 //Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: 'http://localhost:3000', //Localtion of the react app we're conencting to
+    origin: 'http://localhost:3000', //Location of the react app we're conencting to
     credentials: true,
   })
 );  
 app.use(
   session({
-    secret: process.env.SECRET_CODE,
+    secret: 'secret',
     resave: true,
     saveUninitialized: true,
+    //maxAge: 
   })
 );
-app.use(cookieParser(process.env.SECRET_CODE));
+app.use(cookieParser('secret'));
 app.use(passport.initialize());
 app.use(passport.session());
 require('./middleware/passport-config')(passport);
 
-app.use("/images", express.static(path.join(__dirname, 'images')));
+app.use('/images', express.static(path.join(__dirname, 'images')));
+
+app.get('/user', (req, res) => {
+  res.send(req.user); //req.user stores the entire user that has been authenticated inside of it
+});
 
 //Routes
 const userRoutes = require('./routes/userRoutes');

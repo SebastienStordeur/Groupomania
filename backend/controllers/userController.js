@@ -1,20 +1,12 @@
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 const db = require("../models");
 const User = db.users;
 const passport = require('passport');
-/* const initializePassport = require('../middleware/passport-config');
-
-initializePassport(passport, email => {
-  return User.find(user => user.email === email), 
-  id => User.find(user => user.id === id)
-}); */
 
 //Register a new User
 exports.register = (req, res) => {
-  //Create User
   bcrypt
-    .hash(req.body.password, 15) //hash password
+    .hash(req.body.password, 15)
     .then((hash) => {
       const user = {
         lastName: req.body.lastName,
@@ -34,50 +26,27 @@ exports.register = (req, res) => {
     });
 }; 
 
-
 //Login
-/*  exports.login = (req, res) => {
-  User.findOne({ where: { email: req.body.email } })
-    .then((user) => {
-      if (!user) return res.status(401).json({ message: "Impossible de trouver cet utilisateur." });
-      bcrypt.compare(req.body.password, user.password)
-        .then((valid) => {
-          if (!valid) res.status(401).json({ message: "Mot de passe incorrect." });
-          res.status(200).json({
-            userId: user.id,
-            token: jwt.sign(
-              { userId: user.id }, 
-              "RANDOM_TOKEN_PHRASE", 
-              { expiresIn: "24h" }
-            ),
-          });
-        })
-        .catch((error) => res.status(500).json({ error }));
-    })
-    .catch((error) => res.status(500).json({ message: "Impossible de vous connecter " + error }));
-};   */
-
  exports.login = (req, res, next) => {
   console.log(req.body)
-  passport.authenticate("local", (err, user, info) => {
+  passport.authenticate('local', (err, user, info) => {
     if (err) throw err;
-    if (!user) res.send("Impossible de trouver cet utilisateur");
+    if (!user) res.send('Impossible de trouver cet utilisateur');
     else {
       req.logIn(user, (err) => {
         if(err) throw err;
-        res.send("Authentification réussie." );
+        res.send('Authentification réussie.');
         console.log(req.user);
       });
     }
-  });
-};
+  })(req, res, next)
+}; 
 
 
 exports.logout = (req, res) => {
   req.logOut();
   req.redirect('/login');
 }
-
 
 exports.getProfile = (req,res, next) => {
   User.findOne({ id: req.params.id }) 
