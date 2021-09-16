@@ -2,13 +2,13 @@
 
 .main-header {
   display: flex;
+  padding-left: 35%;
   justify-content: space-around;
   align-items: center;
   height: 4rem;
   width: 100%;
   background-color: $secondary-color;
   box-shadow: 3px 3px 15px 2px #d9d9d9;
-  //position: fixed;
 }
 .icons-container {
   display: flex;

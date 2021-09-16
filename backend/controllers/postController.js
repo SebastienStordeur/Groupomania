@@ -8,14 +8,14 @@ const fs = require("fs")
 
 //Create a post
 exports.createPost = (req,res) => {
-  console.log(req.file)
+  console.log(req.body)
     const post = {
       ...req.body,
     imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
     likes: 0,
     dislikes: 0,
+    userId: req.body.userId
     }
-
   //Post.setUser(User.id)
   Post.create(post)
     .then(() => res.status(201).json({ message: "Post crée" }))
@@ -43,9 +43,13 @@ exports.getPostWithUserId = (req,res) => {
 }
 
 exports.likePost = (req,res) => {
-  Post.findOne({ where: {id: req.params.id } })
-    .then(() => res.status(200).json({ message : 'ok'}))
-    .catch(error => res.status(400).json({message: "Impossible d'apporter un changement. " + error}))
+  Post.findOne({ where: {id: req.post.id } })
+    switch (req.body.like) {
+      case +1: 
+      Post.updateOne(
+        
+      )
+    }
 }
 
 exports.createComment = (req,res) => {

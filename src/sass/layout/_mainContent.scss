@@ -23,8 +23,10 @@
   cursor: pointer;
 }
 
-
-
+.post-container {
+  display: flex;
+  flex-direction: column-reverse;
+}
 
 //Post content
 .post-content {
@@ -44,6 +46,20 @@
     font-family: "Roboto", sans-serif;
     font-size: 16px;
     margin: 0.75rem 0.5rem;
+    &--image-container {
+      display: flex;
+      //margin: 0.5rem 5%;
+      height: 20rem;
+      width: 90%;
+      border-radius: 15%;
+      position: relative;
+      .post-image {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        object-fit: cover;
+      }
+    }
   }
   &__like-box {
     display: flex;

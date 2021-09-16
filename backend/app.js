@@ -15,6 +15,7 @@ app.use(helmet());
 
 //Database
 const db = require("./models")
+const User = db.users
 db.sequelize.sync();
 
 //headers
@@ -42,7 +43,7 @@ app.use(
 );  
 app.use(
   session({
-    secret: process.env.SESSION_SECRET,
+    secret: process.env.SESSION_SECRET + User,
     resave: true,
     saveUninitialized: true,
     cookie: {
@@ -50,7 +51,7 @@ app.use(
     },
   })
 );
-app.use(cookieParser(process.env.SESSION_SECRET));
+app.use(cookieParser(process.env.SESSION_SECRET + User));
 app.use(passport.initialize());
 app.use(passport.session());
 require('./middleware/passport-config')(passport);

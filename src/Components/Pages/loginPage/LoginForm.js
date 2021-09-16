@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import {login} from '../../../utils/loginLogout';
 import Axios from 'axios';
 
-const LoginForm = () => {
+const LoginForm = (props) => {
   
   //allow to toggle password visibility
   const showPassword = (e) => {
@@ -21,7 +21,6 @@ const LoginForm = () => {
 
   const loginFunction = (e) => {
     e.preventDefault();
-    //Check email format
     const emailChecking = () => {
       if (emailRegex.test(email)) return true;
       else {
@@ -39,7 +38,11 @@ const LoginForm = () => {
         },
         withCredentials: true, 
         url: "http://localhost:5000/api/auth/login",
-      }).then((res) => console.log(res));
+      }).then((res) =>  {
+        console.log(res)
+        document.cookie = JSON.stringify(res);
+        localStorage.setItem('test', JSON.stringify(res));
+      })
     };
   };
 

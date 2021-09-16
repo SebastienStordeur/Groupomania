@@ -23,22 +23,26 @@ const ModalPost = () => {
       else return true;
     };
 
+    const testId = JSON.parse(localStorage.getItem('test'))
     const formData = new FormData();
     formData.append('title', title);
     formData.append('content', content);
     formData.append('image', file);
+    formData.append('userId', testId.data.id)
 
     Axios.post('http://localhost:5000/api/post', formData, {
       headers: { 'Content-Type': 'multipart/form-data'}
-    })
+    });
+    const modal = document.querySelector('.modal')
+    modal.style.display = "none";
   };
 
   return (
     <div className="modal modal-post">
       <ImCross className="close-modal" onClick={closeModal} />
-      <form className="input-box" onSubmit={post}>
+      <form className="input-box ipt" onSubmit={post}>
         <input
-          className="input-title"
+          className="input-title ipt"
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -47,7 +51,7 @@ const ModalPost = () => {
         />
         <label htmlFor="message">Message</label>
         <textarea
-          className="input-box__message"
+          className="input-box__message ipt"
           type="text"
           value={content}
           onChange={(e) => setContent(e.target.value)}
@@ -55,13 +59,14 @@ const ModalPost = () => {
           required
         />
         <input
-          className="input-box__btn add-image-btn"
+          className="input-box__btn add-image-btn "
           type="file"
           accept="image/*"
           placeholder="Fichier"
           onChange={ (e) => {
             setFile(e.target.files[0]);
-          }} 
+          }}
+          required
         />
 
         <button className="submit-post input-box__submit-btn" onClick={post}>

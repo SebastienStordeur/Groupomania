@@ -5,19 +5,15 @@ import ModalGetComment from "./ModalGetComment";
 import { BiHeart } from 'react-icons/bi';
 import { RiDislikeLine } from 'react-icons/ri';
 import { ImSpinner3 } from 'react-icons/im';
+import axios from "axios";
 
 const MainContent = () => {
   
   const openModal = () => {
     const modal = document.querySelector(".modal");
+    const dashboard = document.querySelector('.main-content-section');
     modal.style.display = "block";
   };
-
-  //Close any kind of modal if clicked outside of it
-/*   const closeModal = () => {
-    const modals = document.querySelectorAll('.modal');
-    modals.style.display = 'none';
-  } */
 
   const openAddComment = () => {
     document.querySelector('.add-comment-modal').style.display = "block";
@@ -38,6 +34,12 @@ const MainContent = () => {
   useEffect(() => {
     getPosts();
   }, []); 
+
+  let id
+
+  const like = async () => {
+    const response = await fetch(`http://localhost:5000/api/post/${id}/like`)
+  }
 
 
   return (
@@ -61,8 +63,10 @@ const MainContent = () => {
               </div>
               <div className="post-content__content">
                 <h3>{title}</h3>
-                <p>{content}</p> 
-                <img src={imageUrl} alt="image" />
+                <p>{content}</p>
+                <div className="post-content__content--image-container">
+                  <img src={imageUrl} alt="image" className="post-image" />
+                </div>
               </div>
               <div className="post-content__like-box">
                 <BiHeart className="like-heart like" size={26} />
@@ -70,9 +74,10 @@ const MainContent = () => {
                 <RiDislikeLine className="dislike-heart dislike" size={26} />
                 <span className="dislike-count">{dislikes}</span>
               </div>
+              <button className="btn">Delete</button>
               <div className="post-content__comment-box"> 
                 <h4 onClick={openAddComment}>Ajouter un commentaire</h4>
-                <AddComment style={{ display: 'none' }} />
+                <AddComment style={{ display: 'none' }}/>
                 <h4 onClick={openAllComments}>Voir les commentaires</h4>
               </div>
             </div>

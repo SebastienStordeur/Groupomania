@@ -29,8 +29,7 @@ function App() {
             <DashboardPage />
           </Route> 
           {/* <PrivateRoute component={ProfilePage} path="/profile:id" exact /> */}
-        <Route path="/profile:id">
-            <ProfilePage />
+        <Route path="/profile/:id" children={<ProfilePage />}>
           </Route> 
         </Switch>
       </BrowserRouter>

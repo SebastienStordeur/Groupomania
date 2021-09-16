@@ -6,7 +6,7 @@ const ProfileDisconnect = () => {
   return (
     <div>
       <Link to="/">
-        <h2 style={{ cursor:'pointer'}} onClick={logout}>Deconnexion</h2>
+        <h2 className="disconnect" onClick={logout}>Deconnexion</h2>
       </Link>
     </div>
   )

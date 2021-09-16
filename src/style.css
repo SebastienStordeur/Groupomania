@@ -160,16 +160,15 @@ input {
   cursor: pointer;
 }
 
-/* margin-top: 1rem;
-height: 1.6rem;
-width: 18rem;
-background-color: $secondary-color;
-font-family: "Poppins", sans-serif;
-font-size: 16px;
-font-weight: 600;
-cursor: pointer; */
+.disconnect {
+  color: #FFFFFF;
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
+}
+
 .main-header {
   display: flex;
+  padding-left: 35%;
   justify-content: space-around;
   align-items: center;
   height: 4rem;
@@ -232,6 +231,11 @@ cursor: pointer; */
   cursor: pointer;
 }
 
+.post-container {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
 .post-content {
   margin: 1.25rem auto;
   width: 80%;
@@ -250,6 +254,19 @@ cursor: pointer; */
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   margin: 0.75rem 0.5rem;
+}
+.post-content__content--image-container {
+  display: flex;
+  height: 20rem;
+  width: 90%;
+  border-radius: 15%;
+  position: relative;
+}
+.post-content__content--image-container .post-image {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  object-fit: cover;
 }
 .post-content__like-box {
   display: flex;
@@ -290,7 +307,7 @@ cursor: pointer; */
   display: none;
   position: fixed;
   margin: auto;
-  z-index: 1;
+  z-index: 5;
   background-color: #FFFFFF;
   margin-top: 1rem;
   width: 50%;

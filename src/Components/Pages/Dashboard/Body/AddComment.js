@@ -10,37 +10,18 @@ const AddComment = () => {
 
   const [comment, setComment] = useState("");
 
-
   const postComment = (e) => {
-    e.preventDefault()
-    const postCommentContent = JSON.parse(localStorage.getItem("comment"));
-    const promise = fetch(`http://localhost:5000/api/post/:1/comment`, {
-      method: 'POST',
-      body: JSON.stringify(postCommentContent),
-      headers: { 'Content-Type' : 'application/json' },
-    });
-    promise.then(async(response) => {
-      try {
-        localStorage.removeItem('comment')
-        const responseContent = await response.json()
-        console.log(responseContent);
-      } catch (error) {
-        console.log('impossible')
-      }
-    })
-  } 
-
-/*   const postComment = (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    const { id } = this.id
     Axios({
       method: 'POST',
       data: {
         content: comment,
       },
       withCredentials: true,
-      url: 'http://localhost:5000/api/post/1/comment'
+      url: `http://localhost:5000/api/post/${id}/comment`,
     }).then((res) => console.log(res));
-  }; */
+  }
 
   return (
     <div className='add-comment-modal modal'>
