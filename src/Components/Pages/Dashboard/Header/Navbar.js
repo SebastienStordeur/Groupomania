@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link, useParams } from "react-router-dom";
 import { AiFillHome } from "react-icons/ai"
-import { IoIosNotifications } from "react-icons/io"
 import { FaUserAlt } from "react-icons/fa"
 
 

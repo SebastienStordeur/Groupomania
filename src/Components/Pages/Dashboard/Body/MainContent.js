@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import ModalPost from "./ModalPost";
-import ModalGetComment from "./ModalGetComment";
 import { BiHeart } from 'react-icons/bi';
 import { RiDislikeLine } from 'react-icons/ri';
 import { ImSpinner3 } from 'react-icons/im';
@@ -14,12 +13,9 @@ const MainContent = () => {
     modal.style.display = "block";
   };
 
-  const openAllComments = () => {
-    document.querySelector('.modal-get-comments').style.display = "block";
-  }
-
   const [posts, setPosts] = useState([]);
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState(''); //value from the comment input
+  const [comments, setComments] = useState([]);
 
   const getPosts = async () => {
     const response = await fetch('http://localhost:5000/api/post/');
@@ -29,14 +25,7 @@ const MainContent = () => {
 
   useEffect(() => {
     getPosts();
-  }, []); 
-
-
-  const like = async () => {
-   // const response = await fetch(`http://localhost:5000/api/post/${id}/like`)
-  }
-
-
+  }, []);
 
   return (
     <section className="main-content-section" /* onClick={closeModal} */>
@@ -49,9 +38,20 @@ const MainContent = () => {
       <ModalPost style={{ display: "none" }} />
       <div className="post-container">
         {posts.map((post) => { 
-           const { id, title, content, author, likes, dislikes, imageUrl } = post; 
+           const { id, title, content, author, likes, dislikes, imageUrl } = post; //defining what a
            
-           const addComment = async(e) => {
+          //delete a post
+          const deletePost = async(e) => {
+            e.preventDefault();
+            axios({
+              method: 'DELETE',
+              withCredentials: true,
+              url: `http://localhost:5000/api/post/${id}`
+            }).then((res) => console.log(res));
+          }
+
+           //add a comment
+          const addComment = async(e) => {
              e.preventDefault()
             axios({
               method: 'POST',
@@ -62,9 +62,19 @@ const MainContent = () => {
               withCredentials: true,
               url: `http://localhost:5000/api/post/${id}/comment`
             }).then((res) => {
-              console.log(res)
+              console.log(res);
             })
+          };
+
+          const getComments = async() => {
+            const response = await fetch(`http://localhost:5000/api/post/${id}/comment`);
+            const comments = await response.json();
+            setComments(comments.data);
           }
+
+         /*  useEffect(() => {
+            getComments();
+          }, []);  */
 
            return ( 
             <div className="post-content"  key={id} >
@@ -86,14 +96,28 @@ const MainContent = () => {
                 <RiDislikeLine className="dislike-heart dislike" size={26} />
                 <span className="dislike-count">{dislikes}</span>
               </div>
-              <button className="btn">Delete</button>
+              <button className="btn" onClick={deletePost}>Delete</button>
               <div className="post-content__comment-box"> 
                 <h4>Ajouter un commentaire</h4>
-                <h4 onClick={openAllComments}>Voir les commentaires</h4>
+                <h4>Voir les commentaires</h4>
               </div>
-              <form className='comment-form' onSubmit={addComment}>
+              <form className='comment-form'  onSubmit={addComment}>
                 <input className="add-comment input" name="comment-input" value={comment} onChange={(e) => setComment(e.target.value)}></input>
               </form>
+
+              <div className="comment-content">
+                <button onClick={getComments}>Test</button>
+              </div>
+              <div className='comment-box'> 
+                {/* {comments.data.map((commentaire) => {
+                  const { id, content, userId, postId} = commentaire;
+                  return (
+                    <div className='comment-box__container' key={id}>
+                      <p>{content}</p>
+                    </div>
+                  )
+                })} */}
+              </div>
             </div>
           );
         })}  

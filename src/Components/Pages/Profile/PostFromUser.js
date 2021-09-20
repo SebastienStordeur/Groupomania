@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
-import AddComment from '../Dashboard/Body/AddComment';
-import ModalGetComment from '../Dashboard/Body/ModalGetComment';
 import { BiHeart } from 'react-icons/bi';
 import { RiDislikeLine } from 'react-icons/ri';
 
@@ -55,7 +53,6 @@ const PostFromUser = () => {
               </div>
               <div className="post-content__comment-box"> 
                 <h4 onClick={openAddComment}>Ajouter un commentaire</h4>
-                <AddComment style={{ display: 'none' }} />
                 <h4 onClick={openAllComments}>Voir les commentaires</h4>
               </div>
             </div>

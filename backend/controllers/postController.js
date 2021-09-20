@@ -42,15 +42,20 @@ exports.getPostWithUserId = (req,res) => {
     .catch(error => res.status(500).json({ message: "Rien à afficher" + error }));
 }
 
-exports.likePost = (req,res) => {
+
+//Like / dislike
+ exports.likePost = (req,res) => {
   Post.findOne({ where: {id: req.post.id } })
     switch (req.body.like) {
       case +1: 
       Post.updateOne(
-        
+       {where: { postId: req.body.postId }},
+
       )
+        .then(() => res.status(201).json({ message: 'Like envoyé.'}))
+        .catch(error => res.status(400).json({ error }));
     }
-}
+} 
 
 
 
@@ -69,7 +74,13 @@ exports.createComment = (req,res) => {
 
 exports.getComments = (req, res) => {
   console.log(req.body)
-  Comment.findAll({ where: {postId : req.body.postId } })
+  Comment.findAll({ where:  {id: req.body.postId }})
     .then((data) => res.status(201).json({ data }))
-    .catch(error => res.status(500).json({ message: 'Impossible de récupérer les commentaires. ' + error}));
+    .catch(error => res.status(500).json({ message: 'Impossible de récupérer les commentaires. ' + error }));
 }
+
+/* exports.deleteComment = (req, res) => {
+  Comment.destroy({ where: {id: req.body.postId} && {commentId: req.params.id} })
+    .then(() => res.status(201).json({ message: 'Commentaire supprimé.'}))
+    .catch(error => res.status(500).json({ message: 'Impossible de supprimer ce commentaire. ' + error }));
+} */
