@@ -257,6 +257,7 @@ input {
 }
 .post-content__content--image-container {
   display: flex;
+  margin: 0.5rem 5%;
   height: 20rem;
   width: 90%;
   border-radius: 15%;

@@ -52,12 +52,24 @@ exports.likePost = (req,res) => {
     }
 }
 
+
+
+//Commentaires
+
 exports.createComment = (req,res) => {
   console.log(req.body);
   const comment = {
-    ...req.body
+    ...req.body,
+    postId: req.body.postId
   };
   Comment.create(comment)
     .then(() => res.status(201).json({ message: "Commentaire crée" }))
-    .catch(error => res.status(400).json({ message: "Impossible de créer ce commentaire" + error }));
+    .catch(error => res.status(400).json({ message: "Impossible de créer ce commentaire. " + error }));
+}
+
+exports.getComments = (req, res) => {
+  console.log(req.body)
+  Comment.findAll({ where: {postId : req.body.postId } })
+    .then((data) => res.status(201).json({ data }))
+    .catch(error => res.status(500).json({ message: 'Impossible de récupérer les commentaires. ' + error}));
 }

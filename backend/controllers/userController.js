@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const db = require("../models");
 const User = db.users;
 const passport = require("passport");
+const { BiCookie } = require("react-icons/bi");
 
 //Register a new User
 exports.register = (req, res) => {

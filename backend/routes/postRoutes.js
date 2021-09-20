@@ -14,6 +14,6 @@ router.post('/:id/like', postController.likePost);
 
 //Comments
 router.post('/:id/comment', postController.createComment)
-
+router.get('/:id/comment', postController.getComments)
 
 module.exports = router;

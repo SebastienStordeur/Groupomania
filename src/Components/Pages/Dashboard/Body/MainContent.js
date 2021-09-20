@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import ModalPost from "./ModalPost";
-import AddComment from "./AddComment";
 import ModalGetComment from "./ModalGetComment";
 import { BiHeart } from 'react-icons/bi';
 import { RiDislikeLine } from 'react-icons/ri';
@@ -15,15 +14,12 @@ const MainContent = () => {
     modal.style.display = "block";
   };
 
-  const openAddComment = () => {
-    document.querySelector('.add-comment-modal').style.display = "block";
-  }
-
   const openAllComments = () => {
     document.querySelector('.modal-get-comments').style.display = "block";
   }
 
   const [posts, setPosts] = useState([]);
+  const [comment, setComment] = useState('');
 
   const getPosts = async () => {
     const response = await fetch('http://localhost:5000/api/post/');
@@ -35,11 +31,11 @@ const MainContent = () => {
     getPosts();
   }, []); 
 
-  let id
 
   const like = async () => {
-    const response = await fetch(`http://localhost:5000/api/post/${id}/like`)
+   // const response = await fetch(`http://localhost:5000/api/post/${id}/like`)
   }
+
 
 
   return (
@@ -54,6 +50,22 @@ const MainContent = () => {
       <div className="post-container">
         {posts.map((post) => { 
            const { id, title, content, author, likes, dislikes, imageUrl } = post; 
+           
+           const addComment = async(e) => {
+             e.preventDefault()
+            axios({
+              method: 'POST',
+              data: { 
+                content: comment,
+                postId: id
+              },
+              withCredentials: true,
+              url: `http://localhost:5000/api/post/${id}/comment`
+            }).then((res) => {
+              console.log(res)
+            })
+          }
+
            return ( 
             <div className="post-content"  key={id} >
               <div className="post-content__user-info">
@@ -76,10 +88,12 @@ const MainContent = () => {
               </div>
               <button className="btn">Delete</button>
               <div className="post-content__comment-box"> 
-                <h4 onClick={openAddComment}>Ajouter un commentaire</h4>
-                <AddComment style={{ display: 'none' }}/>
+                <h4>Ajouter un commentaire</h4>
                 <h4 onClick={openAllComments}>Voir les commentaires</h4>
               </div>
+              <form className='comment-form' onSubmit={addComment}>
+                <input className="add-comment input" name="comment-input" value={comment} onChange={(e) => setComment(e.target.value)}></input>
+              </form>
             </div>
           );
         })}  
