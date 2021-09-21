@@ -260,8 +260,9 @@ input {
   margin: 0.5rem 5%;
   height: 20rem;
   width: 90%;
-  border-radius: 15%;
+  border-radius: 20%;
   position: relative;
+  overflow: hidden;
 }
 .post-content__content--image-container .post-image {
   height: 100%;
@@ -448,6 +449,28 @@ input {
   max-width: 90%;
   margin-right: 0.8rem;
   margin-bottom: 1rem;
+}
+
+.comment-box {
+  display: flex;
+  flex-direction: column-reverse;
+}
+.comment-box__container {
+  min-height: 3rem;
+  margin: 0.1rem 0.5rem;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+.comment-box__container p {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 1rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+}
+.comment-box__trash {
+  margin: 0.2rem 1rem 0.2rem auto;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=style.css.map */

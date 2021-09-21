@@ -3,6 +3,7 @@ import ModalPost from "./ModalPost";
 import { BiHeart } from 'react-icons/bi';
 import { RiDislikeLine } from 'react-icons/ri';
 import { ImSpinner3 } from 'react-icons/im';
+import { BsFillTrashFill } from 'react-icons/bs';
 import axios from "axios";
 
 const MainContent = () => {
@@ -15,7 +16,7 @@ const MainContent = () => {
 
   const [posts, setPosts] = useState([]);
   const [comment, setComment] = useState(''); //value from the comment input
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState([]); //Commentaires retournés par le back
 
   const getPosts = async () => {
     const response = await fetch('http://localhost:5000/api/post/');
@@ -28,7 +29,7 @@ const MainContent = () => {
   }, []);
 
   return (
-    <section className="main-content-section" /* onClick={closeModal} */>
+    <section className="main-content-section">
       <button className="button post-btn" onClick={openModal}>
         Créer un nouveau post
       </button>
@@ -37,9 +38,8 @@ const MainContent = () => {
       </button>
       <ModalPost style={{ display: "none" }} />
       <div className="post-container">
-        {posts.map((post) => { 
-           const { id, title, content, author, likes, dislikes, imageUrl } = post; //defining what a
-           
+        {posts.map((post, commentaire) => { 
+           const { id, title, content, author, likes, dislikes, imageUrl } = post; //defining what a post is
           //delete a post
           const deletePost = async(e) => {
             e.preventDefault();
@@ -65,6 +65,8 @@ const MainContent = () => {
               console.log(res);
             })
           };
+
+
 
           const getComments = async() => {
             const response = await fetch(`http://localhost:5000/api/post/${id}/comment`);
@@ -109,14 +111,25 @@ const MainContent = () => {
                 <button onClick={getComments}>Test</button>
               </div>
               <div className='comment-box'> 
-                {/* {comments.data.map((commentaire) => {
+                {comments.map((commentaire) => {
                   const { id, content, userId, postId} = commentaire;
+
+                  const deleteComment = async(e) => {
+                    e.preventDefault();
+                    axios({
+                      method: 'DELETE',
+                      withCredentials: true,
+                      url: `http://localhost:5000/api/comment/${id}`
+                    })
+                  };
+
                   return (
                     <div className='comment-box__container' key={id}>
                       <p>{content}</p>
+                      <BsFillTrashFill className="comment-box__trash" onClick={deleteComment} />
                     </div>
                   )
-                })} */}
+                })}
               </div>
             </div>
           );
