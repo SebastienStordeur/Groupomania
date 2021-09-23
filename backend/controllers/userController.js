@@ -13,7 +13,10 @@ exports.signup = (req, res) => {
       password: hash,
     };
     User.create(user)
-      .then(() => res.status(201).json({ message: "Utilisateur crée." }))
+      .then(() => {
+        //res.status(201).json({ message: "Utilisateur crée." })
+        res.redirect(301, 'http://localhost:3000/login');
+      })
       .catch((error) => res.status(500).json({ message: "Impossible de créer l'utilisateur. " + error }));
   });
 };

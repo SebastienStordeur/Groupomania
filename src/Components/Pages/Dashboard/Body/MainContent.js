@@ -19,7 +19,7 @@ const MainContent = () => {
   const [comments, setComments] = useState([]); //Commentaires retournés par le back
 
   const getPosts = async () => {
-    const response = await fetch('http://localhost:5000/api/post/');
+    const response = await fetch('http://localhost:5000/posts/');
     const posts = await response.json();
     setPosts(posts.data);
   }
@@ -47,7 +47,7 @@ const MainContent = () => {
             axios({
               method: 'DELETE',
               withCredentials: true,
-              url: `http://localhost:5000/api/post/${id}`
+              url: `http://localhost:5000/posts/${id}`
             }).then((res) => console.log(res));
           }
 
@@ -61,14 +61,14 @@ const MainContent = () => {
                 postId: id
               },
               withCredentials: true,
-              url: `http://localhost:5000/api/post/${id}/comment`
+              url: `http://localhost:5000/posts/${id}/comment`
             }).then((res) => {
               console.log(res);
             })
           };
 
           const getComments = async() => {
-            const response = await fetch(`http://localhost:5000/api/post/${id}/comment`);
+            const response = await fetch(`http://localhost:5000/post/${id}/comment`);
             const comments = await response.json();
             setComments(comments.data);
           }

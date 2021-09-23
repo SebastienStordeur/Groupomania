@@ -1,21 +1,22 @@
 import React, { useState } from "react";
 import Axios from "axios";
+import { Redirect } from "react-router-dom";
 import { AiFillEye } from "react-icons/ai";
 
 const SignupForm = () => {
   
+  const [lastname, setLastname] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password1, setPassword1] = useState("");
+  const [password2, setPassword2] = useState("");
+
   const showPassword = (e) => {
     const psw = e.target.parentNode.parentNode.firstChild;
     e.preventDefault();
     if (psw.type === "password") psw.type = "text";
     else psw.type = "password";
   };
-
-  const [lastname, setLastname] = useState("");
-  const [firstname, setFirstname] = useState("");
-  const [email, setEmail] = useState("");
-  const [password1, setPassword1] = useState("");
-  const [password2, setPassword2] = useState("");
 
   const signup = (e) => {
     e.preventDefault();
@@ -60,7 +61,10 @@ const SignupForm = () => {
         },
         withCredentials: true,
         url: "http://localhost:5000/users/signup",
-      }).then((res) => console.log(res));
+      }).then((res) => {
+        console.log(res);
+        <Redirect  to="http://localhost:3000/login" />
+      });
     } 
   };
 

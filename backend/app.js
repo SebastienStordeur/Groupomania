@@ -71,4 +71,9 @@ app.use('/users', userRoutes);
 app.use('/posts', postRoutes);
 app.use('/comments', commentRoutes);
 
+app.get('/', (req, res) => {
+  res.redirect('/login')
+})
+
+
 module.exports = app;

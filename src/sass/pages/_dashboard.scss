@@ -1,0 +1,11 @@
+//Post Form
+.post-form {
+  display: flex;
+  margin-top: 4rem;
+  &__content {
+    height: 2.2rem;
+    width: 100%;
+    padding: 8px;
+  }
+}
+

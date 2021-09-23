@@ -3,8 +3,8 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 //Pages
 import Signup from "./Components/PublicPages/Signup/Signup";
-//import LoginPage from "./Components/Pages/loginPage/LoginPage";
-import DashboardPage from "./Components/Pages/Dashboard/DashboardPage";
+import Login from "./Components/PublicPages/Login/Login";
+import Dashboard from "./Components/Pages/RestrictedPages/Dashboard/Dashboard";
 import ProfilePage from "./Components/Pages/Profile/ProfilePage";
 
 //Routes
@@ -20,13 +20,13 @@ function App() {
 {/*           <Route exact path="/">
             <RegisterPage />
           </Route> */}
-          {/* <PublicRoute restricted={false} component={LoginPage} path="/login" exact /> */}
+           <PublicRoute restricted={false} component={Login} path="/login" exact /> 
 {/*           <Route path="/login">
             <LoginPage />
           </Route> */}
           {/* <PrivateRoute component={DashboardPage} path="/dashboard" exact /> */}
            <Route path="/dashboard">
-            <DashboardPage />
+            <Dashboard />
           </Route> 
           {/* <PrivateRoute component={ProfilePage} path="/profile:id" exact /> */}
         <Route path="/profile/:id" children={<ProfilePage />}>

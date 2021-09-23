@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router';
 import { useEffect } from 'react/cjs/react.development';
-import Header from '../Dashboard/Header/Header';
+
 import PostFromUser from './PostFromUser';
 
 const ProfilePage = () => {
@@ -22,7 +22,6 @@ const ProfilePage = () => {
 
   return (
     <main>
-      <Header />
       <section className="profile-section-info" key={id}>
         <div className="profile-section-info__img-ctn">
           {/* <img className="profile-section-info__img" src={image} alt={lastName + firstName} /> */}

@@ -1,0 +1,19 @@
+.restricted-header {
+  display: flex;
+  padding-left: 35%;
+  justify-content: space-around;
+  align-items: center;
+  height: 4rem;
+  background-color: $secondary-color;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  box-shadow: 3px 3px 15px 2px $shadow-color;
+}
+.icons-container {
+  display: flex;
+  color: $white;
+  cursor: pointer;
+}
+.menu-icon {
+  margin: 0 1rem;
+}

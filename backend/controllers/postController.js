@@ -3,8 +3,8 @@ const Post = db.posts;
 const User = db.users;
 const Comment = db.comments;
 const fs = require("fs");
-var session = require('express-session');
-const passport = require('passport');
+/* var session = require('express-session');
+const passport = require('passport'); */
 
 
 //Create a post
@@ -16,7 +16,7 @@ exports.createPost = (req,res) => {
     imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
     likes: 0,
     dislikes: 0,
-    userId: req.body.userId
+    //userId: req.body.userId
     }
   //Post.setUser(User.id)
   Post.create(post)

@@ -6,9 +6,10 @@ const passport = require("passport");
 const isAuthenticated = require("../middleware/isAuthenticated");
 
 //Posts
+router.post('/', multer, postController.createPost);
 router.get('/', postController.getAllPost);
 router.get('/:userId', postController.getPostWithUserId); 
-router.post('/', multer, postController.createPost);
+
 router.delete('/:id', postController.deletePost);
 
 //Likes && dislikes

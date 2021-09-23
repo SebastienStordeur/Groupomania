@@ -1,11 +1,12 @@
-@import './components/navbar-signup.scss';
+//Global
 @import './base/global.scss';
 @import './utils/variables';
+
+
 @import './components/forms';
 @import './components/registerLogo';
 @import './components/btn';
 
-@import './layout/header';
 @import './layout/mainContent';
 @import './components/postModal';
 @import './pages/profile';
@@ -17,3 +18,8 @@
 
 //Public content
 @import "./components/publicHeader";
+
+
+//Restricted content
+@import "./components/restrictedHeader";
+@import "./pages/dashboard";
