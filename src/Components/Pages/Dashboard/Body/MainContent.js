@@ -38,8 +38,9 @@ const MainContent = () => {
       </button>
       <ModalPost style={{ display: "none" }} />
       <div className="post-container">
-        {posts.map((post, commentaire) => { 
+        {posts.map((post) => { 
            const { id, title, content, author, likes, dislikes, imageUrl } = post; //defining what a post is
+
           //delete a post
           const deletePost = async(e) => {
             e.preventDefault();
@@ -66,17 +67,14 @@ const MainContent = () => {
             })
           };
 
-
-
           const getComments = async() => {
             const response = await fetch(`http://localhost:5000/api/post/${id}/comment`);
             const comments = await response.json();
             setComments(comments.data);
           }
 
-         /*  useEffect(() => {
-            getComments();
-          }, []);  */
+          /* var x = document.cookie;
+          console.log(x) //Renvoi id=1 (remplace 1 par le l'id stocké dans le cookie) */
 
            return ( 
             <div className="post-content"  key={id} >

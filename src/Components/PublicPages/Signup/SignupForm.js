@@ -1,12 +1,9 @@
 import React, { useState } from "react";
-import "../../../style.css";
+import Axios from "axios";
 import { AiFillEye } from "react-icons/ai";
-import ConfirmRegister from "./ConfirmRegister";
-import DenyRegister from "./DenyRegister";
-import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
-const RegisterForm = () => {
-  //Show password function onClick on the eye icon
+const SignupForm = () => {
+  
   const showPassword = (e) => {
     const psw = e.target.parentNode.parentNode.firstChild;
     e.preventDefault();
@@ -20,16 +17,13 @@ const RegisterForm = () => {
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
 
-  const sendRegisterForm = (e) => {
+  const signup = (e) => {
     e.preventDefault();
 
-    //CHECKING FORM CONTENT
     const checkRegisterForm = () => {
-
       const letterRegex = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
       const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
 
-      //Input validation for Lastname and Firstname
       const letterChecking = () => {
         if(letterRegex.test(lastname) && letterRegex.test(firstname))
           return true;
@@ -38,8 +32,6 @@ const RegisterForm = () => {
           return false;
         }
       };
-
-      //Input validation for email
       const emailChecking = () => {
         if (emailRegex.test(email)) return true;
         else {
@@ -47,8 +39,6 @@ const RegisterForm = () => {
           return false;
         }
       };
-
-      //password validation, checking if both inputs values are the same
       const passwordChecking = () => {
         if (password1 === password2) return true;
         else {
@@ -56,53 +46,26 @@ const RegisterForm = () => {
           return false;
         }
       };
-      if (letterChecking() && emailChecking() && passwordChecking())
-        return true;
+      if (letterChecking() && emailChecking() && passwordChecking()) return true;
     };
 
-    //POST Form function
-    const postRegisterForm = () => {
-      let registerForm = JSON.parse(localStorage.getItem("RegisterForm"));
-      const promise = fetch("http://localhost:5000/api/auth/register", {
+    if (checkRegisterForm()) {
+      Axios({
         method: "POST",
-        body: JSON.stringify(registerForm),
-        headers: {
-          "Content-Type" : "application/json"
-        },
-      });
-      //Response
-      promise.then(async (response) => {
-        try {
-          localStorage.clear();
-          const responseContent = await response.json();
-          console.log(responseContent);
-        } catch (error) {
-          alert("Une erreur s'est produite");
-        }
-      });
-    };
-
-      //If form datas are ok, then create register object to send it to the back
-      if (checkRegisterForm()) {
-        let register = {
+        data: {
           lastName: lastname,
           firstName: firstname,
           email: email,
-          password: password2,
-        };
-        console.log(register);
-        localStorage.setItem("RegisterForm", JSON.stringify(register));
-        postRegisterForm();
-        
-        document.querySelector('.confirm-panel').style.display = "block";
-        <Redirect to="/login" />
-      } else {
-        document.querySelector('.deny-panel').style.display = "block";
-      }
+          password: password2
+        },
+        withCredentials: true,
+        url: "http://localhost:5000/users/signup",
+      }).then((res) => console.log(res));
+    } 
   };
 
   return (
-    <form className="register-form" onSubmit={sendRegisterForm}>
+    <form className="register-form" onSubmit={signup}>
       <label
         className="input"
         value="Nom de famille"
@@ -180,15 +143,13 @@ const RegisterForm = () => {
         <button
           type="submit"
           className="register-btn btn"
-          onClick={sendRegisterForm}
+          onClick={signup}
         >
           S'inscrire
         </button>
       </div>
-      <ConfirmRegister />
-      <DenyRegister />
     </form>
   );
 };
 
-export default RegisterForm;
+export default SignupForm;

@@ -1,7 +1,9 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const postController = require('../controllers/postController');
-const multer = require('../middleware/multer-config');
+const postController = require("../controllers/postController");
+const multer = require("../middleware/multer-config");
+const passport = require("passport");
+const isAuthenticated = require("../middleware/isAuthenticated");
 
 //Posts
 router.get('/', postController.getAllPost);

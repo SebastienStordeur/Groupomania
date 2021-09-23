@@ -3,11 +3,14 @@ const Post = db.posts;
 const User = db.users;
 const Comment = db.comments;
 const fs = require("fs");
+var session = require('express-session');
+const passport = require('passport');
 
 
 //Create a post
 exports.createPost = (req,res) => {
-  console.log(req.body)
+  console.log('Blabla')
+  console.log(req.user)
     const post = {
       ...req.body,
     imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
@@ -34,6 +37,9 @@ exports.deletePost = (req,res) => {
 };
 
 exports.getAllPost = (req,res) => {
+  //session = req.session;
+  console.log('test')
+  console.log(req.session)
   Post.findAll({ where: req.body.id })
     .then((data) => res.status(201).json({ data }))
     .catch(error => res.status(500).json({ message: "Rien à afficher. " + error }))

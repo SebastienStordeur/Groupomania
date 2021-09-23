@@ -1,12 +1,11 @@
-const bcrypt = require("bcrypt");
 const db = require("../models");
 const User = db.users;
-const passport = require("passport");
-const { BiCookie } = require("react-icons/bi");
+const bcrypt = require("bcrypt");
+const passport = require("passport")
 
 //Register a new User
-exports.register = (req, res) => {
-  bcrypt.hash(req.body.password, 15).then((hash) => {
+exports.signup = (req, res) => {
+  bcrypt.hash(req.body.password, 10).then((hash) => {
     const user = {
       lastName: req.body.lastName,
       firstName: req.body.firstName,
@@ -14,18 +13,13 @@ exports.register = (req, res) => {
       password: hash,
     };
     User.create(user)
-      .then(() => {
-        res.status(201).json({ message: "Utilisateur crée." });
-      })
-      .catch((error) => {
-        res.status(500).json({ message: "Impossible de créer l'utilisateur. " + error });
-      });
+      .then(() => res.status(201).json({ message: "Utilisateur crée." }))
+      .catch((error) => res.status(500).json({ message: "Impossible de créer l'utilisateur. " + error }));
   });
 };
 
 //Login
 exports.login = (req, res, next) => {
-  console.log(req.body);
   passport.authenticate("local", (err, user, info) => {
     if (err) throw err;
     if (!user) res.send("Impossible de trouver cet utilisateur");
@@ -33,9 +27,12 @@ exports.login = (req, res, next) => {
       req.logIn(user, (err) => {
         if (err) throw err;
         //res.send('Authentification réussie.');
+        const session = req.session;
+        session.user = req.user;
+        console.log(req._passport.session) //Send { user: 2}
         res.send(user);
-        console.log("req?user=", req.user);
-        console.log(user.dataValues.id);
+ 
+        console.log(req.session)
       });
     }
   })(req, res, next);
@@ -46,7 +43,7 @@ exports.logout = (req, res) => {
   req.redirect("/login");
 };
 
-exports.getProfile = (req, res, next) => {
+exports.getProfile = (req, res) => {
   User.findOne({ id: req.params.id })
     .then((user) => res.status(200).json(user))
     .catch((error) =>

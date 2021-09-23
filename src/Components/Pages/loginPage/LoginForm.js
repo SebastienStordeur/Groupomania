@@ -29,13 +29,6 @@ const LoginForm = (props) => {
       }
     };
 
-/*     function setCookie(cname, cvalue, exdays) {
-      const d = new Date();
-      d.setTime(d.getTime() + (exdays*24*60*60*1000));
-      let expires = "expires="+ d.toUTCString();
-      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    } */
-
     if(emailChecking) {
       Axios({
         method: 'POST',
@@ -44,14 +37,11 @@ const LoginForm = (props) => {
           password: password
         },
         withCredentials: true, 
-        url: "http://localhost:5000/api/auth/login",
+        url: "http://localhost:5000/users/login",
       }).then((res) =>  {
         console.log(res)
-        //setCookie('id', JSON.stringify(res.data.id))
-        document.cookie=`id=${res.data.id}`
-        //setCookie('name', JSON.stringify(res.data.lastName))
-        //setCookie("Infos", res.data.id)
-        //document.cookie = JSON.stringify(res.data.id);
+        //document.cookie=`id=${res.data.id}`
+
         localStorage.setItem('test', JSON.stringify(res));
 
         //document.cookie="cookiename=;expires = Thu, 01 Jan 1970 00:00:00 GMT"

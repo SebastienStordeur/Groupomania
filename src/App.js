@@ -2,8 +2,8 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 //Pages
-import RegisterPage from "./Components/Pages/registerPage/registerPage";
-import LoginPage from "./Components/Pages/loginPage/LoginPage";
+import Signup from "./Components/PublicPages/Signup/Signup";
+//import LoginPage from "./Components/Pages/loginPage/LoginPage";
 import DashboardPage from "./Components/Pages/Dashboard/DashboardPage";
 import ProfilePage from "./Components/Pages/Profile/ProfilePage";
 
@@ -16,11 +16,11 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Switch>
-          <PublicRoute restricted={false} component={RegisterPage} path="/" exact />
+          <PublicRoute restricted={false} component={Signup} path="/" exact />
 {/*           <Route exact path="/">
             <RegisterPage />
           </Route> */}
-          <PublicRoute restricted={false} component={LoginPage} path="/login" exact />
+          {/* <PublicRoute restricted={false} component={LoginPage} path="/login" exact /> */}
 {/*           <Route path="/login">
             <LoginPage />
           </Route> */}
