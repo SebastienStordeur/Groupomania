@@ -18,7 +18,6 @@ exports.createPost = (req,res) => {
     dislikes: 0,
     //userId: req.body.userId
     }
-  //Post.setUser(User.id)
   Post.create(post)
     .then(() => res.status(201).json({ message: "Post crée" }))
     .catch(error => res.status(400).json({ message: "Impossible de créer ce post" + error }));
@@ -37,8 +36,6 @@ exports.deletePost = (req,res) => {
 };
 
 exports.getAllPost = (req,res) => {
-  //session = req.session;
-  console.log('test')
   console.log(req.session)
   Post.findAll({ where: req.body.id })
     .then((data) => res.status(201).json({ data }))
@@ -53,39 +50,27 @@ exports.getPostWithUserId = (req,res) => {
 
 
 //Like / dislike
- exports.likePost = (req,res) => {
-  Post.findOne({ where: {id: req.post.id } })
-    switch (req.body.like) {
-      //like
-      case +1: 
-      Post.updateOne(
-        { where: { postId: req.body.postId }}
-      )
-        .then(() => res.status(201).json({ message: 'Like envoyé.'}))
-        .catch(error => res.status(400).json({ error }));
-        break;
+exports.like = (req,res) => {
+  switch(req.body.like) {
+    case +1:
+      Post.update({
+        where: { id: req.params.id },
+        where: { likes: +1 }
+      })
+      .then(() => res.status(201).json({ message: "Post Liké." }))
+      .catch(error => res.status(500).json({ message: "Impossible de liker. " + error }));
+    break;
 
-      //Retour à l'état initial, si like ou dislike => retour 0
-      case 0:
-        
-
-        break;
-
-      //dislike
-      case -1: 
-      Post.updateOne(
-        { where: { postId: req.body.postId }}
-      )
-        .then(() => res.status(201).json({ message: 'Dislike envoyé.'}))
-        .catch(error => res.status(400).json({ message: "Impossible d'envoyer le dislike. " + error })); 
-        break;
-
-      default: 
-        break;
-    };
-} ;
-
-
+    case -1: 
+      Post.update({
+        where: { id: req.paramas.id },
+        where: { likes: -1 }
+      })
+      .then(() => res.status(201).json({ message: "Post disliké." }))
+      .catch(error => res.status(500).json({ message: "Impossible de disliker. " + error}));
+    break;
+  }
+};
 
 //Commentaires
 exports.createComment = (req,res) => {

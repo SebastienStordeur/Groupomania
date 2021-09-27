@@ -71,10 +71,7 @@ const MainContent = () => {
             const response = await fetch(`http://localhost:5000/post/${id}/comment`);
             const comments = await response.json();
             setComments(comments.data);
-          }
-
-          /* var x = document.cookie;
-          console.log(x) //Renvoi id=1 (remplace 1 par le l'id stocké dans le cookie) */
+          };
 
            return ( 
             <div className="post-content"  key={id} >

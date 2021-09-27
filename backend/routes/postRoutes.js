@@ -13,7 +13,7 @@ router.get('/:userId', postController.getPostWithUserId);
 router.delete('/:id', postController.deletePost);
 
 //Likes && dislikes
-router.post('/:id/like', postController.likePost);
+router.post('/:id/like', postController.like);
 
 //Comments
 router.post('/:id/comment', postController.createComment);

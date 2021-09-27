@@ -27,9 +27,13 @@ const PostInput = () => {
 
   return (
     <form className="post-form" onSubmit={post}>
-      <input className="post-form__content" placeholder="Contenu de votre prochain post.." value={content} onChange={(e) => setContent(e.target.value)}/>
-      <input className="post-form__file" type="file" accept="image/*" onChange={(e) => setFile(e.target.files[0])} />
-      <button className="post-form__submit btn" type="submit" onClick={post}>Poster</button>
+      <div className="post-form__main-input">
+        <input className="post-form__content" placeholder="Contenu de votre prochain post.." value={content} onChange={(e) => setContent(e.target.value)}/>
+      </div>
+      <div className="post-form__secondary-input">
+        <input className="post-form__file" type="file" accept="image/*" onChange={(e) => setFile(e.target.files[0])} />
+        <button className="post-form__submit btn" type="submit" onClick={post}>Poster</button>
+      </div>
     </form>
   )
 }

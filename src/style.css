@@ -143,189 +143,6 @@ input {
   font-size: 22px;
 }
 
-.dashboard-main {
-  display: flex;
-  justify-content: center;
-  margin-top: 6rem;
-}
-
-.main-content-section {
-  width: 50%;
-  border-radius: 1px solid black;
-}
-
-.post-btn {
-  height: 2.5rem;
-  width: 12rem;
-  background-color: #FD2D01;
-  font-family: "Roboto", sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  border-radius: 6px;
-  margin: auto;
-  cursor: pointer;
-}
-
-.post-container {
-  display: flex;
-  flex-direction: column-reverse;
-}
-
-.post-content {
-  margin: 1.25rem auto;
-  width: 80%;
-  border: 3px solid lightgrey;
-}
-.post-content__user-info {
-  display: flex;
-  padding: 8px;
-}
-.post-content__name {
-  font-size: 14px;
-  font-weight: 300;
-  font-family: "Roboto", sans-serif;
-}
-.post-content__content {
-  font-family: "Roboto", sans-serif;
-  font-size: 16px;
-  margin: 0.75rem 0.5rem;
-}
-.post-content__content--image-container {
-  display: flex;
-  margin: 0.5rem 5%;
-  height: 20rem;
-  width: 90%;
-  border-radius: 20%;
-  position: relative;
-  overflow: hidden;
-}
-.post-content__content--image-container .post-image {
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  object-fit: cover;
-}
-.post-content__like-box {
-  display: flex;
-}
-.post-content__comment-box {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 8px;
-}
-.post-content__comment-box h4 {
-  cursor: pointer;
-  font-family: "Poppins", sans-serif;
-  font-size: 12px;
-}
-
-.like-heart {
-  margin: 0 0.1rem 0.75rem 0.5rem;
-  background-color: #FFFFFF;
-  cursor: pointer;
-}
-.like-heart:active {
-  color: red;
-}
-
-.like-count {
-  margin: 0.2rem 1rem 0 0;
-}
-
-.dislike-count {
-  margin: 0.2rem 1rem 0 0.1rem;
-}
-
-.dislike-heart {
-  cursor: pointer;
-}
-
-.modal {
-  display: none;
-  position: fixed;
-  margin: auto;
-  z-index: 5;
-  background-color: #FFFFFF;
-  margin-top: 1rem;
-  width: 50%;
-  height: 40%;
-  border: 1px solid lightgrey;
-  box-shadow: 3px 3px 15px 2px #d9d9d9;
-}
-
-.close-modal {
-  position: absolute;
-  margin: 1rem 1rem 0 95%;
-  color: #FFD7D7;
-  cursor: pointer;
-}
-
-.input-box {
-  display: flex;
-  flex-direction: column;
-  margin-top: 3rem;
-  margin-left: 1rem;
-}
-.input-box label {
-  margin-left: 12px;
-  font-family: "Roboto", sans-serif;
-  font-weight: 600;
-}
-.input-box__message {
-  margin-top: 0.25rem;
-  max-width: 80%;
-  height: 10rem;
-  resize: none;
-  padding-left: 8px;
-  padding-top: 8px;
-  border: 3px solid #FFD7D7;
-  border-radius: 6px;
-  outline: none;
-}
-.input-box__message ::placeholder {
-  color: #000;
-  font-family: "Poppins", sans-serif;
-}
-.input-box__btn {
-  margin-top: 1rem;
-  height: 1.6rem;
-  width: 18rem;
-  background-color: #FD2D01;
-  font-family: "Poppins", sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-}
-.input-box__img-input {
-  margin-top: 1rem;
-  padding-left: 8px;
-  height: 2.2rem;
-  width: 80%;
-  border: 3px solid #FFD7D7;
-  border-radius: 6px;
-  outline: none;
-}
-.input-box__submit-btn {
-  height: 2.2rem;
-  width: 8rem;
-  font-family: "Poppins", sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  background-color: #FD2D01;
-  cursor: pointer;
-}
-
-.input-title {
-  max-width: 80%;
-  padding-left: 8px;
-  border: 3px solid #FFD7D7;
-  border-radius: 6px;
-  outline: none;
-}
-.input-title ::placeholder {
-  font-family: "Poppins", sans-serif;
-}
-
 .profile-section-info {
   display: flex;
   margin: auto;
@@ -348,42 +165,6 @@ input {
 }
 .profile-section-info__details {
   margin: 1rem 1rem;
-}
-
-.panel {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 2rem;
-  margin-top: 1rem;
-  font-size: 12px;
-  font-family: "Poppins", sans-serif;
-}
-
-.confirm-panel {
-  display: none;
-  background-color: lightgreen;
-}
-
-.deny-panel {
-  display: none;
-  background-color: #F08080;
-}
-
-.add-comment-modal {
-  height: 14rem;
-}
-
-.label-add-comment {
-  font-family: "Poppins", sans-serif;
-}
-
-.input-comment {
-  resize: none;
-  padding: 6px;
-  max-width: 90%;
-  margin-right: 0.8rem;
-  margin-bottom: 1rem;
 }
 
 .comment-box {
@@ -454,12 +235,130 @@ input {
 
 .post-form {
   display: flex;
+  flex-direction: column;
   margin-top: 4rem;
 }
 .post-form__content {
   height: 2.2rem;
   width: 100%;
   padding: 8px;
+}
+.post-form__secondary-input {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dashboard-main {
+  display: flex;
+  justify-content: center;
+  margin-top: 6rem;
+}
+
+.main-content-section {
+  width: 50%;
+  border-radius: 1px solid black;
+}
+
+.post-btn {
+  height: 2.5rem;
+  width: 12rem;
+  background-color: #FD2D01;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 6px;
+  margin: auto;
+  cursor: pointer;
+}
+
+.post-container {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.post-content {
+  margin: 1.25rem auto;
+  width: 80%;
+  border: 3px solid lightgrey;
+}
+.post-content__user-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+}
+.post-content__name {
+  display: flex;
+  flex-direction: row;
+  font-size: 14px;
+  font-weight: 300;
+  font-family: "Roboto", sans-serif;
+}
+.post-content__name--delete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.5rem;
+  width: 1.5rem;
+  background-color: lightgray;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.post-content__content {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  margin: 0.25rem 0.5rem;
+}
+.post-content__content--image-container {
+  display: flex;
+  margin: 0.5rem 5%;
+  height: 20rem;
+  width: 90%;
+  border-radius: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+.post-content__content--image-container .post-image {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  object-fit: cover;
+}
+.post-content__like-box {
+  display: flex;
+}
+.post-content__like-box .heart {
+  color: grey;
+}
+.post-content__comment-box {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 8px;
+}
+.post-content__comment-box h4 {
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+}
+
+.like-heart {
+  margin: 0 0.1rem 0.75rem 0.5rem;
+  background-color: #FFFFFF;
+  cursor: pointer;
+}
+.like-heart:active {
+  color: red;
+}
+
+.like-count {
+  margin: 0.2rem 1rem 0 0;
+}
+
+.dislike-count {
+  margin: 0.2rem 1rem 0 0.1rem;
+}
+
+.dislike-heart {
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=style.css.map */
