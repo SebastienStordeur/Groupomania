@@ -22,10 +22,10 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.INTEGER
     },
     usersLiked: {
-      type: Sequelize.JSON
+      type: Sequelize.STRING
     },
     usersDisliked: {
-      type: Sequelize.JSON
+      type: Sequelize.STRING
     }
   });
 

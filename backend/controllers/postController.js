@@ -9,8 +9,8 @@ const passport = require('passport'); */
 
 //Create a post
 exports.createPost = (req,res) => {
-  console.log('Blabla')
   console.log(req.user)
+  console.log(req.session)
     const post = {
       ...req.body,
     imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
@@ -28,11 +28,12 @@ exports.deletePost = (req,res) => {
     .then((post) => {
       const filename = post.imageUrl.split("/images/")[1];
       fs.unlink(`images/${filename}`, () => {
-      })
-    });
-    Post.destroy({ where: { id: req.params.id } })
-      .then(() => res.status(201).json({ message: "Post supprimé."}))
-      .catch(error => res.status(400).json({ message: "Impossible de supprimer ce post. " + error}));
+        Post.destroy({ where: { id: req.params.id } })
+          .then(() => res.status(201).json({ message: "Post supprimé."}))
+          .catch(error => res.status(400).json({ message: "Impossible de supprimer ce post. " + error}));
+      });
+    })
+    .catch(error => res.status(500).json({ message: "Erreur. " + error }));
 };
 
 exports.getAllPost = (req,res) => {
@@ -52,23 +53,31 @@ exports.getPostWithUserId = (req,res) => {
 //Like / dislike
 exports.like = (req,res) => {
   switch(req.body.like) {
+    //Like
     case +1:
-      Post.update({
-        where: { id: req.params.id },
-        where: { likes: +1 }
-      })
+      Post.update({ where: { id: req.params.id },
+      likes: likes + 1})
       .then(() => res.status(201).json({ message: "Post Liké." }))
       .catch(error => res.status(500).json({ message: "Impossible de liker. " + error }));
     break;
 
+    //Dislike
     case -1: 
       Post.update({
-        where: { id: req.paramas.id },
-        where: { likes: -1 }
-      })
+        where: { id: req.params.id, dislikes: +1 } })
       .then(() => res.status(201).json({ message: "Post disliké." }))
       .catch(error => res.status(500).json({ message: "Impossible de disliker. " + error}));
     break;
+
+    case 0: 
+    Post.findOne({ where: { id: req.params.id }}).then((post) => {
+      if(post.usersLiked.includes(req.body.userId)) {
+        Post.update({ where: { id: req.params.id}})
+      }
+      if(post.usersDisliked.includes(req.body.userId)) {
+        Post.update() 
+      }
+    }) 
   }
 };
 
@@ -79,20 +88,15 @@ exports.createComment = (req,res) => {
     postId: req.body.postId
   };
   Comment.create(comment)
-    .then(() => res.status(201).json({ message: "Commentaire crée" }))
+    .then(() => {
+      res.redirect("/posts/:id/comment")
+    })
     .catch(error => res.status(400).json({ message: "Impossible de créer ce commentaire. " + error }));
 };
 
 exports.getComments = (req, res) => {
-  console.log(req.body)
-  Comment.findAll({ where:  req.body.postId })
+  console.log(req.params.id)
+  Comment.findAll({ where: { postId: req.params.id }})
     .then((data) => res.status(201).json({ data }))
     .catch(error => res.status(500).json({ message: 'Impossible de récupérer les commentaires. ' + error }));
-};
-
-/* exports.deleteComment = (req, res) => {
-  Comment.destroy({ where: {id: req.body.postId}}, 
-    { where: {commentId: req.params.id } })
-    .then(() => res.status(201).json({ message: 'Commentaire supprimé.'}))
-    .catch(error => res.status(500).json({ message: 'Impossible de supprimer ce commentaire. ' + error }));
-}; */
+}; 

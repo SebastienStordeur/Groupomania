@@ -172,15 +172,22 @@ input {
   flex-direction: column-reverse;
 }
 .comment-box__container {
+  display: flex;
+  justify-content: space-between;
   min-height: 3rem;
-  margin: 0.1rem 0.5rem;
-  border: 1px solid black;
-  border-radius: 3px;
+  margin: 0.3rem 0.5rem;
+  padding: 8px;
+  background-color: lightgray;
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+.comment-box__container h4 {
+  font-family: "Poppins", sans-serif;
 }
 .comment-box__container p {
   display: flex;
   align-items: center;
-  margin: 0.5rem 1rem;
+  margin: 0.1rem;
   font-family: "Poppins", sans-serif;
   font-size: 14px;
 }
@@ -231,6 +238,10 @@ input {
 
 .menu-icon {
   margin: 0 1rem;
+}
+
+.disconnect {
+  cursor: pointer;
 }
 
 .post-form {
@@ -359,6 +370,28 @@ input {
 
 .dislike-heart {
   cursor: pointer;
+}
+
+.form-comment {
+  display: flex;
+  justify-content: space-between;
+}
+.form-comment .comment-form {
+  margin: 0 8px;
+}
+.form-comment .comment-form input {
+  height: 2.2rem;
+  width: 22rem;
+  padding-left: 8px;
+  font-family: "Poppins", sans-serif;
+}
+.form-comment .comment-form input::placeholder {
+  font-family: "Poppins", sans-serif;
+}
+.form-comment .refresh-btn {
+  height: 2.2rem;
+  font-family: "Poppins", sans-serif;
+  margin-right: 8px;
 }
 
 /*# sourceMappingURL=style.css.map */

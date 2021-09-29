@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios"
-import Comment from "./Comment";
 import { FaHeartBroken, FaHeart } from "react-icons/fa";
 import { BsFillTrashFill } from "react-icons/bs";
 
@@ -8,7 +7,8 @@ import { BsFillTrashFill } from "react-icons/bs";
 const Post = () => {
 
   const [posts, setPosts] = useState([]);
-  const [comment, setComment] = useState("");
+  const [comment, setComment] = useState(""); //contenu du commentaire
+  const [comments, setComments] = useState([]);
 
   const getPosts = async() => {
     const response = await fetch("http://localhost:5000/posts/");
@@ -23,6 +23,7 @@ const Post = () => {
     <div className="post-container">
       {posts.map((post) => {
         const { id, content, author, likes, dislikes, imageUrl } = post;
+        const idPost = post.id;
 
         const deletePost = async(e) => {
           e.preventDefault();
@@ -38,10 +39,11 @@ const Post = () => {
           Axios({
             method: "POST",
             data: {
-              like: 1,
+              like: like ? 1 : 0,
+              userId: 2
             },
             url: `http://localhost:5000/posts/${id}/like`,
-          });
+          }).then((res) => console.log(res));
         };
 
         const dislikePost = async(e, dislike) => {
@@ -50,9 +52,10 @@ const Post = () => {
             method: "POST",
             data: {
               like: dislike ? -1 : 0,
+              userId: 2
             },
             url: `http://localhost:5000/posts/${id}/like`,
-          });
+          }).then((res) => console.log(res));
         };
 
         const createComment = async(e) => {
@@ -66,6 +69,15 @@ const Post = () => {
             withCredentials: true,
             url: `http://localhost:5000/posts/${id}/comment`,
           }).then((res) => console.log(res));
+/*           const commentForm = document.querySelector("comment-form");
+          commentForm.reset(); */
+        };
+
+        const getComments = async() => {
+          const response = await fetch(`http://localhost:5000/posts/${id}/comment`);
+          const comments = await response.json();
+          console.log(comments)
+          setComments(comments.data);
         };
 
         return (
@@ -75,8 +87,8 @@ const Post = () => {
                 <h3>Nom prénom</h3>
               </div>
               <div className="post-content__name--delete">
-                  <BsFillTrashFill className="trash-icon" onClick={deletePost} />
-                </div>
+                <BsFillTrashFill className="trash-icon" onClick={deletePost} />
+              </div>
             </div>
             <div className="post-content__content">
               <p>{content}</p>
@@ -90,9 +102,44 @@ const Post = () => {
               <FaHeartBroken className="dislike-heart heart dislike" size={24} onClick={dislikePost}/>
               <span className="dislike-count">{dislikes}</span>
             </div>
-            <form className="comment-form" onSubmit={createComment}>
-              <input className="add-comment input" name="comment-input" onChange={(e) => setComment(e.target.value)} placeholder="Votre commentaire"/>
-            </form>
+            <div className="form-comment refresh">
+              <form className="comment-form" onSubmit={createComment}>
+                <input className="add-comment input" name="comment-input" onChange={(e) => setComment(e.target.value)} placeholder="Votre commentaire"/>
+              </form>
+              <button className="refresh-btn" onClick={getComments}>Get comments</button>
+            </div>
+            <div className="comment-box">
+              {comments.map((commentaire) => {
+                const { id, content, userId, postId } = commentaire;
+
+                console.log(postId, idPost)
+                
+                
+                
+                if(postId === idPost) {
+
+                const deleteComment = async(e) => {
+                  e.preventDefault();
+                  Axios({
+                    method: "DELETE",
+                    withCredentials: true,
+                    url: `http://localhost:5000/comments/${id}`
+                  }).then((res) => console.log(res));
+                };
+
+                return (
+                  <div className='comment-box__container' key={id}>
+                    <div>
+                      <h4>Nom Prénom</h4>
+                      <p>{content}</p>
+                    </div>
+                    <div className="post-content__name--delete">
+                      <BsFillTrashFill className="trash-icon" onClick={deleteComment} />
+                    </div>
+                  </div>
+                )}
+              })}
+            </div>
           </div>
         )
       })}

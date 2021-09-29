@@ -3,8 +3,18 @@ import { Link } from "react-router-dom";
 import { AiFillHome } from "react-icons/ai";
 import { FaUserAlt } from "react-icons/fa";
 import { GiExitDoor } from "react-icons/gi";
+import axios from "axios";
 
 const Header = () => {
+
+  const logout = () => {
+    axios({
+      method: "GET",
+      withCredentials: true,
+      url: "http://localhost:5000/users/logout",
+    }).then((res) => console.log(res));
+  }
+
   return (
     <header className="restricted-header header">
       <div className="icons-container">
@@ -16,7 +26,7 @@ const Header = () => {
         </Link>
       </div>
       <div className="disconnect-box">
-        <h2 className="disconnect">Deconnexion <GiExitDoor size={32}/></h2>
+        <h2 className="disconnect" onClick={logout}>Deconnexion <GiExitDoor size={32}/></h2>
       </div>
     </header>
   )

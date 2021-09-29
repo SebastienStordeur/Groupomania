@@ -125,3 +125,26 @@
 .dislike-heart {
   cursor: pointer;
 }
+
+.form-comment {
+  display: flex;
+  justify-content: space-between;
+  .comment-form {
+    margin: 0 8px;
+    input {
+      height: 2.2rem;
+      width: 22rem;
+      padding-left: 8px;
+      font-family: "Poppins", sans-serif;
+      &::placeholder {
+        font-family: "Poppins", sans-serif;
+      }
+    }
+  }
+  .refresh-btn {
+    height: 2.2rem;
+    font-family: "Poppins", sans-serif;  
+    margin-right: 8px;
+  }
+
+}

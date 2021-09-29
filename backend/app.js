@@ -18,7 +18,6 @@ app.use(helmet());
 
 //Database
 const db = require("./models")
-const User = db.users
 db.sequelize.sync();
 
 //Headers
@@ -48,8 +47,8 @@ app.use(cors({
   })
 );  
 app.use(session({
-    secret: process.env.SESSION_SECRET + User,
-    resave: true,
+    secret: process.env.SESSION_SECRET,
+    resave: false,
     saveUninitialized: true,
     cookie: {
       maxAge: 1000 * 60 * 60 * 24 // = 1day
@@ -59,6 +58,14 @@ app.use(session({
 app.use(cookieParser(process.env.SESSION_SECRET));
 app.use(passport.initialize());
 app.use(passport.session());
+
+/* app.get("/", (req, res, next) => {
+  if(req.session.viewCount) {
+    req.session.viewCount = req.session.viewCount + 1;
+  } else {
+    req.session.viewCount = 1;
+  }
+}) */
 
 //Static directory
 app.use('/images', express.static(path.join(__dirname, 'images')));

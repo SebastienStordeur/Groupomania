@@ -18,6 +18,5 @@ router.post('/:id/like', postController.like);
 //Comments
 router.post('/:id/comment', postController.createComment);
 router.get('/:id/comment', postController.getComments);
-//router.delete('/:id/comment/:commentId', postController.deleteComment);
 
 module.exports = router;

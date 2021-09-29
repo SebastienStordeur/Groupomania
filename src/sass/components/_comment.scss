@@ -2,14 +2,21 @@
   display: flex;
   flex-direction: column-reverse;
   &__container {
+    display: flex;
+    justify-content: space-between;
     min-height: 3rem;
-    margin: 0.1rem 0.5rem;
-    border: 1px solid black;
-    border-radius: 3px;
+    margin: 0.3rem 0.5rem;
+    padding: 8px;
+    background-color: lightgray;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    h4 {
+      font-family: "Poppins", sans-serif;
+    }
     p {
       display: flex;
       align-items: center;
-      margin: 0.5rem 1rem;
+      margin: 0.1rem ;
       font-family: "Poppins", sans-serif;
       font-size: 14px;
     }

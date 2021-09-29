@@ -12,5 +12,6 @@ router.post("/login", passport.authenticate('local'/* , { successRedirect: '/das
 router.delete("/logout", userController.logout);
 router.get("/:id", userController.getProfile);
 router.put("/:id", userController.updateProfile);
+router.get("/logout", userController.logout);
 
 module.exports = router;
