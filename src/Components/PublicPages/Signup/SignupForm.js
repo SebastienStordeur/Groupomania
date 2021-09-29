@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Axios from "axios";
+import Confirmation from "./Confirmation";
+import Deny from "./Deny";
 import { Redirect } from "react-router-dom";
 import { AiFillEye } from "react-icons/ai";
 
@@ -61,9 +63,14 @@ const SignupForm = () => {
         },
         withCredentials: true,
         url: "http://localhost:5000/users/signup",
-      }).then((res) => {
-        console.log(res);
-        <Redirect  to="http://localhost:3000/login" />
+      })
+      .then((res) => {
+        if(res.status === 201) {
+          document.querySelector(".confirm-panel").style.display = "flex";
+        } 
+        else {
+          document.querySelector(".deny-panel").style.display = "flex";
+        }
       });
     } 
   };
@@ -152,6 +159,8 @@ const SignupForm = () => {
           S'inscrire
         </button>
       </div>
+      <Confirmation className="confirm-panel"/>
+      <Deny className="deny-panel" />
     </form>
   );
 };

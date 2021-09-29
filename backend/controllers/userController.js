@@ -27,6 +27,7 @@ exports.login = (req, res, next) => {
     if (err) throw err;
     if (!user) res.send("Impossible de trouver cet utilisateur");
     else {
+      //genere token/cookie bdd
       req.logIn(user, (err) => {
         if (err) throw err;
         //res.send('Authentification réussie.');

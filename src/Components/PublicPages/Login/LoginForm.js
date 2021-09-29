@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import FailLogin from "./FailLogin";
 import { AiFillEye} from "react-icons/ai";
 import Axios from "axios";
 
@@ -35,7 +36,11 @@ const LoginForm = () => {
         },
         withCredentials: true, 
         url: "http://localhost:5000/users/login",
-      }).then((res) =>  console.log(res));
+      }).then((res) =>  {
+        if(res.status === 401) {
+          document.querySelector(".fail-login-panel").style.display = "flex";
+        }
+      });
     };
   };
 
@@ -69,6 +74,7 @@ const LoginForm = () => {
       <div className="btn-box">
         <button className="btn signup-button" onClick={login}>Se connecter</button>
       </div>
+      <FailLogin className="fail-login-panel" />
     </form>
   );
 };
