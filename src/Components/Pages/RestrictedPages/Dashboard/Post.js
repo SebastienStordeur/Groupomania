@@ -39,8 +39,8 @@ const Post = () => {
           Axios({
             method: "POST",
             data: {
-              like: like ? 1 : 0,
-              userId: 2
+              userId: 1,
+              postId: id,
             },
             url: `http://localhost:5000/posts/${id}/like`,
           }).then((res) => console.log(res));
@@ -51,10 +51,10 @@ const Post = () => {
           Axios({
             method: "POST",
             data: {
-              like: dislike ? -1 : 0,
-              userId: 2
+              userId: 1,
+              postId: id,
             },
-            url: `http://localhost:5000/posts/${id}/like`,
+            url: `http://localhost:5000/posts/${id}/dislike`,
           }).then((res) => console.log(res));
         };
 
@@ -76,9 +76,16 @@ const Post = () => {
         const getComments = async() => {
           const response = await fetch(`http://localhost:5000/posts/${id}/comment`);
           const comments = await response.json();
-          console.log(comments)
           setComments(comments.data);
         };
+
+/*         const getLikes = async() => {
+          Axios({
+            method: "GET",
+            withCredentials: true,
+            url: `http://localhost:5000/posts/${id}/like`
+          })
+        } */
 
         return (
           <div className="post-content" key={id}>
@@ -97,6 +104,9 @@ const Post = () => {
               </div>
             </div>
             <div className="post-content__like-box">
+              {
+                
+              }
               <FaHeart className="like-heart heart like" size={26} onClick={likePost}/>
               <span className="like-count">{likes}</span>
               <FaHeartBroken className="dislike-heart heart dislike" size={24} onClick={dislikePost}/>
@@ -112,12 +122,7 @@ const Post = () => {
               {comments.map((commentaire) => {
                 const { id, content, userId, postId } = commentaire;
 
-                console.log(postId, idPost)
-                
-                
-                
                 if(postId === idPost) {
-
                 const deleteComment = async(e) => {
                   e.preventDefault();
                   Axios({
@@ -137,7 +142,7 @@ const Post = () => {
                       <BsFillTrashFill className="trash-icon" onClick={deleteComment} />
                     </div>
                   </div>
-                )}
+                )};
               })}
             </div>
           </div>

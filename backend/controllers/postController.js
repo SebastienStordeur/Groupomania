@@ -2,6 +2,8 @@ const db = require('../models');
 const Post = db.posts;
 const User = db.users;
 const Comment = db.comments;
+const Like = db.likes;
+const Dislike = db.dislikes;
 const fs = require("fs");
 /* var session = require('express-session');
 const passport = require('passport'); */
@@ -51,35 +53,25 @@ exports.getPostWithUserId = (req,res) => {
 
 
 //Like / dislike
-exports.like = (req,res) => {
-  switch(req.body.like) {
-    //Like
-    case +1:
-      Post.update({ where: { id: req.params.id },
-      likes: likes + 1})
-      .then(() => res.status(201).json({ message: "Post Liké." }))
-      .catch(error => res.status(500).json({ message: "Impossible de liker. " + error }));
-    break;
-
-    //Dislike
-    case -1: 
-      Post.update({
-        where: { id: req.params.id, dislikes: +1 } })
-      .then(() => res.status(201).json({ message: "Post disliké." }))
-      .catch(error => res.status(500).json({ message: "Impossible de disliker. " + error}));
-    break;
-
-    case 0: 
-    Post.findOne({ where: { id: req.params.id }}).then((post) => {
-      if(post.usersLiked.includes(req.body.userId)) {
-        Post.update({ where: { id: req.params.id}})
-      }
-      if(post.usersDisliked.includes(req.body.userId)) {
-        Post.update() 
-      }
-    }) 
+exports.like = (req, res) => {
+  const like = { ...req.body };
+  if(Like.userId.includes(req.body.userId)) {
+    Like.destroy({ where: { id: req.params.id } })
+      .then(() => res.status(201).json({ message: "Like supprimé."}))
+      .catch(error => res.status(500).json({ message: "Impossible de supprimer le like. " + error }));
+  } else {
+    Like.create(like)
+      .then(() => res.status(201).json({ message: "Like envoyé."}))
+      .catch(error => res.status(500).json({ message: "Impossible d'envoyer le like. " + error}));
   }
 };
+
+exports.dislike = (req, res) => {
+  const dislike = { ...req.body };
+  Dislike.create(dislike)
+    .then(() => res.status(201).json({ message: "Dislike envoyé."}))
+    .catch(error => res.status(500).json({ message: "Impossible d'envoyer le dislike. " + error })); 
+}
 
 //Commentaires
 exports.createComment = (req,res) => {

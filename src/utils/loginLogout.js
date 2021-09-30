@@ -1,6 +1,5 @@
 const TOKEN_KEY = 'jwt';
 
-const value_or_null = (document.cookie.match(/^(?:.*;)?\s*connect.sid\s*=\s*([^;]+)(?:.*)?$/)||[,null])[1]
 
 export const login = () => {
   localStorage.setItem(TOKEN_KEY, 'TestLogin');
@@ -11,8 +10,16 @@ export const logout = () => {
 }
 
 export const isLogin = () => {
-  if (value_or_null) {
+  if (TOKEN_KEY) {
       return true;
   }
   return false;
 }
+
+/* export const login = () => {
+  setIslogin(true);
+}
+
+export const logout = () => {
+  setIslogin(false);
+} */

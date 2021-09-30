@@ -15,18 +15,6 @@ module.exports = (sequelize, Sequelize) => {
     imageUrl: {
       type: Sequelize.STRING
     },
-    likes: {
-      type: Sequelize.INTEGER
-    },
-    dislikes: {
-      type: Sequelize.INTEGER
-    },
-    usersLiked: {
-      type: Sequelize.STRING
-    },
-    usersDisliked: {
-      type: Sequelize.STRING
-    }
   });
 
   return Post;
