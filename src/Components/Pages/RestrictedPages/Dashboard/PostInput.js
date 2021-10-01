@@ -1,10 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Axios from "axios";
 
 const PostInput = () => {
 
+  const [posts, setPosts] = useState([]);
   const [content, setContent] = useState("");
   const [file, setFile] = useState("");
+
+  const getPosts = async() => {
+    const response = await fetch("http://localhost:5000/posts/");
+    const posts = await response.json();
+    setPosts(posts.data);
+  };
+  useEffect(() => {
+    getPosts();
+  }, []);
+
 
   const post = (e) => {
     e.preventDefault();
@@ -21,7 +32,7 @@ const PostInput = () => {
 
       Axios.post("http://localhost:5000/posts/", formData, {
         headers: { "Content-Type": "multipart/form-data" }
-      });
+      }).then(() => getPosts());
     };
   };
 

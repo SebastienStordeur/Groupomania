@@ -31,10 +31,10 @@ const Post = () => {
             method: "DELETE",
             withCredentials: true,
             url: `http://localhost:5000/posts/${id}`,
-          }).then((res) => console.log(res));
+          }).then(() => getPosts());
         };
 
-         const likePost = async(e, like) => {
+         const likePost = async(e) => {
           e.preventDefault();
           Axios({
             method: "POST",
@@ -46,7 +46,7 @@ const Post = () => {
           }).then((res) => console.log(res));
         };
 
-        const dislikePost = async(e, dislike) => {
+        const dislikePost = async(e) => {
           e.preventDefault();
           Axios({
             method: "POST",

@@ -33,7 +33,6 @@ exports.login = (req, res, next) => {
         //res.send('Authentification réussie.');
         const session = req.session;
         session.user = req.user;
-        console.log(req._passport.session) //Send { user: XX}
         res.send(user);
         console.log(req.session)
       });

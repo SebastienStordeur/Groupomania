@@ -34,10 +34,6 @@ app.use((req, res, next) => {
   next();
 });
 
-//EJS
-app.use(expressLayouts);
-app.set("view engine", "ejs");
-
 //Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -56,16 +52,9 @@ app.use(session({
   })
 );
 app.use(cookieParser(process.env.SESSION_SECRET));
+require("./middleware/passport-config")(passport);
 app.use(passport.initialize());
 app.use(passport.session());
-
-/* app.get("/", (req, res, next) => {
-  if(req.session.viewCount) {
-    req.session.viewCount = req.session.viewCount + 1;
-  } else {
-    req.session.viewCount = 1;
-  }
-}) */
 
 //Static directory
 app.use('/images', express.static(path.join(__dirname, 'images')));
