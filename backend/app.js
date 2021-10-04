@@ -6,11 +6,10 @@ const cookieParser = require("cookie-parser");
 const passport = require("passport");
 const helmet = require("helmet");
 const path = require("path");
-const expressLayouts = require("express-ejs-layouts");
 
 //Imports
 require("dotenv").config({ path: "./config/.env" });
-require("./middleware/passport-config")(passport);
+//require("./middleware/passport-config")(passport);
 
 const app = express();
 
@@ -42,7 +41,7 @@ app.use(cors({
     credentials: true,
   })
 );  
-app.use(session({
+/* app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
@@ -54,7 +53,7 @@ app.use(session({
 app.use(cookieParser(process.env.SESSION_SECRET));
 require("./middleware/passport-config")(passport);
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.session()); */
 
 //Static directory
 app.use('/images', express.static(path.join(__dirname, 'images')));
@@ -66,10 +65,5 @@ const commentRoutes = require('./routes/commentRoutes');
 app.use('/users', userRoutes);
 app.use('/posts', postRoutes);
 app.use('/comments', commentRoutes);
-
-app.get('/', (req, res) => {
-  res.redirect('/login')
-})
-
 
 module.exports = app;

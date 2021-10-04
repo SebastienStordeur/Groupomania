@@ -6,7 +6,8 @@ const passport = require('passport');
 
 //Basic routes
 router.post("/signup", pswChecking, userController.signup);
-router.post("/login", passport.authenticate('local'/* , { successRedirect: '/dashboard', failureRedirect:'/login' }  */), userController.login);
+//router.post("/login", passport.authenticate('local'/* , { successRedirect: '/dashboard', failureRedirect:'/login' }  */), userController.login);
+router.post("/login", userController.login);
 
 //Specific routes
 router.delete("/logout", userController.logout);

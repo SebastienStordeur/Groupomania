@@ -3,21 +3,34 @@ import Axios from "axios"
 import { FaHeartBroken, FaHeart } from "react-icons/fa";
 import { BsFillTrashFill } from "react-icons/bs";
 
-
 const Post = () => {
 
-  const [posts, setPosts] = useState([]);
-  const [comment, setComment] = useState(""); //contenu du commentaire
-  const [comments, setComments] = useState([]);
+  const [posts, setPosts] = useState([]);       //Ensemble des posts
+  const [comment, setComment] = useState("");   //Contenu du commentaire
+  const [comments, setComments] = useState([]); //Ensemble des commentaires
+
+  const authToken = JSON.parse(localStorage.getItem("authToken"));
 
   const getPosts = async() => {
+
     const response = await fetch("http://localhost:5000/posts/");
     const posts = await response.json();
     setPosts(posts.data);
-  };
-  useEffect(() => {
+
+/*     Axios({ 
+      method: "GET",
+      withCredentials: true,
+      url: "http://localhost:5000/posts/",
+      headers : {
+        Authorization: "Bearer " + authToken,
+      },
+    }).then(() => setPosts(posts.data))
+      .catch(error => console.log(error)) */
+  };  
+
+   useEffect(() => {
     getPosts();
-  }, []);
+  }, []);  
 
   return (
     <div className="post-container">
@@ -31,6 +44,9 @@ const Post = () => {
             method: "DELETE",
             withCredentials: true,
             url: `http://localhost:5000/posts/${id}`,
+            headers: {
+              Authorization: "Bearer " + authToken,
+            },
           }).then(() => getPosts());
         };
 
@@ -68,6 +84,9 @@ const Post = () => {
             },
             withCredentials: true,
             url: `http://localhost:5000/posts/${id}/comment`,
+            headers: {
+              Authorization: "Bearer " + authToken,
+            }
           }).then((res) => console.log(res));
 /*           const commentForm = document.querySelector("comment-form");
           commentForm.reset(); */
@@ -128,7 +147,10 @@ const Post = () => {
                   Axios({
                     method: "DELETE",
                     withCredentials: true,
-                    url: `http://localhost:5000/comments/${id}`
+                    url: `http://localhost:5000/comments/${id}`,
+                    headers: {
+                      Authorization: "Bearer " + authToken,
+                    }
                   }).then((res) => console.log(res));
                 };
 

@@ -17,6 +17,7 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
+//Tables
 db.users = require("./UserModel")(sequelize, Sequelize);
 db.posts = require("./postModel")(sequelize, Sequelize);
 db.comments = require("./commentModel")(sequelize, Sequelize);

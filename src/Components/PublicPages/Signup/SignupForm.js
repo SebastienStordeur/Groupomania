@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Axios from "axios";
 import Confirmation from "./Confirmation";
 import Deny from "./Deny";
-import { Redirect } from "react-router-dom";
 import { AiFillEye } from "react-icons/ai";
 
 const SignupForm = () => {

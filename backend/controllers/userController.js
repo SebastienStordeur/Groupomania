@@ -1,7 +1,10 @@
 const db = require("../models");
 const User = db.users;
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const passport = require("passport")
+
+require("dotenv").config();
 
 //Register a new User
 exports.signup = (req, res) => {
@@ -13,16 +16,13 @@ exports.signup = (req, res) => {
       password: hash,
     };
     User.create(user)
-      .then(() => {
-      res.status(201).json({ message: "Utilisateur crée." })
-/*         res.redirect(301, 'http://localhost:3000/login'); */
-      })
+      .then(() => res.status(201).json({ message: "Utilisateur crée." }))
       .catch((error) => res.status(500).json({ message: "Impossible de créer l'utilisateur. " + error }));
   });
 };
 
 //Login
-exports.login = (req, res, next) => {
+/* exports.login = (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     if (err) throw err;
     if (!user) res.send("Impossible de trouver cet utilisateur");
@@ -38,6 +38,23 @@ exports.login = (req, res, next) => {
       });
     }
   })(req, res, next);
+}; */
+
+exports.login = (req, res, next) => {
+  User.findOne({ where: { email: req.body.email } })
+    .then( user => {
+      if(!user) return res.status(401).json({ message: "Impossible de trouver cet utilisateur."});
+      bcrypt.compare(req.body.password, user.password)
+        .then(valid => {
+          if(!valid) return res.status(401).json({ message: "Mot de passe invalide."});
+          res.status(200).json({
+            userId: user.id,
+            token: jwt.sign({ userId: user.id}, process.env.SECRET_TOKEN_JWT, { expiresIn: "24h" })
+          });
+        })
+        .catch(error => res.status(401).json({ message: "1" + error }));
+    })
+    .catch(error => res.status(401).json({ message: "2" + error }));
 };
 
 //test user

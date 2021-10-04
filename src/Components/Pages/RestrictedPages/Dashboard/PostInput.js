@@ -7,14 +7,21 @@ const PostInput = () => {
   const [content, setContent] = useState("");
   const [file, setFile] = useState("");
 
-  const getPosts = async() => {
-    const response = await fetch("http://localhost:5000/posts/");
+  const authToken = JSON.parse(localStorage.getItem("authToken"));
+
+/*  const getPosts = async() => {
+    const response = await fetch("http://localhost:5000/posts/", {
+      headers: { 
+        Authorization: "Bearer " + authToken
+      },
+    });
     const posts = await response.json();
     setPosts(posts.data);
   };
+
   useEffect(() => {
     getPosts();
-  }, []);
+  }, []);  */
 
 
   const post = (e) => {
@@ -31,8 +38,8 @@ const PostInput = () => {
       formData.append("image", file);
 
       Axios.post("http://localhost:5000/posts/", formData, {
-        headers: { "Content-Type": "multipart/form-data" }
-      }).then(() => getPosts());
+        headers: { "Content-Type": "multipart/form-data", Authorization: "Bearer " + authToken  }
+      })/* .then(() => getPosts()); */
     };
   };
 

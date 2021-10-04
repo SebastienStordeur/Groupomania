@@ -2,22 +2,21 @@ const express = require("express");
 const router = express.Router();
 const postController = require("../controllers/postController");
 const multer = require("../middleware/multer-config");
-const passport = require("passport");
-const isAuthenticated = require("../middleware/isAuthenticated");
+const auth = require("../middleware/auth");
 
 //Posts
-router.post("/", multer, postController.createPost);
-router.get("/", postController.getAllPost);
-router.get("/:userId", postController.getPostWithUserId); 
+router.post("/", auth, multer, postController.createPost);
+router.get("/",  postController.getAllPost);
+router.get("/:userId", auth, postController.getPostWithUserId); 
 
-router.delete('/:id', postController.deletePost);
+router.delete('/:id', auth, postController.deletePost);
 
 //Likes && dislikes
-router.post("/:id/like", postController.like);
-router.post("/:id/dislike", postController.dislike);
+router.post("/:id/like", auth, postController.like);
+router.post("/:id/dislike", auth, postController.dislike);
 
 //Comments
-router.post("/:id/comment", postController.createComment);
-router.get("/:id/comment", postController.getComments);
+router.post("/:id/comment", auth, postController.createComment);
+router.get("/:id/comment", auth, postController.getComments);
 
 module.exports = router;

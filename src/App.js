@@ -17,13 +17,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           <PublicRoute restricted={false} component={Signup} path="/" exact />
-{/*           <Route exact path="/">
-            <RegisterPage />
-          </Route> */}
            <PublicRoute restricted={false} component={Login} path="/login" exact /> 
-{/*           <Route path="/login">
-            <LoginPage />
-          </Route> */}
           {/* <PrivateRoute component={DashboardPage} path="/dashboard" exact /> */}
            <Route path="/dashboard">
             <Dashboard />
