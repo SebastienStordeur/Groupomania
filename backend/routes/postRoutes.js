@@ -17,6 +17,6 @@ router.post("/:id/dislike", auth, postController.dislike);
 
 //Comments
 router.post("/:id/comment", auth, postController.createComment);
-router.get("/:id/comment", auth, postController.getComments);
+router.get("/:id/comment",  auth, postController.getComments);
 
 module.exports = router;

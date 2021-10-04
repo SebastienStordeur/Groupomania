@@ -12,20 +12,9 @@ const Post = () => {
   const authToken = JSON.parse(localStorage.getItem("authToken"));
 
   const getPosts = async() => {
-
-    const response = await fetch("http://localhost:5000/posts/");
+    const response = await fetch("http://localhost:5000/posts/", { headers: { Authorization: "Bearer " + authToken}});
     const posts = await response.json();
     setPosts(posts.data);
-
-/*     Axios({ 
-      method: "GET",
-      withCredentials: true,
-      url: "http://localhost:5000/posts/",
-      headers : {
-        Authorization: "Bearer " + authToken,
-      },
-    }).then(() => setPosts(posts.data))
-      .catch(error => console.log(error)) */
   };  
 
    useEffect(() => {
@@ -55,10 +44,13 @@ const Post = () => {
           Axios({
             method: "POST",
             data: {
-              userId: 1,
+              userId: 3,
               postId: id,
             },
             url: `http://localhost:5000/posts/${id}/like`,
+            headers: {
+              Authorization: "Bearer " + authToken,
+            }
           }).then((res) => console.log(res));
         };
 
@@ -67,10 +59,13 @@ const Post = () => {
           Axios({
             method: "POST",
             data: {
-              userId: 1,
+              userId: 3,
               postId: id,
             },
             url: `http://localhost:5000/posts/${id}/dislike`,
+            headers: {
+              Authorization: "Bearer " + authToken,
+            }
           }).then((res) => console.log(res));
         };
 
@@ -86,16 +81,16 @@ const Post = () => {
             url: `http://localhost:5000/posts/${id}/comment`,
             headers: {
               Authorization: "Bearer " + authToken,
-            }
-          }).then((res) => console.log(res));
+            },
+          });
 /*           const commentForm = document.querySelector("comment-form");
           commentForm.reset(); */
         };
 
         const getComments = async() => {
-          const response = await fetch(`http://localhost:5000/posts/${id}/comment`);
+          const response = await fetch(`http://localhost:5000/posts/${id}/comment`, { headers: { Authorization: "Bearer " + authToken}});
           const comments = await response.json();
-          setComments(comments.data);
+          setComments(comments.data); 
         };
 
 /*         const getLikes = async() => {
@@ -151,7 +146,7 @@ const Post = () => {
                     headers: {
                       Authorization: "Bearer " + authToken,
                     }
-                  }).then((res) => console.log(res));
+                  }).then(() => getComments());
                 };
 
                 return (
