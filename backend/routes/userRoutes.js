@@ -13,6 +13,7 @@ router.post("/login", userController.login);
 router.delete("/logout", userController.logout);
 router.get("/:id", userController.getProfile);
 router.put("/:id", userController.updateProfile);
+router.delete("/:id", userController.deleteProfile);
 router.get("/logout", userController.logout);
 
 module.exports = router;

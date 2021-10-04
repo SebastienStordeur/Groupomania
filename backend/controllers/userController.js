@@ -57,10 +57,6 @@ exports.login = (req, res, next) => {
     .catch(error => res.status(401).json({ message: "2" + error }));
 };
 
-//test user
-exports.getUser = (req, res, next) => {
-    res.send(req.user)
-}
 
 exports.logout = (req, res) => {
   req.logOut();
@@ -71,12 +67,16 @@ exports.getProfile = (req, res) => {
   User.findOne({ id: req.params.id })
     .then((user) => res.status(200).json(user))
     .catch((error) =>
-      res
-        .status(404)
-        .json({ message: "Impossible de trouver ce profile" + error })
+      res.status(401).json({ message: "Impossible de trouver ce profile" + error })
     );
 };
 
 exports.updateProfile = (req, res, next) => {
-  User.updateOne({ id: req.params.id }).then((user) => {});
+  User.updateOne({ where: { id: req.params.id } }).then((user) => {});
 };
+
+exports.deleteProfile = (req, res, next) => {
+  User.destroy({ where: { id: req.params.id } })
+    .then(() => res.status(201).json({ message: "Utilisateur supprimé." }))
+    .catch(error => res.status(401).json({ message: "Impossible de supprimer cet utilisateur. " + error }))
+}
