@@ -7,11 +7,16 @@ import axios from "axios";
 
 const Header = () => {
 
+  const authToken = JSON.parse(localStorage.getItem("authToken"));
+
   const logout = () => {
     axios({
       method: "GET",
       withCredentials: true,
       url: "http://localhost:5000/users/logout",
+      headers: {
+        Authorization: "Bearer " + authToken,
+      }
     }).then((res) => console.log(res));
   }
 
@@ -21,7 +26,7 @@ const Header = () => {
         <Link to="/dashboard">
           <AiFillHome size={32} className="home-icon menu-icon" />
         </Link>
-        <Link to="/profile">
+        <Link to="/profile/:id">
           <FaUserAlt size={30} className="profile-icon menu-icon" />
         </Link>
       </div>

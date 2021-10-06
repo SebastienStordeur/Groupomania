@@ -27,7 +27,6 @@ exports.signup = (req, res) => {
     if (err) throw err;
     if (!user) res.send("Impossible de trouver cet utilisateur");
     else {
-      //genere token/cookie bdd
       req.logIn(user, (err) => {
         if (err) throw err;
         //res.send('Authentification réussie.');
@@ -64,15 +63,16 @@ exports.logout = (req, res) => {
 };
 
 exports.getProfile = (req, res) => {
-  User.findOne({ id: req.params.id })
+  User.findOne({ where: { id: req.params.id } })
     .then((user) => res.status(200).json(user))
-    .catch((error) =>
-      res.status(401).json({ message: "Impossible de trouver ce profile" + error })
+    .catch((error) => res.status(401).json({ message: "Impossible de trouver ce profile" + error })
     );
 };
 
 exports.updateProfile = (req, res, next) => {
-  User.updateOne({ where: { id: req.params.id } }).then((user) => {});
+  User.updateOne({ where: { id: req.params.id } })
+    .then((user) => {})
+    .catch(error => res.status(401).json({ message: "Impossible de mettre à jour votre profil. " + error }));
 };
 
 exports.deleteProfile = (req, res, next) => {

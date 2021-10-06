@@ -40,8 +40,12 @@ exports.deletePost = (req,res) => {
 
 exports.getAllPost = (req,res) => {
   console.log(req.session)
-  Post.findAll({ where: req.body.id })
-    .then((data) => res.status(201).json({ data }))
+  Post.findAll( {include:[{ model:Like, required: false}, {model:Dislike, required: false}]}, { where: req.body.id })
+    .then((data) => {
+      console.log("data", data["post"])
+      res.status(201).json({ data })
+    }
+      )
     .catch(error => res.status(500).json({ message: "Rien à afficher. " + error }))
 };
 

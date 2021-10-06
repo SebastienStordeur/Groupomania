@@ -16,10 +16,19 @@ export const isLogin = () => {
   return false;
 }
 
+
+
+
 /* export const login = () => {
-  setIslogin(true);
+  if(localStorage.getItem("authToken"))
 }
 
 export const logout = () => {
   setIslogin(false);
-} */
+  localStorage.clear();
+} 
+
+export const isLogin = () => {
+  if(local)
+}
+*/

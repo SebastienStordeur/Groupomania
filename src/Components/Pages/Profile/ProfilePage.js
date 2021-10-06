@@ -29,7 +29,6 @@ const ProfilePage = () => {
         <div className="profile-section-info__details">
           <h1>{profile.firstName + ' ' + profile.lastName}</h1>
           <h3>Nombre de posts : </h3>
-          <button className="sub-btn">S'abonner</button>
         </div>
       </section>
     <PostFromUser />

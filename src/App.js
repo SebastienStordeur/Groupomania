@@ -5,7 +5,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Signup from "./Components/PublicPages/Signup/Signup";
 import Login from "./Components/PublicPages/Login/Login";
 import Dashboard from "./Components/Pages/RestrictedPages/Dashboard/Dashboard";
-import ProfilePage from "./Components/Pages/Profile/ProfilePage";
+import Profile from "./Components/Pages/RestrictedPages/Profile/Profile";
 
 //Routes
 import PrivateRoute from "./PrivateRoute";
@@ -23,7 +23,7 @@ function App() {
             <Dashboard />
           </Route> 
           {/* <PrivateRoute component={ProfilePage} path="/profile:id" exact /> */}
-        <Route path="/profile/:id" children={<ProfilePage />}>
+        <Route path="/profile/:id" children={<Profile />}>
           </Route> 
         </Switch>
       </BrowserRouter>
