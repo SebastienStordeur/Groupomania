@@ -18,7 +18,7 @@ exports.createPost = (req,res) => {
     imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
     likes: 0,
     dislikes: 0,
-    //userId: req.body.userId
+    userId: req.body.userId
     }
   Post.create(post)
     .then(() => res.status(201).json({ message: "Post crée" }))
@@ -40,7 +40,7 @@ exports.deletePost = (req,res) => {
 
 exports.getAllPost = (req,res) => {
   console.log(req.session)
-  Post.findAll( {include:[{ model:Like, required: false}, {model:Dislike, required: false}]}, { where: req.body.id })
+  Post.findAll( /* {include:[{ model:Like, required: false}, {model:Dislike, required: false}]} */ { where: req.body.id })
     .then((data) => {
       console.log("data", data["post"])
       res.status(201).json({ data })

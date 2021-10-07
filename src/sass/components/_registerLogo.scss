@@ -3,6 +3,8 @@
   justify-content: center;
   margin-top: 6.5rem;
   .logo-container {
+    display: flex;
+    justify-content: center;
     position: relative;
     margin-top: 4rem;
     width: 25rem;
@@ -17,13 +19,25 @@
 }
 
 @media (max-width: 800px) {
-  .register-body{
+  .public-body{
     margin-top: -5rem;
     flex-direction: column-reverse;
-    &__logo-container {
+    .logo-container {
+      display: flex;
+      margin-top: -2rem;
+      margin: auto;
       width: 20rem;
       height: 20rem;
-      margin: -2rem auto 0 auto;
+    }
+  }
+}
+
+@media (max-width: 420px) {
+  .public-body {
+    .logo-container {
+      margin: auto;
+      width: 20rem;
+      height: 20rem;
     }
   }
 }

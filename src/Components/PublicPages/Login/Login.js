@@ -11,7 +11,6 @@ const Login = () => {
       <section className="public-body">
         <Logo />
         <LoginForm />
-      <Link to="/dashboard">Dashboard</Link>
       </section>
     </div>
   )

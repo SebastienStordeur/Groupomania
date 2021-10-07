@@ -10,6 +10,10 @@ const Post = () => {
   const [comments, setComments] = useState([]); //Ensemble des commentaires
 
   const authToken = JSON.parse(localStorage.getItem("authToken"));
+  const tokenPart = authToken.split(".");
+  const encodedPayload = tokenPart[1];
+  const rawPayload = atob(encodedPayload);
+  const user = JSON.parse(rawPayload);
 
   const getPosts = async() => {
     const response = await fetch("http://localhost:5000/posts/", { headers: { Authorization: "Bearer " + authToken}});
@@ -44,7 +48,7 @@ const Post = () => {
           Axios({
             method: "POST",
             data: {
-              userId: 3,
+              userId: user.userId,
               postId: id,
             },
             url: `http://localhost:5000/posts/${id}/like`,
@@ -59,7 +63,7 @@ const Post = () => {
           Axios({
             method: "POST",
             data: {
-              userId: 3,
+              userId: user.userId,
               postId: id,
             },
             url: `http://localhost:5000/posts/${id}/dislike`,
@@ -76,13 +80,14 @@ const Post = () => {
             data: {
               content: comment,
               postId: id,
+              userId: user.userId
             },
             withCredentials: true,
             url: `http://localhost:5000/posts/${id}/comment`,
             headers: {
               Authorization: "Bearer " + authToken,
             },
-          });
+          }).then(() => getComments());
 /*           const commentForm = document.querySelector("comment-form");
           commentForm.reset(); */
         };

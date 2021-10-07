@@ -70,9 +70,16 @@ exports.getProfile = (req, res) => {
 };
 
 exports.updateProfile = (req, res, next) => {
-  User.updateOne({ where: { id: req.params.id } })
-    .then((user) => {})
-    .catch(error => res.status(401).json({ message: "Impossible de mettre à jour votre profil. " + error }));
+  //bcrypt.hash(req.body.password, 10).then((hash) => {
+    const user = {
+      lastName: req.body.lastName,
+      firstName: req.body.firstName,
+      email: req.body.email,
+      password: req.body.password,
+    };
+    User.update(user)
+      .then(() => res.status(201).json({ message: "Profil mis à jour."}))
+      .catch(error => res.status(500).json({ message: "Impossible de mettre à jour votre profil. " + error }));
 };
 
 exports.deleteProfile = (req, res, next) => {

@@ -8,24 +8,24 @@ const PostInput = () => {
   const [file, setFile] = useState("");
 
   const authToken = JSON.parse(localStorage.getItem("authToken"));
+  const tokenPart = authToken.split(".");
+  const encodedPayload = tokenPart[1];
+  const rawPayload = atob(encodedPayload);
+  
 
-/*  const getPosts = async() => {
-    const response = await fetch("http://localhost:5000/posts/", {
-      headers: { 
-        Authorization: "Bearer " + authToken
-      },
-    });
+  const getPosts = async() => {
+    const response = await fetch("http://localhost:5000/posts/", { headers: { Authorization: "Bearer " + authToken}});
     const posts = await response.json();
     setPosts(posts.data);
-  };
+  };  
 
-  useEffect(() => {
+   useEffect(() => {
     getPosts();
-  }, []);  */
-
+  }, []);
 
   const post = (e) => {
     e.preventDefault();
+    const user = JSON.parse(rawPayload);
     const postChecking = () => {
       const regex = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
       if(regex.test(content)) return true;
@@ -36,10 +36,11 @@ const PostInput = () => {
       const formData = new FormData();
       formData.append("content", content);
       formData.append("image", file);
+      formData.append("userId", user.userId)
 
       Axios.post("http://localhost:5000/posts/", formData, {
         headers: { "Content-Type": "multipart/form-data", Authorization: "Bearer " + authToken  }
-      })/* .then(() => getPosts()); */
+      }).then(() => getPosts());
     };
   };
 

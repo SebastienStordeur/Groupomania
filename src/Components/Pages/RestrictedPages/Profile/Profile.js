@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
+import Axios from "axios";
+import UpdateForm from "./UpdateForm";
 
 const Profile = () => {
 
@@ -24,12 +26,9 @@ const Profile = () => {
 
   return (
     <main>
-      { console.log("array", profile)}
       {profile.map((profil) => { 
-        {console.log("profil", profil)}
         const { id, firstName, lastName, /* postNumber */ imageUrl } = profil;
         return( 
-        
         <section className="profile-section-info" key={id}>
           <div className="profile-section-info__img-ctn">
             <img className="profile-section-info_img" src={imageUrl} alt={firstName + lastName} />
@@ -41,6 +40,8 @@ const Profile = () => {
         </section> 
         )
        })} 
+
+      <UpdateForm />
     </main>
   )
 }

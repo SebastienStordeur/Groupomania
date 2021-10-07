@@ -13,7 +13,7 @@ router.post("/login", userController.login);
 //Specific routes
 router.delete("/logout", userController.logout);
 router.get("/:id", userController.getProfile);
-router.put("/:id", auth, userController.updateProfile);
+router.put("/:id",  userController.updateProfile);
 router.delete("/:id", auth, userController.deleteProfile);
 router.get("/logout", auth, userController.logout);
 
