@@ -22,7 +22,7 @@ const Post = () => {
   };  
 
    useEffect(() => {
-    getPosts();
+    getPosts()
   }, []);  
 
   return (
@@ -135,11 +135,11 @@ const Post = () => {
               <form className="comment-form" onSubmit={createComment}>
                 <input className="add-comment input" name="comment-input" onChange={(e) => setComment(e.target.value)} placeholder="Votre commentaire"/>
               </form>
-              <button className="refresh-btn" onClick={getComments}>Get comments</button>
+              <button className="refresh-btn" onClick={getComments}>Afficher les commentaires</button>
             </div>
             <div className="comment-box">
               {comments.map((commentaire) => {
-                const { id, content, userId, postId } = commentaire;
+                const { id, content, postId } = commentaire;
 
                 if(postId === idPost) {
                 const deleteComment = async(e) => {

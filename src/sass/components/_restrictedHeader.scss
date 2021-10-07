@@ -21,3 +21,9 @@
 .disconnect {
   cursor: pointer;
 }
+
+@media (max-width: 600px) {
+  .restricted-header {
+    padding-left: 0;
+  }
+}

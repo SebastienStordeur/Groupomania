@@ -278,10 +278,15 @@ input {
   cursor: pointer;
 }
 
+@media (max-width: 600px) {
+  .restricted-header {
+    padding-left: 0;
+  }
+}
 .post-form {
   display: flex;
+  justify-content: center;
   flex-direction: column;
-  margin-top: 4rem;
 }
 .post-form__content {
   height: 2.2rem;
@@ -296,11 +301,11 @@ input {
 .dashboard-main {
   display: flex;
   justify-content: center;
-  margin-top: 6rem;
+  margin-top: 2rem;
 }
 
 .main-content-section {
-  width: 50%;
+  width: 60%;
   border-radius: 1px solid black;
 }
 
@@ -322,8 +327,10 @@ input {
 }
 
 .post-content {
+  display: flex;
+  flex-direction: column;
   margin: 1.25rem auto;
-  width: 80%;
+  width: 100%;
   border: 3px solid lightgrey;
 }
 .post-content__user-info {
@@ -411,11 +418,13 @@ input {
   justify-content: space-between;
 }
 .form-comment .comment-form {
+  width: 70%;
   margin: 0 8px;
 }
 .form-comment .comment-form input {
-  height: 2.2rem;
-  width: 22rem;
+  height: 3rem;
+  /* width: 20rem;
+  min-width: 10rem; */
   padding-left: 8px;
   font-family: "Poppins", sans-serif;
 }
@@ -423,9 +432,19 @@ input {
   font-family: "Poppins", sans-serif;
 }
 .form-comment .refresh-btn {
-  height: 2.2rem;
+  height: 3rem;
   font-family: "Poppins", sans-serif;
   margin-right: 8px;
+}
+
+@media (max-width: 900px) {
+  .main-content-section {
+    width: 90%;
+  }
+
+  .post-content {
+    width: 100%;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
