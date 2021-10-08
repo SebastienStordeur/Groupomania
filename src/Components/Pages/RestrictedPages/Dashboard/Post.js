@@ -28,8 +28,9 @@ const Post = () => {
   return (
     <div className="post-container">
       {posts.map((post) => {
-        const { id, content, author, likes, dislikes, imageUrl, userId } = post;
+        const { id, content, likes, dislikes, imageUrl, userId } = post;
         const idPost = post.id;
+        const author = user.firstName + user.lastName
 
         const deletePost = async(e) => {
           e.preventDefault();
@@ -115,14 +116,6 @@ const Post = () => {
               {(userId === user.userId) &&  <div className="post-content__name--delete">
                 <BsFillTrashFill className="trash-icon" onClick={deletePost} />
               </div>}
-{/*               {if(userId === user.userId) {
-                return (
-                  <div className="post-content__name--delete">
-                <BsFillTrashFill className="trash-icon" onClick={deletePost} />
-              </div>
-                )
-              }} */}
-              
             </div>
             <div className="post-content__content">
               <p>{content}</p>

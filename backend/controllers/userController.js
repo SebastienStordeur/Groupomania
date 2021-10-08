@@ -81,8 +81,17 @@ exports.updateProfile = (req, res, next) => {
       .catch(error => res.status(500).json({ message: "Impossible de mettre à jour votre profil. " + error }));
 };
 
-exports.deleteProfile = (req, res, next) => {
+exports.deleteProfile = (req, res) => {
   User.destroy({ where: { id: req.params.id } })
     .then(() => res.status(201).json({ message: "Utilisateur supprimé." }))
     .catch(error => res.status(401).json({ message: "Impossible de supprimer cet utilisateur. " + error }))
+}
+
+exports.manageProfilePicture = (req, res, next) => {
+  const user = { 
+    imageUrl: req.body.image
+  }
+  User.update(user)
+    .then(() => res.status(201).json({ message: "Photo uploaded."}))
+    .catch(error => res.status(500).json({ message: "Impossible d'uploader votre photo. " + error }));
 }

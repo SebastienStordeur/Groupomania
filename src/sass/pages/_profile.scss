@@ -4,21 +4,27 @@
   margin: auto;
   margin-top: 3rem;
   height: 20rem;
-  width: 50%;
+  width: 35rem;
   border: 1px solid black;
   &__img-ctn {
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 80%;
     width: 40%;
     position: relative;
     background-color: black;
+    &__img {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      object-fit: cover;
+    }
   }
-  &__img {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    object-fit: cover;
-  }
+
   &__details {
     margin: 1rem 1rem;
   }
+}
+.btn-box-profile {
+  margin-top: 70%;
 }
