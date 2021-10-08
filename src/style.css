@@ -282,6 +282,10 @@ input {
   .restricted-header {
     padding-left: 0;
   }
+
+  .disconnect span {
+    display: none;
+  }
 }
 .post-form {
   display: flex;

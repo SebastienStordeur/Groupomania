@@ -28,7 +28,7 @@ const Post = () => {
   return (
     <div className="post-container">
       {posts.map((post) => {
-        const { id, content, author, likes, dislikes, imageUrl } = post;
+        const { id, content, author, likes, dislikes, imageUrl, userId } = post;
         const idPost = post.id;
 
         const deletePost = async(e) => {
@@ -112,9 +112,17 @@ const Post = () => {
               <div className="post-content__name">
                 <h3>Nom prénom</h3>
               </div>
-              <div className="post-content__name--delete">
+              {(userId === user.userId) &&  <div className="post-content__name--delete">
+                <BsFillTrashFill className="trash-icon" onClick={deletePost} />
+              </div>}
+{/*               {if(userId === user.userId) {
+                return (
+                  <div className="post-content__name--delete">
                 <BsFillTrashFill className="trash-icon" onClick={deletePost} />
               </div>
+                )
+              }} */}
+              
             </div>
             <div className="post-content__content">
               <p>{content}</p>

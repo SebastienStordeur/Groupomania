@@ -15,6 +15,12 @@ module.exports = (sequelize, Sequelize) => {
     imageUrl: {
       type: Sequelize.STRING
     },
+/*     like: {
+      type: Sequelize.INTEGER
+    },
+    dislike: {
+      type: Sequelize.INTEGER
+    } */
   });
 
   return Post;

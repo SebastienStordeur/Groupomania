@@ -19,7 +19,7 @@ const PostFromUser = () => {
 
 
   const getPosts = async() => {
-    const response = await fetch(`http://localhost:5000/api/post/${userId}`);
+    const response = await fetch(`http://localhost:5000/posts/${userId}`);
     const posts = await response.json();
     console.log(posts);
     setPosts(posts.data)
@@ -32,7 +32,7 @@ const PostFromUser = () => {
   return (
     <section>
       <div className="post-container">
-        {posts.map((post) => { 
+       {/*  {posts.map((post) => { 
            const { id, title, content, author, likes, dislikes } = post; 
            return ( 
             <div className="post-content"  key={id} >
@@ -57,7 +57,7 @@ const PostFromUser = () => {
               </div>
             </div>
           );
-        })}  
+        })}   */}
       </div>
 
     </section>

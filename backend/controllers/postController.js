@@ -5,14 +5,9 @@ const Comment = db.comments;
 const Like = db.likes;
 const Dislike = db.dislikes;
 const fs = require("fs");
-/* var session = require('express-session');
-const passport = require('passport'); */
-
 
 //Create a post
 exports.createPost = (req,res) => {
-  console.log(req.user)
-  console.log(req.session)
     const post = {
       ...req.body,
     imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
@@ -39,10 +34,8 @@ exports.deletePost = (req,res) => {
 };
 
 exports.getAllPost = (req,res) => {
-  console.log(req.session)
   Post.findAll( /* {include:[{ model:Like, required: false}, {model:Dislike, required: false}]} */ { where: req.body.id })
     .then((data) => {
-      console.log("data", data["post"])
       res.status(201).json({ data })
     }
       )
@@ -50,7 +43,7 @@ exports.getAllPost = (req,res) => {
 };
 
 exports.getPostWithUserId = (req,res) => {
-  Post.findAll({ where: { userId: 1 } })
+  Post.findAll({ where: { userId: req.params.userId } })
     .then((data) => res.status(201).json({ data }))
     .catch(error => res.status(500).json({ message: "Rien à afficher" + error }));
 };

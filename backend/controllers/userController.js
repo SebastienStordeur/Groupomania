@@ -56,7 +56,6 @@ exports.login = (req, res, next) => {
     .catch(error => res.status(401).json({ message: "2" + error }));
 };
 
-
 exports.logout = (req, res) => {
   req.logOut();
   res.redirect("/");

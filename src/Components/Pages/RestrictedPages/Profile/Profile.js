@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import Axios from "axios";
+import Header from "../Header";
 import UpdateForm from "./UpdateForm";
+import PostFromUser from "../../Profile/PostFromUser";
 
 const Profile = () => {
 
@@ -15,9 +17,7 @@ const Profile = () => {
     const response = await fetch(`http://localhost:5000/users/${id}`, { headers: { Authorization: "Bearer " + authToken }});
     const profile = await response.json();
     array.push(profile)
-     setProfile(array);
-    
-   // console.log(array);
+    setProfile(array);
   }
 
   useEffect(() => {
@@ -26,6 +26,7 @@ const Profile = () => {
 
   return (
     <main>
+      <Header />
       {profile.map((profil) => { 
         const { id, firstName, lastName, /* postNumber */ imageUrl } = profil;
         return( 
@@ -42,6 +43,7 @@ const Profile = () => {
        })} 
 
       <UpdateForm />
+      <PostFromUser />
     </main>
   )
 }
