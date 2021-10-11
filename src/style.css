@@ -170,30 +170,98 @@ input {
   margin-top: 3rem;
   height: 20rem;
   width: 35rem;
-  border: 1px solid black;
+  border: 3px solid #B6B6B6;
+  overflow: hidden;
 }
-.profile-section-info__img-ctn {
+.profile-section-info__img {
   display: flex;
   flex-direction: column;
-  height: 80%;
+  height: 100%;
   width: 40%;
-  position: relative;
-  background-color: black;
 }
-.profile-section-info__img-ctn__img {
+.profile-section-info__img form {
+  margin-left: 0.3rem;
+}
+.profile-section-info__img form button {
+  margin-top: -0.5rem;
+}
+.profile-section-info__img--ctn {
+  height: 20rem;
+  width: 15rem;
+  position: relative;
+}
+.profile-section-info__img--ctn__img {
   height: 100%;
   width: 100%;
   position: absolute;
   object-fit: cover;
 }
 .profile-section-info__details {
-  margin: 1rem 1rem;
+  margin: 1rem 1.5rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
 }
 
 .btn-box-profile {
-  margin-top: 70%;
+  display: flex;
+  position: absolute;
+  margin-top: 9rem;
+}
+.btn-box-profile .btn {
+  max-width: 8rem;
 }
 
+h3 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.update {
+  cursor: pointer;
+}
+
+.update-user-form, .update-bio, .update-job {
+  display: grid;
+  column-gap: 1rem;
+  grid-template-columns: repeat(2, 16rem);
+  margin-top: 1rem;
+}
+
+.input-update {
+  height: 2.2rem;
+  width: 15rem;
+}
+
+.update-forms-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+@media (max-width: 600px) {
+  .profile-section-info {
+    flex-direction: column;
+    width: 20rem;
+    height: 30rem;
+  }
+  .profile-section-info__img {
+    height: 15rem;
+    width: 20rem;
+    margin-left: 2.5rem;
+  }
+  .profile-section-info__img form {
+    margin-left: 0;
+  }
+
+  .btn-box-profile {
+    margin-top: 2rem;
+  }
+
+  .update-user-form, .update-bio, .update-job {
+    display: flex;
+    flex-direction: column;
+  }
+}
 .comment-box {
   display: flex;
   flex-direction: column-reverse;

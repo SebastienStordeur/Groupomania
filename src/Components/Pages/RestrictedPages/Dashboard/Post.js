@@ -28,7 +28,7 @@ const Post = () => {
   return (
     <div className="post-container">
       {posts.map((post) => {
-        const { id, content, likes, dislikes, imageUrl, userId } = post;
+        const { id, content, like, dislike, imageUrl, userId } = post;
         const idPost = post.id;
         const author = user.firstName + user.lastName
 
@@ -49,6 +49,7 @@ const Post = () => {
           Axios({
             method: "POST",
             data: {
+              like: 1,
               userId: user.userId,
               postId: id,
             },
@@ -64,10 +65,11 @@ const Post = () => {
           Axios({
             method: "POST",
             data: {
+              like: -1,
               userId: user.userId,
               postId: id,
             },
-            url: `http://localhost:5000/posts/${id}/dislike`,
+            url: `http://localhost:5000/posts/${id}/like`,
             headers: {
               Authorization: "Bearer " + authToken,
             }
@@ -128,9 +130,9 @@ const Post = () => {
                 
               }
               <FaHeart className="like-heart heart like" size={26} onClick={likePost}/>
-              <span className="like-count">{likes}</span>
+              <span className="like-count">{like}</span>
               <FaHeartBroken className="dislike-heart heart dislike" size={24} onClick={dislikePost}/>
-              <span className="dislike-count">{dislikes}</span>
+              <span className="dislike-count">{dislike}</span>
             </div>
             <div className="form-comment refresh">
               <form className="comment-form" onSubmit={createComment}>

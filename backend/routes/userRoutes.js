@@ -12,11 +12,11 @@ router.post("/signup", pswChecking, userController.signup);
 router.post("/login", userController.login);
 
 //Specific routes
-router.delete("/logout", userController.logout);
-router.get("/:id", userController.getProfile);
-router.put("/:id/updateProfile",  userController.updateProfile);
+router.get("/:id", auth, userController.getProfile);
+router.put("/:id/updateProfile", auth, userController.updateProfile);
+router.put("/:id/updateBio", auth, userController.updateBio);
+router.put("/:id/updateJob", auth, userController.updateJob);
 router.delete("/:id", auth, userController.deleteProfile);
-router.post("/:id/manageProfilePicture",  multer, userController.manageProfilePicture)
-router.get("/logout", auth, userController.logout);
+router.put("/:id/manageProfilePicture",  auth, multer, userController.manageProfilePicture)
 
 module.exports = router;

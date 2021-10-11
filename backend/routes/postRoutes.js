@@ -11,8 +11,7 @@ router.get("/:userId", /* auth, */ postController.getPostWithUserId);
 router.delete('/:id', auth, postController.deletePost);
 
 //Likes && dislikes
-router.post("/:id/like", auth, postController.like);
-router.post("/:id/dislike", auth, postController.dislike);
+router.post("/:id/like", postController.likeManagement);
 
 //Comments
 router.post("/:id/comment", auth, postController.createComment);

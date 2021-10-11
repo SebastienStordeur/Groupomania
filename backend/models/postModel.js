@@ -4,23 +4,20 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       required: false
     },
-    title: {
-      type: Sequelize.STRING(30),
-      required: true,
-    },
     content: {
       type: Sequelize.STRING(500),
       required: true
     },
     imageUrl: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      required: true
     },
-/*     like: {
+    like: {
       type: Sequelize.INTEGER
     },
     dislike: {
       type: Sequelize.INTEGER
-    } */
+    } 
   });
 
   return Post;

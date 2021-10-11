@@ -4,6 +4,7 @@ import Axios from "axios";
 import Header from "../Header";
 import UpdateForm from "./UpdateForm";
 import PostFromUser from "../../Profile/PostFromUser";
+import { GrUpdate } from "react-icons/gr"
 
 const Profile = () => {
 
@@ -35,7 +36,7 @@ const Profile = () => {
     <main>
       <Header />
       {profile.map((profil) => { 
-        const { id, firstName, lastName, /* postNumber */ imageUrl } = profil;
+        const { id, firstName, lastName, imageUrl, job, bio } = profil;
 
         const deleteProfile = () => {
           Axios({
@@ -63,30 +64,33 @@ const Profile = () => {
               Authorization: "Bearer " + authToken
             }
           });
-        }; */
+        }; */ 
 
         const addProfilePicture = (e) => {
           e.preventDefault();
           const formData = new FormData();
           formData.append("image", file);
-          Axios.post(`http://localhost:5000/users/${id}/manageProfilePicture`, {
+          Axios.put(`http://localhost:5000/users/${id}/manageProfilePicture`, formData, {
             headers: { "Content-Type": "multipart/form-data", Authorization: "Bearer " + authToken }
           })
         }
 
         return( 
         <section className="profile-section-info" key={id}>
-          <div className="profile-section-info__img-ctn">
-            <img className="profile-section-info_img" src={imageUrl} alt={firstName + lastName} />
-            <form className="post-form-profile">
+          <div className="profile-section-info__img">
+            <div className="profile-section-info__img--ctn">
+              <img className="profile-section-info__img--ctn__img" src={imageUrl} alt={firstName + lastName} />
+            </div>
+            {(id === user.userId) && <form className="post-form-profile">
               <input className="post-form__file" type="file" accept="image/*" onChange={(e) => setFile(e.target.files[0])} />
               <button className="send-btn btn" type="submit" onClick={addProfilePicture}>Envoyer</button>
-            </form>
+            </form>}
           </div>
+          
           <div className="profile-section-info__details">
             <h1>{firstName + ' ' + lastName}</h1>
-            <h3>Nombre de posts : {/* {postNumber} */}</h3>
-            
+            <h3><span className="text">Poste occupé : {job}</span> {(id === user.userId) && <span><GrUpdate className="update"/></span>}</h3>
+            <h3><span className="text">Bio : {bio}</span> {(id === user.userId) && <span><GrUpdate className="update"/></span>}</h3>
             {(id === user.userId) && <div className="btn-box-profile">
               <button className="btn modify-btn">Modifier</button>
               <button className="btn delete-btn" onClick={deleteProfile}>Suppression</button>
@@ -95,7 +99,6 @@ const Profile = () => {
         </section> 
         )
        })} 
-
       <UpdateForm className="update-form" />
       <PostFromUser />
     </main>

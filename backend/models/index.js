@@ -21,9 +21,7 @@ db.sequelize = sequelize;
 db.users = require("./UserModel")(sequelize, Sequelize);
 db.posts = require("./postModel")(sequelize, Sequelize);
 db.comments = require("./commentModel")(sequelize, Sequelize);
-db.roles = require("./RoleModel")(sequelize, Sequelize);
 db.likes = require("./like")(sequelize, Sequelize);
-db.dislikes = require("./dislike")(sequelize, Sequelize);
 
 //Liaison entre table users et posts (ajout de userId dans la table post)
 db.users.hasMany(db.posts);
@@ -37,11 +35,5 @@ db.users.hasOne(db.comments);
 db.posts.hasMany(db.likes);
 db.likes.belongsTo(db.users);
 
-//Liaison dislike/posts et dislike/users
-db.posts.hasMany(db.dislikes);
-db.dislikes.belongsTo(db.users);
-
-//Liaison role/user
-db.roles.hasOne(db.users);
 
 module.exports = db;

@@ -26,10 +26,12 @@ module.exports = (sequelize, Sequelize) => {
       defaultValue: 'http://localhost:5000/images/default_image.jpg'
     },
     bio: {
-      type: Sequelize.STRING(300)
+      type: Sequelize.STRING(300),
+      defaultValue: "Bio par défaut",
     },
     job: {
-      type: Sequelize.STRING(50)
+      type: Sequelize.STRING(50),
+      defaultValue: "A remplir"
     }
   });
   return User;

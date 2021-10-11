@@ -39,7 +39,7 @@ exports.signup = (req, res) => {
   })(req, res, next);
 }; */
 
-exports.login = (req, res, next) => {
+exports.login = (req, res) => {
   User.findOne({ where: { email: req.body.email } })
     .then( user => {
       if(!user) return res.status(401).json({ message: "Impossible de trouver cet utilisateur."});
@@ -56,29 +56,11 @@ exports.login = (req, res, next) => {
     .catch(error => res.status(401).json({ message: "2" + error }));
 };
 
-exports.logout = (req, res) => {
-  req.logOut();
-  res.redirect("/");
-};
-
 exports.getProfile = (req, res) => {
   User.findOne({ where: { id: req.params.id } })
     .then((user) => res.status(200).json(user))
     .catch((error) => res.status(401).json({ message: "Impossible de trouver ce profile" + error })
     );
-};
-
-exports.updateProfile = (req, res, next) => {
-  //bcrypt.hash(req.body.password, 10).then((hash) => {
-    const user = {
-      lastName: req.body.lastName,
-      firstName: req.body.firstName,
-      email: req.body.email,
-      password: req.body.password,
-    };
-    User.update(user)
-      .then(() => res.status(201).json({ message: "Profil mis à jour."}))
-      .catch(error => res.status(500).json({ message: "Impossible de mettre à jour votre profil. " + error }));
 };
 
 exports.deleteProfile = (req, res) => {
@@ -87,9 +69,9 @@ exports.deleteProfile = (req, res) => {
     .catch(error => res.status(401).json({ message: "Impossible de supprimer cet utilisateur. " + error }))
 };
 
-exports.manageProfilePicture = (req, res, next) => {
+exports.manageProfilePicture = (req, res) => {
   User.findOne({ where: { id: req.params.id } })
-    .then(user => {
+    .then((user) => {
       const filename = user.imageUrl.split("/images/")[1];
       if(filename != "default_image.jpg") {
         fs.unlink(`images/${filename}`), (error) => {
@@ -97,15 +79,14 @@ exports.manageProfilePicture = (req, res, next) => {
         };
       }
       const profilePicture = { imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}` }
-      User.update(profilePicture, { where: { id: req.params.id }})
+      User.update(profilePicture, { where: { id: req.params.id } })
         .then(() => res.status(201).json({ message: "Photo de profile mise à jour avec succès." }))
         .catch(error => res.status(400).json({ message: "Impossible de mettre à jour votre photo. " + error }));
     })
-    
+    .catch(error => res.status(500).json({ error }))
 };
 
-exports.updateProfile = (req, res, next) => {
-  /* const UserObject = { ...req.body } */
+exports.updateProfile = (req, res) => {
   User.findOne({ where: { id: req.params.id } })
   .then(() => {
     bcrypt.hash(req.body.password, 10)
@@ -117,3 +98,21 @@ exports.updateProfile = (req, res, next) => {
   })
   .catch(error => res.status(500).json({ error }))
 };
+
+exports.updateBio = (req, res) => {
+  User.findOne({ where: { id: req.params.id } })
+  .then(() => {
+    User.update({ ...req.body }, { where: { id: req.params.id }})
+      res.status(201).json({ message: "Bio mise à jour."}); 
+  })
+  .catch(error => res.status(400).json({ error }));
+};
+
+exports.updateJob = (req, res) => {
+  User.findOne({ where: { id: req.params.id } })
+  .then(() => {
+    User.update({ ...req.body }, { where: { id: req.params.id }})
+      res.status(201).json({ message: "Job mis à jour."}); 
+  })
+  .catch(error => res.status(400).json({ error }));
+}
