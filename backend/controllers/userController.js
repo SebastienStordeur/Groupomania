@@ -85,13 +85,35 @@ exports.deleteProfile = (req, res) => {
   User.destroy({ where: { id: req.params.id } })
     .then(() => res.status(201).json({ message: "Utilisateur supprimé." }))
     .catch(error => res.status(401).json({ message: "Impossible de supprimer cet utilisateur. " + error }))
-}
+};
 
 exports.manageProfilePicture = (req, res, next) => {
-  const user = { 
-    imageUrl: req.body.image
-  }
-  User.update(user)
-    .then(() => res.status(201).json({ message: "Photo uploaded."}))
-    .catch(error => res.status(500).json({ message: "Impossible d'uploader votre photo. " + error }));
-}
+  User.findOne({ where: { id: req.params.id } })
+    .then(user => {
+      const filename = user.imageUrl.split("/images/")[1];
+      if(filename != "default_image.jpg") {
+        fs.unlink(`images/${filename}`), (error) => {
+        if(error) res.status(400).json({ message: "Impossible de supprimer l'ancienne image. "});
+        };
+      }
+      const profilePicture = { imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}` }
+      User.update(profilePicture, { where: { id: req.params.id }})
+        .then(() => res.status(201).json({ message: "Photo de profile mise à jour avec succès." }))
+        .catch(error => res.status(400).json({ message: "Impossible de mettre à jour votre photo. " + error }));
+    })
+    
+};
+
+exports.updateProfile = (req, res, next) => {
+  /* const UserObject = { ...req.body } */
+  User.findOne({ where: { id: req.params.id } })
+  .then(() => {
+    bcrypt.hash(req.body.password, 10)
+    .then(hash => {
+      User.update({ ...req.body , password: hash }, { where: { id: req.params.id }});
+      res.status(201).json({ message: "Profil mis à jour avec succès." });
+    })
+    .catch(error => res.status(500).json({ message: "Impossible de mettre à jour votre profil. " + error }));
+  })
+  .catch(error => res.status(500).json({ error }))
+};

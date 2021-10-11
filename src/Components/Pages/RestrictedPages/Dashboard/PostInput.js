@@ -40,7 +40,11 @@ const PostInput = () => {
 
       Axios.post("http://localhost:5000/posts/", formData, {
         headers: { "Content-Type": "multipart/form-data", Authorization: "Bearer " + authToken  }
-      }).then(() => getPosts());
+      }).then(() => {
+        setContent(""); 
+        setFile("");
+        getPosts()
+      });
     };
   };
 

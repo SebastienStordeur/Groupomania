@@ -1,9 +1,9 @@
 import React from "react";
+import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { AiFillHome } from "react-icons/ai";
 import { FaUserAlt } from "react-icons/fa";
 import { GiExitDoor } from "react-icons/gi";
-import axios from "axios";
 
 const Header = () => {
 
@@ -12,16 +12,11 @@ const Header = () => {
   const encodedPayload = tokenPart[1];
   const rawPayload = atob(encodedPayload);
   const user = JSON.parse(rawPayload);
+  const history = useHistory();
 
   const logout = () => {
-    axios({
-      method: "GET",
-      withCredentials: true,
-      url: "http://localhost:5000/users/logout",
-      headers: {
-        Authorization: "Bearer " + authToken,
-      }
-    }).then((res) => console.log(res));
+    localStorage.removeItem("authToken");
+    history.push("/login")
   }
 
   return (

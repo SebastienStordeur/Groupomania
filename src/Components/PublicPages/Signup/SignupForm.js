@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import Axios from "axios";
 import Confirmation from "./Confirmation";
 import Deny from "./Deny";
@@ -11,7 +11,6 @@ const SignupForm = () => {
   const [email, setEmail] = useState("");
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
-  const formRef = useRef(null);
 
   const showPassword = (e) => {
     const psw = e.target.parentNode.parentNode.firstChild;
@@ -67,7 +66,11 @@ const SignupForm = () => {
       .then((res) => {
         if(res.status === 201) {
           document.querySelector(".confirm-panel").style.display = "flex";
-          formRef.current.reset();
+          setLastname("");
+          setFirstname("");
+          setEmail("");
+          setPassword1("");
+          setPassword2("");
         } 
         else {
           document.querySelector(".deny-panel").style.display = "flex";
@@ -77,7 +80,7 @@ const SignupForm = () => {
   };
 
   return (
-    <form className="register-form" onSubmit={signup} ref={formRef}>
+    <form className="register-form" onSubmit={signup}>
       <label
         className="input"
         value="Nom de famille"

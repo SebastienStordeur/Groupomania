@@ -22,8 +22,15 @@ module.exports = (sequelize, Sequelize) => {
       min: 8
     },
     imageUrl: {
-      type: Sequelize.STRING()
+      type: Sequelize.STRING(),
+      defaultValue: 'http://localhost:5000/images/default_image.jpg'
     },
+    bio: {
+      type: Sequelize.STRING(300)
+    },
+    job: {
+      type: Sequelize.STRING(50)
+    }
   });
   return User;
 }

@@ -53,7 +53,15 @@ const UpdateForm = () => {
         /* headers: {
           Authorization: "Bearer " + authToken,
         }, */
-      }).then((res) => console.log(res))
+      })
+      .then((res) => {
+        console.log(res)
+        setLastname(""); 
+        setFirstname("");
+        setEmail("");
+        setPassword("");
+        setConfirmPassword("");
+      })
     };
   }
 

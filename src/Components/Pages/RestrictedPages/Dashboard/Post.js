@@ -140,7 +140,7 @@ const Post = () => {
             </div>
             <div className="comment-box">
               {comments.map((commentaire) => {
-                const { id, content, postId } = commentaire;
+                const { id, content, postId, userId } = commentaire;
 
                 if(postId === idPost) {
                 const deleteComment = async(e) => {
@@ -161,9 +161,9 @@ const Post = () => {
                       <h4>Nom Prénom</h4>
                       <p>{content}</p>
                     </div>
-                    <div className="post-content__name--delete">
+                    {(userId === user.userId && <div className="post-content__name--delete">
                       <BsFillTrashFill className="trash-icon" onClick={deleteComment} />
-                    </div>
+                    </div>)}
                   </div>
                 )};
               })}

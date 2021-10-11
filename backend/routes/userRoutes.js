@@ -14,9 +14,9 @@ router.post("/login", userController.login);
 //Specific routes
 router.delete("/logout", userController.logout);
 router.get("/:id", userController.getProfile);
-router.put("/:id",  userController.updateProfile);
+router.put("/:id/updateProfile",  userController.updateProfile);
 router.delete("/:id", auth, userController.deleteProfile);
-router.post("/:id", auth, multer, userController.manageProfilePicture)
+router.post("/:id/manageProfilePicture",  multer, userController.manageProfilePicture)
 router.get("/logout", auth, userController.logout);
 
 module.exports = router;
