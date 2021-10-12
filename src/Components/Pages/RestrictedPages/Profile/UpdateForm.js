@@ -12,11 +12,12 @@ const UpdateForm = () => {
   const [bio, setBio] = useState("");
   const [job, setJob] = useState("");
 
+
   const regex = /@"^[A-Za-z0-9\s@]*$"/;
   const letterRegex = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
   const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
   const authToken = JSON.parse(localStorage.getItem("authToken"));
-  let id = 1; //A changer
+  let id = useParams() //A changer
 
   const updateUser = () => {
 

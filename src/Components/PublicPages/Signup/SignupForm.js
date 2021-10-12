@@ -3,6 +3,7 @@ import Axios from "axios";
 import Confirmation from "./Confirmation";
 import Deny from "./Deny";
 import { AiFillEye } from "react-icons/ai";
+import { useHistory } from "react-router";
 
 const SignupForm = () => {
   
@@ -11,6 +12,9 @@ const SignupForm = () => {
   const [email, setEmail] = useState("");
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
+  const history = useHistory();
+  const confirmPanel = document.querySelector(".confirm-panel");
+  const denyPanel = document.querySelector(".deny-panel");
 
   const showPassword = (e) => {
     const psw = e.target.parentNode.parentNode.firstChild;
@@ -65,15 +69,20 @@ const SignupForm = () => {
       })
       .then((res) => {
         if(res.status === 201) {
-          document.querySelector(".confirm-panel").style.display = "flex";
+          denyPanel.style.display = "none";
+          confirmPanel.style.display = "flex";
           setLastname("");
           setFirstname("");
           setEmail("");
           setPassword1("");
           setPassword2("");
+          setTimeout(() => { 
+            confirmPanel.style.display = "none"
+            history.push("/login");
+           }, 3000);
         } 
         else {
-          document.querySelector(".deny-panel").style.display = "flex";
+          denyPanel.style.display = "flex";
         }
       });
     } 

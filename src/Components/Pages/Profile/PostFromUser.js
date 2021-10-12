@@ -6,20 +6,12 @@ import { RiDislikeLine } from 'react-icons/ri';
 
 const PostFromUser = () => {
 
-  const { userId } = useParams();
+  const { id } = useParams();
   const [posts, setPosts] = useState([]);
-
-  const openAddComment = () => {
-    document.querySelector('.add-comment-modal').style.display = "block";
-  }
-
-  const openAllComments = () => {
-    document.querySelector('.modal-get-comments').style.display = "block";
-  }
 
 
   const getPosts = async() => {
-    const response = await fetch(`http://localhost:5000/posts/${userId}`);
+    const response = await fetch(`http://localhost:5000/posts/${id}`);
     const posts = await response.json();
     console.log(posts);
     setPosts(posts.data)

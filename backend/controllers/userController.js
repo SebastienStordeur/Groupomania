@@ -2,7 +2,8 @@ const db = require("../models");
 const User = db.users;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const passport = require("passport")
+const passport = require("passport");
+const fs = require("fs");
 
 require("dotenv").config();
 
@@ -74,16 +75,16 @@ exports.manageProfilePicture = (req, res) => {
     .then((user) => {
       const filename = user.imageUrl.split("/images/")[1];
       if(filename != "default_image.jpg") {
-        fs.unlink(`images/${filename}`), (error) => {
+        fs.unlink(`images/${filename}`, (error) => {
           if(error) res.status(400).json({ message: "Impossible de supprimer l'ancienne image. "});
-        };
-      }
+        });
+      };
       const profilePicture = { imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}` }
       User.update(profilePicture, { where: { id: req.params.id } })
         .then(() => res.status(201).json({ message: "Photo de profile mise à jour avec succès." }))
         .catch(error => res.status(400).json({ message: "Impossible de mettre à jour votre photo. " + error }));
     })
-    .catch(error => res.status(500).json({ error }))
+    .catch(error => res.status(500).json({ message: "Erreur" + error }))
 };
 
 exports.updateProfile = (req, res) => {

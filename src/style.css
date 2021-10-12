@@ -200,6 +200,11 @@ input {
   margin: 1rem 1.5rem;
   font-family: "Poppins", sans-serif;
   font-size: 14px;
+  width: 100%;
+}
+.profile-section-info__details h3 {
+  display: flex;
+  justify-content: space-between;
 }
 
 .btn-box-profile {
@@ -209,11 +214,6 @@ input {
 }
 .btn-box-profile .btn {
   max-width: 8rem;
-}
-
-h3 {
-  display: flex;
-  justify-content: space-between;
 }
 
 .update {
@@ -238,8 +238,24 @@ h3 {
   margin-top: 1rem;
 }
 
+.delete-modal {
+  display: none;
+  flex-direction: column;
+  margin-left: 10%;
+  max-width: 50rem;
+  height: 8rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  z-index: 99;
+  background-color: #FFFFFF;
+}
+
 .show {
   display: grid;
+}
+
+.show-delete {
+  display: flex;
 }
 
 @media (max-width: 600px) {
@@ -247,6 +263,9 @@ h3 {
     flex-direction: column;
     width: 20rem;
     height: 30rem;
+  }
+  .profile-section-info__details {
+    width: 90%;
   }
   .profile-section-info__img {
     height: 15rem;
@@ -264,6 +283,10 @@ h3 {
   .update-user-form, .update-bio, .update-job {
     display: none;
     flex-direction: column;
+  }
+
+  .delete-modal {
+    margin-left: 15%;
   }
 
   .show {

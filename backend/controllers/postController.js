@@ -44,7 +44,7 @@ exports.getAllPost = (req,res) => {
 };
 
 exports.getPostWithUserId = (req,res) => {
-  Post.findAll({ where: { userId: req.params.userId } })
+  Post.findAll({ where: { userId: req.params.id } })
     .then((data) => res.status(201).json({ data }))
     .catch(error => res.status(500).json({ message: "Rien à afficher" + error }));
 };

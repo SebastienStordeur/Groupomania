@@ -33,6 +33,11 @@
     margin: 1rem 1.5rem;
     font-family: "Poppins", sans-serif;
     font-size: 14px;
+    width: 100%;
+    h3 {
+      display: flex;
+      justify-content: space-between;
+    }
   }
 }
 .btn-box-profile {
@@ -43,10 +48,7 @@
     max-width: 8rem;
   }
 }
-h3 {
-  display: flex;
-  justify-content: space-between;
-}
+
 .update {
   cursor: pointer;
 }
@@ -67,14 +69,31 @@ h3 {
   justify-content: center;
   margin-top: 1rem;
 }
+.delete-modal {
+  display: none;
+  flex-direction: column;
+  margin-left: 10%;
+  max-width: 50rem;
+  height: 8rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  z-index: 99;
+  background-color: $white;
+}
 .show {
   display: grid;
 }
+.show-delete {
+  display: flex;
+} 
 @media(max-width: 600px) {
   .profile-section-info{
     flex-direction: column ;
     width: 20rem;
     height: 30rem;
+    &__details {
+      width: 90%;
+    }
     &__img{ 
       height: 15rem;
       width: 20rem;
@@ -91,9 +110,14 @@ h3 {
     display: none;
     flex-direction: column;
   }
+  .delete-modal {
+    margin-left: 15%;
+  }
   .show{
     display: flex;
   }
 }
+
+
 
 
