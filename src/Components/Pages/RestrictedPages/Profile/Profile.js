@@ -4,11 +4,15 @@ import Axios from "axios";
 import Header from "../Header";
 import UpdateForm from "./UpdateForm";
 import PostFromUser from "../../Profile/PostFromUser";
+import ConfirmDeletion from "./ConfirmDeletion";
 import { GrUpdate } from "react-icons/gr"
 
 const Profile = () => {
 
   const history = useHistory();
+  const updateForm = document.querySelector(".update-user-form");
+  const bioForm = document.querySelector(".update-bio");
+  const jobForm = document.querySelector(".update-job");
   const [profile, setProfile] = useState([]);
   const [file, setFile] = useState("");
   const { id } = useParams();
@@ -17,9 +21,12 @@ const Profile = () => {
   const encodedPayload = tokenPart[1];
   const rawPayload = atob(encodedPayload);
   const user = JSON.parse(rawPayload);
-  const updateForm = document.querySelector(".update-form")
 
   const array = [];
+
+  const showUpdateForm = () => { updateForm.classList.toggle("show") };
+  const showBioForm = () => { bioForm.classList.toggle("show") };
+  const showJobForm = () => { jobForm.classList.toggle("show") };
 
   const getProfile = async() => {
     const response = await fetch(`http://localhost:5000/users/${id}`, { headers: { Authorization: "Bearer " + authToken }});
@@ -52,20 +59,6 @@ const Profile = () => {
           });
         };
 
-/*         const modifyProfile = () => {
-          Axios({ 
-            method: "PUT",
-            withCredentials: true,
-            data: {
-              lastName: 
-            } 
-            url: `http://localhost:5000/users/${id}`,
-            headers: {
-              Authorization: "Bearer " + authToken
-            }
-          });
-        }; */ 
-
         const addProfilePicture = (e) => {
           e.preventDefault();
           const formData = new FormData();
@@ -77,6 +70,7 @@ const Profile = () => {
 
         return( 
         <section className="profile-section-info" key={id}>
+          
           <div className="profile-section-info__img">
             <div className="profile-section-info__img--ctn">
               <img className="profile-section-info__img--ctn__img" src={imageUrl} alt={firstName + lastName} />
@@ -89,16 +83,17 @@ const Profile = () => {
           
           <div className="profile-section-info__details">
             <h1>{firstName + ' ' + lastName}</h1>
-            <h3><span className="text">Poste occupé : {job}</span> {(id === user.userId) && <span><GrUpdate className="update"/></span>}</h3>
-            <h3><span className="text">Bio : {bio}</span> {(id === user.userId) && <span><GrUpdate className="update"/></span>}</h3>
+            <h3><span className="text">Poste occupé : {job}</span> {(id === user.userId) && <span><GrUpdate className="update" onClick={showJobForm} /></span>}</h3>
+            <h3><span className="text">Bio : {bio}</span> {(id === user.userId) && <span><GrUpdate className="update" onClick={showBioForm} /></span>}</h3>
             {(id === user.userId) && <div className="btn-box-profile">
-              <button className="btn modify-btn">Modifier</button>
+              <button className="btn modify-btn" onClick={showUpdateForm}>Modifier</button>
               <button className="btn delete-btn" onClick={deleteProfile}>Suppression</button>
             </div>}
           </div>     
         </section> 
         )
-       })} 
+      })} 
+      {/* <ConfirmDeletion /> */}
       <UpdateForm className="update-form" />
       <PostFromUser />
     </main>

@@ -17,6 +17,7 @@ const UpdateForm = () => {
   const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
   const authToken = JSON.parse(localStorage.getItem("authToken"));
   let id = 1; //A changer
+
   const updateUser = () => {
 
     const checkNames = () => {

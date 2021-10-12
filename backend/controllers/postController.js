@@ -87,12 +87,11 @@ exports.likeManagement = (req, res) => {
       }
 
       //If user has already liked
-      else if(response.dataValues.hasLiked === 1) {
+      else if(response.hasLiked === 1) {
         if(req.body.like === -1) {  //dislike
-        console.log(response)
         Like.update({ hasLiked: -1 }, {where: { [Op.and]: [{ postId: req.body.postId }, { userId: req.body.userId }] }});
-        Post.increment({ dislike: 1 }, { where: { id:req.body.postId } });
-        Post.decrement({ like: 1 }, { where: { id: req.body.post.id } });
+        Post.decrement({ like: 1 }, { where: { id: req.body.postId } });
+        Post.increment({ dislike: 1 }, { where: { id: req.body.postId } });
         res.status(201).json({ message: "Like supprimé, dislike ajouté."});
         }
         else {  //like
@@ -103,11 +102,11 @@ exports.likeManagement = (req, res) => {
       }
 
       //If user has already disliked
-      else if(response.dataValues.like === -1) {
+      else if(response.hasLiked === -1) {
         if(req.body.like === 1) { //Like
           Like.update({ hasLiked: 1 }, {where: { [Op.and]: [{ postId: req.body.postId }, {userId: req.body.userId }] }});
-          Post.increment({ like: 1 }, { where: { id: req.body.postId } });
           Post.decrement({ dislike: 1 }, { where: { id: req.body.postId } });
+          Post.increment({ like: 1 }, { where: { id: req.body.postId } });
           res.status(201).json({ message: "Dislike supprimé, like ajouté." });
         }
         else { //Dislike
@@ -118,4 +117,4 @@ exports.likeManagement = (req, res) => {
       }
     })
     .catch( error => res.status(500).json({ error }))
-}
+} 

@@ -57,7 +57,7 @@ const Post = () => {
             headers: {
               Authorization: "Bearer " + authToken,
             }
-          }).then((res) => console.log(res));
+          }).then(() => getPosts());
         };
 
         const dislikePost = async(e) => {
@@ -73,7 +73,7 @@ const Post = () => {
             headers: {
               Authorization: "Bearer " + authToken,
             }
-          }).then((res) => console.log(res));
+          }).then(() => getPosts());
         };
 
         const createComment = async(e) => {
@@ -90,7 +90,10 @@ const Post = () => {
             headers: {
               Authorization: "Bearer " + authToken,
             },
-          }).then(() => getComments());
+          }).then(() => {
+            setComment("");
+            getComments();
+          });
 /*           const commentForm = document.querySelector("comment-form");
           commentForm.reset(); */
         };
