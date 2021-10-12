@@ -31,6 +31,7 @@ const Post = () => {
         const { id, content, like, dislike, imageUrl, userId } = post;
         const idPost = post.id;
         const author = user.firstName + user.lastName
+        console.log("author", author )
 
         const deletePost = async(e) => {
           e.preventDefault();
@@ -94,8 +95,6 @@ const Post = () => {
             setComment("");
             getComments();
           });
-/*           const commentForm = document.querySelector("comment-form");
-          commentForm.reset(); */
         };
 
         const getComments = async() => {
@@ -103,14 +102,6 @@ const Post = () => {
           const comments = await response.json();
           setComments(comments.data); 
         };
-
-/*         const getLikes = async() => {
-          Axios({
-            method: "GET",
-            withCredentials: true,
-            url: `http://localhost:5000/posts/${id}/like`
-          })
-        } */
 
         return (
           <div className="post-content" key={id}>

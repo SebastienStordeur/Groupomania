@@ -2,6 +2,7 @@ const db = require("../models");
 const User = db.users;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const cryptojs = require("crypto-js");
 const passport = require("passport");
 const fs = require("fs");
 
@@ -13,7 +14,7 @@ exports.signup = (req, res) => {
     const user = {
       lastName: req.body.lastName,
       firstName: req.body.firstName,
-      email: req.body.email,
+      email: cryptojs.MD5(req.body.email).toString(),
       password: hash,
     };
     User.create(user)
@@ -41,7 +42,8 @@ exports.signup = (req, res) => {
 }; */
 
 exports.login = (req, res) => {
-  User.findOne({ where: { email: req.body.email } })
+  let encryptedEmail = cryptojs.MD5(req.body.email).toString();
+  User.findOne({ where: { email: encryptedEmail } })
     .then( user => {
       if(!user) return res.status(401).json({ message: "Impossible de trouver cet utilisateur."});
       bcrypt.compare(req.body.password, user.password)
