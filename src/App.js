@@ -16,15 +16,10 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Switch>
-          <PublicRoute restricted={false} component={Signup} path="/" exact />
-           <PublicRoute restricted={false} component={Login} path="/login" exact /> 
-          {/* <PrivateRoute component={Dashboard} path="/dashboard" exact /> */}
-           <Route path="/dashboard">
-            <Dashboard />
-          </Route>  
-          {/* <PrivateRoute component={ProfilePage} path="/profile:id" exact /> */}
-        <Route path="/profile/:id" children={<Profile />}>
-          </Route> 
+          <PublicRoute restricted={true} component={Signup} path="/" exact />
+          <PublicRoute restricted={true} component={Login} path="/login" exact /> 
+          <PrivateRoute component={Dashboard} path="/dashboard" exact />
+          <PrivateRoute component={Profile} path="/profile/:id" exact />
         </Switch>
       </BrowserRouter>
     </div>
