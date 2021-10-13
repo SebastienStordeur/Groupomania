@@ -42,9 +42,9 @@ const PostInput = () => {
         headers: { "Content-Type": "multipart/form-data", Authorization: "Bearer " + authToken  }
       })
       .then(() => {
+        getPosts();
         setContent(""); 
         setFile("");
-        getPosts();
       });
     };
   };

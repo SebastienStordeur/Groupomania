@@ -1,5 +1,6 @@
 const db = require("../models");
 const User = db.users;
+const Post = db.posts;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cryptojs = require("crypto-js");
@@ -67,10 +68,19 @@ exports.getProfile = (req, res) => {
 };
 
 exports.deleteProfile = (req, res) => {
-  User.destroy({ where: { id: req.params.id } })
-    .then(() => res.status(201).json({ message: "Utilisateur supprimé." }))
-    .catch(error => res.status(401).json({ message: "Impossible de supprimer cet utilisateur. " + error }))
-};
+  User.findOne({ where: { id: req.params.id } })
+    .then((user) => {
+      const filename = user.imageUrl.split("/images/")[1];
+      if(filename != default_image) {
+        fs.unlink(`images/${filename}`, () => {
+          User.destroy({ where: { id: req.params.id } })
+            .then(() => res.status(201).json({ message: "Utilisateur supprimé." }))
+            .catch(error => res.status(401).json({ message: "Impossible de supprimer cet utilisateur. " + error }))
+        })
+      }
+    })
+    .catch(err => res.status(500).json({ err }));
+}; 
 
 exports.manageProfilePicture = (req, res) => {
   User.findOne({ where: { id: req.params.id } })

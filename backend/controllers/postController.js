@@ -34,9 +34,8 @@ exports.deletePost = (req,res) => {
 };
 
 exports.getAllPost = (req,res) => {
-  Post.findAll({ where: req.body.id, include:User })
-    .then((data) => 
-      res.status(201).json({ data }))
+  Post.findAll({ where: req.body.id }, include:User })
+    .then((data) => res.status(201).json({ data }))
     .catch(error => res.status(500).json({ message: "Rien à afficher. " + error }))
 };
 
