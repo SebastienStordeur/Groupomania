@@ -3,7 +3,7 @@ import { useHistory, useParams } from "react-router";
 import Axios from "axios";
 import Header from "../Header";
 import UpdateForm from "./UpdateForm";
-import PostFromUser from "../../Profile/PostFromUser";
+import PostFromUser from "./PostFromUser";
 import { GrUpdate } from "react-icons/gr"
 
 const Profile = () => {
@@ -90,7 +90,7 @@ const Profile = () => {
               </div>}
             </div> 
           </section>
-          {(id === user.userId) &&  <div className="delete-modal">
+          {(id === user.userId) && <div className="delete-modal">
             <h1>Êtes-vous sûr de vouloir supprimer votre compte ? Ce processus est irréversible.</h1>
             <div className="delete-btn-box">
               <button className="cancel-btn btn" onClick={showDeletePop}>Annuler</button>

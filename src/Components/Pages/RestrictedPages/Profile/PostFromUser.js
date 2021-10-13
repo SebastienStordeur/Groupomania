@@ -1,12 +1,17 @@
-import React, { useState, useEffect } from "react";
-import Axios from "axios"
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router';
+import { BiHeart } from 'react-icons/bi';
+import { RiDislikeLine } from 'react-icons/ri';
 import { Link } from "react-router-dom";
 import { FaHeartBroken, FaHeart } from "react-icons/fa";
 import { BsFillTrashFill } from "react-icons/bs";
+import Axios from "axios";
 
-const Post = () => {
 
-  const [posts, setPosts] = useState([]);       //Ensemble des posts
+const PostFromUser = () => {
+
+  const { id } = useParams();
+  const [posts, setPosts] = useState([]);
   const [comment, setComment] = useState("");   //Contenu du commentaire
   const [comments, setComments] = useState([]); //Ensemble des commentaires
 
@@ -17,98 +22,96 @@ const Post = () => {
   const userToken = JSON.parse(rawPayload);
 
   const getPosts = async() => {
-    const response = await fetch("http://localhost:5000/posts/", { headers: { Authorization: "Bearer " + authToken}});
+    const response = await fetch(`http://localhost:5000/posts/${id}`,  { headers: { Authorization: "Bearer " + authToken}});
     const posts = await response.json();
-    setPosts(posts.data);
-  };  
+    setPosts(posts.data)
+  }
 
-   useEffect(() => {
-    getPosts()
-  }, []);  
+  useEffect(() => {
+    getPosts();
+  }, []);
 
   return (
-    <div className="post-container">
-      {posts.map((post) => {
-        const { id, content, like, dislike, imageUrl, userId, user } = post;
-        const idPost = post.id;
+    
+      <div className="post-container">
+        {posts.map((post) => { 
+           const { id, content, author, imageUrl, like, dislike, userId } = post;
+           const idPost = post.id;
 
-        const deletePost = async(e) => {
-          e.preventDefault();
-          Axios({
-            method: "DELETE",
-            withCredentials: true,
-            url: `http://localhost:5000/posts/${id}`,
-            headers: {
-              Authorization: "Bearer " + authToken,
-            },
-          }).then(() => getPosts());
-        };
+           const deletePost = async(e) => {
+            e.preventDefault();
+            Axios({
+              method: "DELETE",
+              withCredentials: true,
+              url: `http://localhost:5000/posts/${id}`,
+              headers: {
+                Authorization: "Bearer " + authToken,
+              },
+            }).then(() => getPosts());
+          };
+  
+           const likePost = async(e) => {
+            e.preventDefault();
+            Axios({
+              method: "POST",
+              data: {
+                like: 1,
+                userId: userToken.userId,
+                postId: id,
+              },
+              url: `http://localhost:5000/posts/${id}/like`,
+              headers: {
+                Authorization: "Bearer " + authToken,
+              }
+            }).then(() => getPosts());
+          };
+  
+          const dislikePost = async(e) => {
+            e.preventDefault();
+            Axios({
+              method: "POST",
+              data: {
+                like: -1,
+                userId: userToken.userId,
+                postId: id,
+              },
+              url: `http://localhost:5000/posts/${id}/like`,
+              headers: {
+                Authorization: "Bearer " + authToken,
+              }
+            }).then(() => getPosts());
+          };
+  
+          const createComment = async(e) => {
+            e.preventDefault();
+            Axios({
+              method: "POST",
+              data: {
+                content: comment,
+                postId: id,
+                userId: userToken.userId
+              },
+              withCredentials: true,
+              url: `http://localhost:5000/posts/${id}/comment`,
+              headers: {
+                Authorization: "Bearer " + authToken,
+              },
+            }).then(() => {
+              setComment("");
+              getComments();
+            });
+          };
+  
+          const getComments = async() => {
+            const response = await fetch(`http://localhost:5000/posts/${id}/comment`, { headers: { Authorization: "Bearer " + authToken}});
+            const comments = await response.json();
+            setComments(comments.data); 
+          };
 
-         const likePost = async(e) => {
-          e.preventDefault();
-          Axios({
-            method: "POST",
-            data: {
-              like: 1,
-              userId: userToken.userId,
-              postId: id,
-            },
-            url: `http://localhost:5000/posts/${id}/like`,
-            headers: {
-              Authorization: "Bearer " + authToken,
-            }
-          }).then(() => getPosts());
-        };
-
-        const dislikePost = async(e) => {
-          e.preventDefault();
-          Axios({
-            method: "POST",
-            data: {
-              like: -1,
-              userId: userToken.userId,
-              postId: id,
-            },
-            url: `http://localhost:5000/posts/${id}/like`,
-            headers: {
-              Authorization: "Bearer " + authToken,
-            }
-          }).then(() => getPosts());
-        };
-
-        const createComment = async(e) => {
-          e.preventDefault();
-          Axios({
-            method: "POST",
-            data: {
-              content: comment,
-              postId: id,
-              userId: userToken.userId
-            },
-            withCredentials: true,
-            url: `http://localhost:5000/posts/${id}/comment`,
-            headers: {
-              Authorization: "Bearer " + authToken,
-            },
-          }).then(() => {
-            setComment("");
-            getComments();
-          });
-        };
-
-        const getComments = async() => {
-          const response = await fetch(`http://localhost:5000/posts/${id}/comment`, { headers: { Authorization: "Bearer " + authToken}});
-          const comments = await response.json();
-          setComments(comments.data); 
-        };
-
-        return (
-          <div className="post-content" key={id}>
+           return ( 
+            <div className="post-content" key={id}>
             <div className="post-content__user-info">
               <div className="post-content__name">
-                <Link to={`/profile/${user.id}`}>
-                  <h3> {user.lastName + " " + user.firstName}</h3>
-                </Link>
               </div>
               {(userId === userToken.userId) &&  <div className="post-content__name--delete">
                 <BsFillTrashFill className="trash-icon" onClick={deletePost} />
@@ -169,4 +172,4 @@ const Post = () => {
   )
 }
 
-export default Post
+export default PostFromUser

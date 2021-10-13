@@ -3,7 +3,6 @@ const Post = db.posts;
 const User = db.users;
 const Comment = db.comments;
 const Like = db.likes;
-const Dislike = db.dislikes;
 const { Op } = require("sequelize");
 const fs = require("fs");
 
@@ -113,5 +112,5 @@ exports.likeManagement = (req, res) => {
         }
       }
     })
-    .catch( error => res.status(500).json({ error }))
+    .catch( error => res.status(500).json({ message: "Erreur. " + error }))
 } 

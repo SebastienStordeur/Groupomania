@@ -7,11 +7,11 @@ const auth = require("../middleware/auth");
 //Posts
 router.post("/", auth, multer, postController.createPost);
 router.get("/", auth, postController.getAllPost);
-router.get("/:userId", /* auth, */ postController.getPostWithUserId); 
+router.get("/:id",  auth, postController.getPostWithUserId); 
 router.delete('/:id', auth, postController.deletePost);
 
 //Likes && dislikes
-router.post("/:id/like", postController.likeManagement);
+router.post("/:id/like",  auth, postController.likeManagement);
 
 //Comments
 router.post("/:id/comment", auth, postController.createComment);
