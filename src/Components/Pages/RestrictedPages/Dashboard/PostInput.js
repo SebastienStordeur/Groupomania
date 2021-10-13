@@ -27,7 +27,7 @@ const PostInput = () => {
     e.preventDefault();
     const user = JSON.parse(rawPayload);
     const postChecking = () => {
-      const regex = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
+      const regex = /^[\w'\-,.][^_!¡?÷?¿/\\+=@#$%ˆ&*{}|~<>;:[\]]{2,}$/i;
       if(regex.test(content)) return true;
       else return false;
     };

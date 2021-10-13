@@ -47,20 +47,6 @@ const Profile = () => {
           {profile.map((profil) => { 
             const { id, firstName, lastName, imageUrl, job, bio } = profil;
 
-            const deleteProfile = () => {
-              Axios({
-                method: "DELETE",
-                withCredentials: true,
-                url: `http://localhost:5000/users/${id}`,
-                headers: {
-                  Authorization: "Bearer " + authToken
-                }
-              }).then(() => {
-                localStorage.removeItem("authToken");
-                history.push("/")
-              });
-            };
-
             const addProfilePicture = (e) => {
               e.preventDefault();
               const formData = new FormData();
@@ -71,7 +57,6 @@ const Profile = () => {
             }
 
             return(
-            <>
               <section className="profile-section-info" key={id}>
                 <div className="profile-section-info__img">
                   <div className="profile-section-info__img--ctn">
@@ -92,14 +77,6 @@ const Profile = () => {
                   </div>}
                 </div> 
               </section>
-              {(id === user.userId) && <div className="delete-modal">
-                <h1>Êtes-vous sûr de vouloir supprimer votre compte ? Ce processus est irréversible.</h1>
-                <div className="delete-btn-box">
-                  <button className="cancel-btn btn" onClick={showDeletePop}>Annuler</button>
-                  <button className="delete-btn btn" onClick={deleteProfile}>Supprimer</button>
-                </div>
-              </div>}
-            </>
             )
           })}
         <UpdateForm className="update-form" />

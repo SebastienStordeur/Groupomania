@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Axios from "axios";
 import { useParams } from "react-router";
+import { useHistory } from "react-router-dom"
 
 const UpdateForm = () => {
 
@@ -16,6 +17,9 @@ const UpdateForm = () => {
   const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
   const authToken = JSON.parse(localStorage.getItem("authToken"));
   let { id } = useParams();
+  const deletePop = document.querySelector(".delete-modal");
+  const showDeletePop = () => deletePop.classList.toggle("show-delete");
+  const history = useHistory();
 
   const updateUser = () => {
 
@@ -122,6 +126,20 @@ const UpdateForm = () => {
     }
   }
 
+  const deleteProfile = () => {
+    Axios({
+      method: "DELETE",
+      withCredentials: true,
+      url: `http://localhost:5000/users/${id}`,
+      headers: {
+        Authorization: "Bearer " + authToken
+      }
+    }).then(() => {
+      localStorage.removeItem("authToken");
+      history.push("/")
+      });
+    };
+
   return (
     <div className="update-forms-container">
       <div>
@@ -141,6 +159,13 @@ const UpdateForm = () => {
           <input className="job-input input-update" value={job} onChange={(e) => setJob(e.target.value)} placeholder="Rôle au sein de l'entreprise.." />
           <button className="btn" type="submit" onSubmit={updateJob}>Envoyer</button>
         </form>
+        <div className="delete-modal">
+          <h1>Êtes-vous sûr de vouloir supprimer votre compte ? Ce processus est irréversible.</h1>
+            <div className="delete-btn-box">
+              <button className="cancel-btn btn" onClick={showDeletePop}>Annuler</button>
+              <button className="delete-btn btn" onClick={deleteProfile}>Supprimer</button>
+            </div>
+        </div>
       </div>
     </div>
   )
