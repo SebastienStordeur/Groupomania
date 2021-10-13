@@ -90,13 +90,13 @@ const Profile = () => {
               </div>}
             </div> 
           </section>
-          {(id === user.userId &&  <div className="delete-modal">
+          {(id === user.userId) &&  <div className="delete-modal">
             <h1>Êtes-vous sûr de vouloir supprimer votre compte ? Ce processus est irréversible.</h1>
             <div className="delete-btn-box">
               <button className="cancel-btn btn" onClick={showDeletePop}>Annuler</button>
               <button className="delete-btn btn" onClick={deleteProfile}>Supprimer</button>
             </div>
-          </div>)}
+          </div>}
          
         </>
         )

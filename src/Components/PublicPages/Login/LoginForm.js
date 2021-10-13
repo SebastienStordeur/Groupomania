@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import FailLogin from "./FailLogin";
-import { AiFillEye} from "react-icons/ai";
 import Axios from "axios";
 import { useHistory } from "react-router";
 
@@ -32,15 +31,13 @@ const LoginForm = () => {
         },
         withCredentials: true, 
         url: "http://localhost:5000/users/login",
-      }).then((res) =>  {
+      })
+      .then((res) =>  {
         if(res.status === 200) {
           localStorage.setItem("authToken", JSON.stringify(res.data.token));
           history.push("/dashboard")
         }
-        if(res.status === 401) {
-          document.querySelector(".fail-login-panel").style.display = "flex";
-        }
-      });
+      }, () => document.querySelector(".fail-login-panel").style.display = "flex" );
     };
   };
 

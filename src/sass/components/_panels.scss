@@ -1,3 +1,5 @@
+@import "../utils/variables";
+
 .panel {
   display: none;
   justify-content: center;
@@ -12,8 +14,9 @@
   background-color: lightgreen;
 }
 .deny-panel {
-  background-color: lightsalmon;
+  background-color: $secondary-color;
+  ;
 }
 .fail-login-panel {
-  background-color: lightsalmon;
+  background-color: $secondary-color;
 }

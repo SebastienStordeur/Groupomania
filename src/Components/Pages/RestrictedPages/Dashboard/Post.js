@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios"
+import { Link } from "react-router-dom";
 import { FaHeartBroken, FaHeart } from "react-icons/fa";
 import { BsFillTrashFill } from "react-icons/bs";
 
@@ -28,10 +29,8 @@ const Post = () => {
   return (
     <div className="post-container">
       {posts.map((post) => {
-        const { id, content, like, dislike, imageUrl, userId } = post;
+        const { id, content, like, dislike, imageUrl, userId, user } = post;
         const idPost = post.id;
-        const author = user.firstName + user.lastName
-        console.log("author", author )
 
         const deletePost = async(e) => {
           e.preventDefault();
@@ -107,7 +106,9 @@ const Post = () => {
           <div className="post-content" key={id}>
             <div className="post-content__user-info">
               <div className="post-content__name">
-                <h3>Nom prénom</h3>
+                <Link to={`/profile/${user.id}`}>
+                  <h3> {user.lastName + " " + user.firstName}</h3>
+                </Link>
               </div>
               {(userId === user.userId) &&  <div className="post-content__name--delete">
                 <BsFillTrashFill className="trash-icon" onClick={deletePost} />

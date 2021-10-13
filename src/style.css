@@ -360,11 +360,11 @@ input {
 }
 
 .deny-panel {
-  background-color: lightsalmon;
+  background-color: #FD2D01;
 }
 
 .fail-login-panel {
-  background-color: lightsalmon;
+  background-color: #FD2D01;
 }
 
 .restricted-header {

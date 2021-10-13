@@ -32,7 +32,7 @@ module.exports = (sequelize, Sequelize) => {
     job: {
       type: Sequelize.STRING(50),
       defaultValue: "A remplir"
-    }
+    },
   });
   return User;
 }

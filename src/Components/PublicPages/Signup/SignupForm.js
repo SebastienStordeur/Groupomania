@@ -80,10 +80,9 @@ const SignupForm = () => {
             confirmPanel.style.display = "none"
             history.push("/login");
            }, 3000);
-        } 
-        else {
-          denyPanel.style.display = "flex";
         }
+      }, () => {
+        denyPanel.style.display = "flex";
       });
     } 
   };

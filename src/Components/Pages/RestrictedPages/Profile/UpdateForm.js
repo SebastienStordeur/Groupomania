@@ -11,13 +11,11 @@ const UpdateForm = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [bio, setBio] = useState("");
   const [job, setJob] = useState("");
-
-
   const regex = /@"^[A-Za-z0-9\s@]*$"/;
   const letterRegex = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
   const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
   const authToken = JSON.parse(localStorage.getItem("authToken"));
-  let id = useParams() //A changer
+  let { id } = useParams();
 
   const updateUser = () => {
 
@@ -89,9 +87,8 @@ const UpdateForm = () => {
           Authorization: "Bearer " + authToken,
         },
       })
-      .then((res) => {
-        if(res.status === 201) setBio("");
-      });
+      .then((res) => { if(res.status === 201) setBio("") }
+      );
     };
   };
 

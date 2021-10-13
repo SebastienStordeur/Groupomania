@@ -18,10 +18,10 @@ function App() {
         <Switch>
           <PublicRoute restricted={false} component={Signup} path="/" exact />
            <PublicRoute restricted={false} component={Login} path="/login" exact /> 
-          {/* <PrivateRoute component={DashboardPage} path="/dashboard" exact /> */}
-           <Route path="/dashboard">
+          <PrivateRoute component={Dashboard} path="/dashboard" exact />
+{/*            <Route path="/dashboard">
             <Dashboard />
-          </Route> 
+          </Route>  */}
           {/* <PrivateRoute component={ProfilePage} path="/profile:id" exact /> */}
         <Route path="/profile/:id" children={<Profile />}>
           </Route> 
