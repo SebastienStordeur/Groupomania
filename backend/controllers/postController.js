@@ -16,7 +16,7 @@ exports.createPost = (req,res) => {
       userId: req.body.userId
     }
   Post.create(post)
-    .then(() => res.status(201).json({ message: "Post crée" }))
+    .then(() => res.status(201).json({ message: "Post crée" }) )
     .catch(error => res.status(400).json({ message: "Impossible de créer ce post. " + error }));
 };
 
@@ -52,9 +52,7 @@ exports.createComment = (req,res) => {
     postId: req.body.postId
   };
   Comment.create(comment)
-    .then(() => {
-      res.redirect("/posts/:id/comment")
-    })
+    .then(() => res.redirect("/posts/:id/comment"))
     .catch(error => res.status(400).json({ message: "Impossible de créer ce commentaire. " + error }));
 };
 
