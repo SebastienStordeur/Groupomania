@@ -30,6 +30,7 @@ db.posts.belongsTo(db.users);
 //Liaison posts/comments et users/comments
 db.posts.hasMany(db.comments);
 db.users.hasOne(db.comments);
+db.comments.belongsTo(db.users);
 
 //Liaison like/posts et like/users
 db.posts.hasMany(db.likes);

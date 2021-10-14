@@ -35,7 +35,7 @@ const PostFromUser = () => {
     
       <div className="post-container">
         {posts.map((post) => { 
-           const { id, content, imageUrl, like, dislike, userId } = post;
+           const { id, content, imageUrl, like, dislike, userId, user } = post;
            const idPost = post.id;
 
            const deletePost = async(e) => {
@@ -112,6 +112,9 @@ const PostFromUser = () => {
             <div className="post-content" key={id}>
             <div className="post-content__user-info">
               <div className="post-content__name">
+                <Link to={`/profile/${user.id}`}>
+                  <h3>{user.lastName + " " + user.firstName}</h3>
+                </Link>
               </div>
               {(userId === userToken.userId || userToken.isAdmin === true) &&  <div className="post-content__name--delete">
                 <BsFillTrashFill className="trash-icon" onClick={deletePost} />
@@ -137,7 +140,7 @@ const PostFromUser = () => {
             </div>
             <div className="comment-box">
               {comments.map((commentaire) => {
-                const { id, content, postId, userId } = commentaire;
+                const { id, content, postId, userId, user } = commentaire;
 
                 if(postId === idPost) {
                 const deleteComment = async(e) => {
@@ -155,7 +158,9 @@ const PostFromUser = () => {
                 return (
                   <div className='comment-box__container' key={id}>
                     <div>
-                      <h4>Nom Prénom</h4>
+                      <Link to={`/profile/${user.id}`}>
+                        <h3>{user.lastName + " " + user.firstName}</h3>
+                      </Link>
                       <p>{content}</p>
                     </div>
                     {(userId === userToken.userId && <div className="post-content__name--delete">
