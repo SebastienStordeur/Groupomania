@@ -46,9 +46,11 @@ const Post = () => {
       Axios.post("http://localhost:5000/posts/", formData, {
         headers: { "Content-Type": "multipart/form-data", Authorization: "Bearer " + authToken  }
       })
-      .then(() =>  getPosts())
+      .then(() => {
+        getPosts();
         setContent(""); 
         setFile("");
+      })
     };
   };
 
@@ -62,7 +64,7 @@ const Post = () => {
           <input className="post-form__file" type="file" accept="image/*" onChange={(e) => setFile(e.target.files[0])} />
           <button className="post-form__submit btn" type="submit" onClick={post}>Poster</button>
         </div>
-      </form>
+    </form>
       
       <div className="post-container">
         {posts.map((post) => {

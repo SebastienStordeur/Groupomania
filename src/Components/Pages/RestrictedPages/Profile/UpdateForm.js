@@ -68,6 +68,7 @@ const UpdateForm = () => {
         setEmail("");
         setPassword("");
         setConfirmPassword("");
+        window.location.reload(false);
       })
     };
   }
@@ -91,8 +92,12 @@ const UpdateForm = () => {
           Authorization: "Bearer " + authToken,
         },
       })
-      .then((res) => { if(res.status === 201) setBio("") }
-      );
+      .then((res) => { 
+        if(res.status === 201) {
+          setBio("")
+          window.location.reload(false);
+        }
+      });
     };
   };
 
@@ -117,11 +122,9 @@ const UpdateForm = () => {
       })
       .then((res) =>  { 
         if(res.status ===201) { 
-          setJob(""); 
-          console.log(res.data.message)
-        } else { 
-          console.log(res.data.message)
-        } 
+          setJob("");
+          window.location.reload(false);
+        };
       })
     }
   }
