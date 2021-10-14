@@ -54,7 +54,8 @@ exports.login = (req, res) => {
           if(!valid) return res.status(401).json({ message: "Mot de passe invalide."});
           res.status(200).json({
             userId: user.id,
-            token: jwt.sign({ userId: user.id}, process.env.SECRET_TOKEN_JWT, { expiresIn: "24h" })
+            isAdmin: user.isAdmin,
+            token: jwt.sign({ userId: user.id, isAdmin: user.isAdmin },  process.env.SECRET_TOKEN_JWT, { expiresIn: "24h" })
           });
         })
         .catch(error => res.status(401).json({ message: "1" + error }));
@@ -68,21 +69,6 @@ exports.getProfile = (req, res) => {
     .catch((error) => res.status(401).json({ message: "Impossible de trouver ce profile" + error })
     );
 };
-
-/* exports.deleteProfile = (req, res) => {
-  User.findOne({ where: { id: req.params.id } })
-    .then((user) => {
-      const filename = user.imageUrl.split("/images/")[1];
-      if(filename != default_image) {
-        fs.unlink(`images/${filename}`, () => {
-          User.destroy({ where: { id: req.params.id } })
-            .then(() => res.status(201).json({ message: "Utilisateur supprimé." }))
-            .catch(error => res.status(401).json({ message: "Impossible de supprimer cet utilisateur. " + error }))
-        })
-      }
-    })
-    .catch(err => res.status(500).json({ err }));
-};  */
 
 exports.deleteProfile = (req, res) => {
   User.findOne({ where: { id: req.params.id } })

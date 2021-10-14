@@ -35,7 +35,7 @@ const PostFromUser = () => {
     
       <div className="post-container">
         {posts.map((post) => { 
-           const { id, content, author, imageUrl, like, dislike, userId } = post;
+           const { id, content, imageUrl, like, dislike, userId } = post;
            const idPost = post.id;
 
            const deletePost = async(e) => {
@@ -113,7 +113,7 @@ const PostFromUser = () => {
             <div className="post-content__user-info">
               <div className="post-content__name">
               </div>
-              {(userId === userToken.userId) &&  <div className="post-content__name--delete">
+              {(userId === userToken.userId || userToken.isAdmin === true) &&  <div className="post-content__name--delete">
                 <BsFillTrashFill className="trash-icon" onClick={deletePost} />
               </div>}
             </div>

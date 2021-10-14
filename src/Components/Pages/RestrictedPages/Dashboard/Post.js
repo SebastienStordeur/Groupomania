@@ -102,19 +102,17 @@ const Post = () => {
           setComments(comments.data); 
         };
 
-        const isUserIdDeleted = () => post.userId === null
-
         return (
           <div className="post-content" key={id}>
             <div className="post-content__user-info">
               <div className="post-content__name">
-              { isUserIdDeleted() ? <h3>User Deleted</h3> : 
+
                 <Link to={`/profile/${user.id}`}>
                   <h3>{user.lastName + " " + user.firstName}</h3>
                 </Link>
-              }
+              
               </div>
-              {(userId === userToken.userId) &&  <div className="post-content__name--delete">
+              {(userId === userToken.userId || userToken.isAdmin === true ) &&  <div className="post-content__name--delete">
                 <BsFillTrashFill className="trash-icon" onClick={deletePost} />
               </div>}
             </div>
@@ -157,14 +155,12 @@ const Post = () => {
                 return (
                   <div className='comment-box__container' key={id}>
                     <div>
-{/*                     { isCommentIdNull() ? <h4>User Deleted</h4> : 
                       <Link to={`/profile/${user.id}`}>
                         <h3>{user.lastName + " " + user.firstName}</h3>
                       </Link>
-                    } */}
                       <p>{content}</p>
                     </div>
-                    {(userId === userToken.userId && <div className="post-content__name--delete">
+                    {((userId === userToken.userId || userToken.isAdmin === true) && <div className="post-content__name--delete">
                       <BsFillTrashFill className="trash-icon" onClick={deleteComment} />
                     </div>)}
                   </div>
