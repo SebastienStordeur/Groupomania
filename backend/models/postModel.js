@@ -1,9 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
   const Post = sequelize.define("post", {
-    author: {
-      type: Sequelize.STRING,
-      required: false
-    },
     content: {
       type: Sequelize.STRING(500),
       required: true

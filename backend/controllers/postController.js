@@ -34,7 +34,7 @@ exports.deletePost = (req,res) => {
 };
 
 exports.getAllPost = (req,res) => {
-  Post.findAll({ where: req.body.id }, include:User })
+  Post.findAll({ where: req.body.id , include:User })
     .then((data) => res.status(201).json({ data }))
     .catch(error => res.status(500).json({ message: "Rien à afficher. " + error }))
 };
@@ -59,7 +59,7 @@ exports.createComment = (req,res) => {
 };
 
 exports.getComments = (req, res) => {
-  Comment.findAll({ where: { postId: req.params.id }})
+  Comment.findAll({ where: { postId: req.params.id /* , include:User  */ }})
     .then((data) => res.status(201).json({ data }))
     .catch(error => res.status(500).json({ message: 'Impossible de récupérer les commentaires. ' + error }));
 };

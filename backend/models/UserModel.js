@@ -33,6 +33,10 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING(50),
       defaultValue: "A remplir"
     },
+    isAdmin: { 
+      type: Sequelize.BOOLEAN,
+      defaultValue: false
+    }
   });
   return User;
 }

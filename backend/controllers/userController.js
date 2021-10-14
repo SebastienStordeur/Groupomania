@@ -1,6 +1,8 @@
 const db = require("../models");
 const User = db.users;
 const Post = db.posts;
+const Comment = db.comments;
+const Like = db.likes;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cryptojs = require("crypto-js");
@@ -67,7 +69,7 @@ exports.getProfile = (req, res) => {
     );
 };
 
-exports.deleteProfile = (req, res) => {
+/* exports.deleteProfile = (req, res) => {
   User.findOne({ where: { id: req.params.id } })
     .then((user) => {
       const filename = user.imageUrl.split("/images/")[1];
@@ -80,7 +82,30 @@ exports.deleteProfile = (req, res) => {
       }
     })
     .catch(err => res.status(500).json({ err }));
-}; 
+};  */
+
+exports.deleteProfile = (req, res) => {
+  User.findOne({ where: { id: req.params.id } })
+    .then(() => {
+          Comment.destroy({ where: { userId: req.params.id } })    //delete post having the the same userId as the currentUser before deletion
+          .then(() => {
+            Like.destroy({ where: { userId: req.params.id } })
+              .then(() => {
+                Post.destroy({ where: { userId: req.params.id } })
+                  .then(() => {
+                    User.destroy({ where: { id: req.params.id }})
+                      .then(() => res.status(201).json({ message: "Utilisateur supprimé."}))
+                      .catch(error => res.status(500).json({ message: "Impossible de supprimer l'utilisateur. " + error }));
+                  })
+                  .catch(error => res.status(500).json({ message: "Impossible de supprimer les posts. " + error }));
+              })
+              .catch(error => res.status(500).json({ message: "Imposisble de supprimer les likes/dislikes. " + error })); 
+          })
+          .catch(err => res.status(500).json({ message: "Impossible de supprimer les commentaires. " +  err }));
+    })
+    .catch(error => res.status(500).json({ message: "Impossible de trouver cet user. " + error }));
+};
+
 
 exports.manageProfilePicture = (req, res) => {
   User.findOne({ where: { id: req.params.id } })
