@@ -115,24 +115,32 @@ const Post = () => {
             }).then(() => getPosts());
           };
 
+          const checkComment = () => {
+            const regex = /^[\w'\-,.][^_!¡?÷?¿/\\+=@#$%ˆ&*{}|~<>;:[\]]{2,}$/i;
+            if(regex.test(comment)) return true;
+            else return false;
+          }
+
           const createComment = async(e) => {
             e.preventDefault();
-            Axios({
-              method: "POST",
-              data: {
-                content: comment,
-                postId: id,
-                userId: userToken.userId
-              },
-              withCredentials: true,
-              url: `http://localhost:5000/posts/${id}/comment`,
-              headers: {
-                Authorization: "Bearer " + authToken,
-              },
-            }).then(() => {
-              setComment("");
-              getComments();
-            });
+            if(checkComment()){
+              Axios({
+                method: "POST",
+                data: {
+                  content: comment,
+                  postId: id,
+                  userId: userToken.userId
+                },
+                withCredentials: true,
+                url: `http://localhost:5000/posts/${id}/comment`,
+                headers: {
+                  Authorization: "Bearer " + authToken,
+                },
+              }).then(() => {
+                setComment("");
+                getComments();
+              });
+            }
           };
 
           const getComments = async() => {
