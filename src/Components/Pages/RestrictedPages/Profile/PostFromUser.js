@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
-import { BiHeart } from 'react-icons/bi';
-import { RiDislikeLine } from 'react-icons/ri';
 import { Link } from "react-router-dom";
 import { FaHeartBroken, FaHeart } from "react-icons/fa";
 import { BsFillTrashFill } from "react-icons/bs";

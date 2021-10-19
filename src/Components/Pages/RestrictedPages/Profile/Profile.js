@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory, useParams } from "react-router";
+import { useParams } from "react-router";
 import Axios from "axios";
 import Header from "../Header";
 import UpdateForm from "./UpdateForm";
@@ -8,7 +8,6 @@ import { GrUpdate } from "react-icons/gr"
 
 const Profile = () => {
 
-  const history = useHistory();
   const updateForm = document.querySelector(".update-user-form");
   const bioForm = document.querySelector(".update-bio");
   const jobForm = document.querySelector(".update-job");
