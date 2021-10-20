@@ -27,7 +27,7 @@ const PostFromUser = () => {
 
   useEffect(() => {
     getPosts();
-  }, []);
+  }, [id]);
 
   return (
     

@@ -121,6 +121,7 @@ const Post = () => {
             else return false;
           }
 
+          
           const createComment = async(e) => {
             e.preventDefault();
             if(checkComment()){
@@ -137,8 +138,8 @@ const Post = () => {
                   Authorization: "Bearer " + authToken,
                 },
               }).then(() => {
-                setComment("");
-                getComments();
+                  setComment("");
+                  getComments();
               });
             }
           };
