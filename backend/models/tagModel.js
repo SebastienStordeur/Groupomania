@@ -1,8 +1,9 @@
 module.exports = (sequelize, Sequelize) => {
-    const Tag = sequelize.define("post", {
-      tag: {
+    const Tag = sequelize.define("tag", {
+      name: {
         type: Sequelize.STRING(20),
-        required: true
+        required: true,
+        unique: true,
       },
     });
   
