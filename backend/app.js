@@ -62,8 +62,10 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 const userRoutes = require('./routes/userRoutes');
 const postRoutes = require('./routes/postRoutes');
 const commentRoutes = require('./routes/commentRoutes');
+const tagRoutes = require('./routes/tagRoutes');
 app.use('/users', userRoutes);
 app.use('/posts', postRoutes);
 app.use('/comments', commentRoutes);
+app.use('/tag', tagRoutes);
 
 module.exports = app;

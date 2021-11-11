@@ -22,6 +22,7 @@ db.users = require("./UserModel")(sequelize, Sequelize);
 db.posts = require("./postModel")(sequelize, Sequelize);
 db.comments = require("./commentModel")(sequelize, Sequelize);
 db.likes = require("./like")(sequelize, Sequelize);
+db.tags = require("./tagModel")(sequelize, Sequelize);
 
 //Liaison entre table users et posts (ajout de userId dans la table post)
 db.users.hasMany(db.posts);
