@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { AiFillHome } from "react-icons/ai";
 import { FaUserAlt } from "react-icons/fa";
 import { GiExitDoor } from "react-icons/gi";
+import { RiAdminFill } from "react-icons/ri";
 
 const Header = () => {
 
@@ -22,6 +23,11 @@ const Header = () => {
   return (
     <header className="restricted-header header">
       <div className="icons-container">
+        {(user.isAdmin === true) &&
+          <Link to="/admin">
+            <RiAdminFill size={32} className="admin-icon menu-icon"/>
+          </Link>
+        }
         <Link to="/dashboard">
           <AiFillHome size={32} className="home-icon menu-icon" />
         </Link>

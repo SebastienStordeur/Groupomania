@@ -2,17 +2,12 @@
 @import './base/global.scss';
 @import './utils/variables';
 
-
 @import './components/forms';
 @import './components/registerLogo';
 @import './components/btn';
 
 @import './pages/profile';
-
-
 @import './components/comment';
-
-
 
 //Public content
 @import "./components/publicHeader";
@@ -21,6 +16,6 @@
 //Restricted content
 @import "./components/restrictedHeader";
 @import "./pages/dashboard";
-
+@import "./pages/adminPage";
 
 @import "./pages/redirect";
