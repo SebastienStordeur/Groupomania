@@ -48,47 +48,51 @@ const TagManagement = () => {
     }, []);
 
     return (
-        <div>
+        <>
             <Header />
-            <h2>Tag Management</h2>
-            <form onSubmit={createNewTag}>
-                <input type="text" 
-                    placeholder="Nouveau Tag" 
-                    autoComplete="none" 
-                    value={newTag} 
-                    onChange={(e) => {setNewTag(e.target.value)}}
-                />
-                <span className="error-add-tag"></span>
-                <button className="button" onClick={createNewTag}>Ajouter Tag</button>
-            </form>
             <div className="tag-container">
-                {tags.map((tag) => {
-                    const { id, name } = tag;
+                <h2>Tag Management</h2>
+                <form onSubmit={createNewTag}>
+                    <input type="text"
+                        className="add-tag-input"
+                        placeholder="Nouveau Tag" 
+                        autoComplete="none" 
+                        value={newTag} 
+                        onChange={(e) => {setNewTag(e.target.value)}}
+                    />
+                    <span className="error-add-tag"></span>
+                    <button className="button" onClick={createNewTag}>Ajouter Tag</button>
+                </form>
+                <div className="tag-list">
+                    {tags.map((tag) => {
+                        const { id, name } = tag;
 
-                    const deleteTag = (e) => {
-                        e.preventDefault();
-                        Axios({
-                            method: "DELETE",
-                            withCredentials: true,
-                            url: `http://localhost:5000/tags/${id}/deleteTag`
-                        }).then(() => {
-                            displayTagList();
-                            setTimeout(() => {
-                                messageTag.innerHTML = "Tag supprimé.";
-                            }, 2000);
-                        });
-                    };
+                        const deleteTag = (e) => {
+                            e.preventDefault();
+                            Axios({
+                                method: "DELETE",
+                                withCredentials: true,
+                                url: `http://localhost:5000/tags/${id}/deleteTag`
+                            }).then(() => {
+                                displayTagList();
+                                messageTag.innerHTML = "Tag supprimé."
+                                setTimeout(() => {
+                                    messageTag.innerHTML = "";
+                                }, 2000);
+                            });
+                        };
 
-                    return(
-                        <div className="tag" key={id}>
-                            <GrFormClose onClick={deleteTag} />
-                            <span>{name}</span>
-                        </div>
-                    )
-                })}
-                <div className="message-tag"></div>
+                        return(
+                            <div className="tag-admin" key={id}>
+                                <GrFormClose onClick={deleteTag} />
+                                <span>{name}</span>
+                            </div>
+                        )
+                    })}
+                    <div className="message-tag"></div>
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 

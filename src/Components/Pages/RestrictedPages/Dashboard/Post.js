@@ -11,6 +11,8 @@ const Post = () => {
   const [comments, setComments] = useState([]); //Ensemble des commentaires
   const [content, setContent] = useState("");
   const [file, setFile] = useState("");
+  const [tags, setTags] = useState([]);
+  const [tagArray, setTagArray] = useState([]);
 
   const authToken = JSON.parse(localStorage.getItem("authToken"));
   const tokenPart = authToken.split(".");
@@ -22,11 +24,21 @@ const Post = () => {
     const response = await fetch("http://localhost:5000/posts/", { headers: { Authorization: "Bearer " + authToken}});
     const posts = await response.json();
     setPosts(posts.data);
-  };  
+  };
+  const displayTagList = async() => {
+    const response = await fetch("http://localhost:5000/tags/getTags");
+    const tags = await response.json();
+    setTags(tags.data);
+  };
 
-   useEffect(() => {
+  useEffect(() => {
+    displayTagList()
+  }, []);
+
+  useEffect(() => {
     getPosts()
   }, []);
+  
 
   const post = (e) => {
     e.preventDefault();
@@ -41,6 +53,7 @@ const Post = () => {
       const formData = new FormData();
       formData.append("content", content);
       formData.append("image", file);
+      formData.append("tags", null || tagArray);
       formData.append("userId", user.userId)
 
       Axios.post("http://localhost:5000/posts/", formData, {
@@ -54,11 +67,30 @@ const Post = () => {
     };
   };
 
+
+
   return (
     <>      
       <form className="post-form" onSubmit={post}>
         <div className="post-form__main-input">
           <input className="post-form__content" placeholder="Contenu de votre prochain post.." value={content} onChange={(e) => setContent(e.target.value)}/>
+        </div>
+        <div className="post-form__tags">
+          <span>Tags</span>
+          {tags.map((tag) => {
+            const { id, name } = tag;
+
+            const addTag = () => {
+              tagArray.push(tag.name)
+              setTagArray(tagArray);
+              console.log(tagArray)
+            }
+            return(
+              <div className="tag" key={id}>
+                <span onClick={addTag}>{name}</span>
+              </div>
+            )
+          })}
         </div>
         <div className="post-form__secondary-input">
           <input className="post-form__file" type="file" accept="image/*" onChange={(e) => setFile(e.target.files[0])} />
