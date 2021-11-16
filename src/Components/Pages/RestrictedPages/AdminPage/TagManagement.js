@@ -84,7 +84,7 @@ const TagManagement = () => {
 
                         return(
                             <div className="tag-admin" key={id}>
-                                <GrFormClose onClick={deleteTag} />
+                                <GrFormClose onClick={deleteTag}  className="cross"/>
                                 <span>{name}</span>
                             </div>
                         )

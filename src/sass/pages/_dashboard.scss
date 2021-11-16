@@ -17,14 +17,20 @@
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
-    .tag {
-      margin: 3px 4px;
-      padding: 3px;
-      border: 1px solid black;
-      border-radius: 4px;
-      cursor: pointer;
-    }
+
   }
+}
+
+.tag {
+  margin: 3px 4px;
+  padding: 3px;
+  border: 1px solid black;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: white;
+}
+.added {
+  background-color: $secondary-color;
 }
 
 .dashboard-main {

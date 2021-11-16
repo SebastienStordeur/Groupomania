@@ -80,12 +80,17 @@ const Post = () => {
           <span>Tags</span>
           {tags.map((tag) => {
             const { id, name } = tag;
+            const tagItem = document.querySelector(".tag");
 
             const addTag = () => {
               tagArray.push(tag.name)
-              setTagArray(tagArray);
+              tagItem.classList.toggle("added");
+              if(tagItem.classList.add("added")) {
+                setTagArray(tagArray);
+              }
               console.log(tagArray)
             }
+
             return(
               <div className="tag" key={id}>
                 <span onClick={addTag}>{name}</span>
@@ -183,6 +188,13 @@ const Post = () => {
             setComments(comments.data); 
           };
 
+/*           const tagDistribution = async() => {
+            let array = [];
+            const tagList = tags.split(" ").join(",");
+            array.push(tagList);
+            console.log(array);
+          } */
+
           return (
             <div className="post-content" key={id}>
               <div className="post-content__user-info">
@@ -202,7 +214,9 @@ const Post = () => {
                 </div>
                 <div className="tag-box">
                   <span>Tags : </span>
-                  {tags}
+                  {
+                    /* tagDistribution() */
+                  }
                 </div>
               </div>
               <div className="post-content__like-box">

@@ -12,6 +12,7 @@ import TagManagement from "./Components/Pages/RestrictedPages/AdminPage/TagManag
 //Routes
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
+import AdminRoute from "./AdminRoute";
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
           <PublicRoute restricted={true} component={Login} path="/login" exact />
           <PrivateRoute component={Dashboard} path="/dashboard" exact />
           <PrivateRoute component={Profile} path="/profile/:id" exact />
-          <Route component={TagManagement} path="/admin" exact />
+          <AdminRoute component={TagManagement} path="/admin" exact />
           <Route component={Redirection} />
         </Switch>
       </BrowserRouter>

@@ -416,25 +416,6 @@ input {
   display: flex;
   justify-content: space-between;
 }
-.post-form__tags {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-}
-
-.tag {
-  margin: 3px 4px;
-  padding: 3px;
-  border: 1px solid black;
-  border-radius: 4px;
-  cursor: pointer;
-  background-color: white;
-}
-
-.added {
-  background-color: #FD2D01;
-}
 
 .dashboard-main {
   display: flex;
@@ -585,47 +566,14 @@ input {
   }
 }
 .tag-container {
-  margin-top: 2rem;
-  margin-left: 2rem;
-}
-.tag-container h2 {
-  margin-bottom: 1rem;
-  font-size: 24px;
-  font-family: "Poppins", sans-serif;
+  border: 1px solid black;
 }
 
-.cross {
-  cursor: pointer;
-}
-
-.tag-admin {
-  margin: 2px 4px;
-  display: flex;
-  align-items: center;
-  max-width: 8rem;
+.tag {
   padding: 0 3px;
   border: 1px solid black;
   border-radius: 3px;
   background-color: #FFD7D7;
-}
-
-.button {
-  margin-left: 10px;
-  height: 2.2rem;
-  width: 6rem;
-  background-color: #FD2D01;
-  border: 2px solid black;
-  font-family: "Poppins", sans-serif;
-  font-weight: 600;
-}
-
-.add-tag-input {
-  height: 2.2rem;
-  font-family: "Poppins", sans-serif;
-  padding-left: 3px;
-}
-.add-tag-input ::placeholder {
-  font-family: "Poppins", sans-serif;
 }
 
 .main-error {
