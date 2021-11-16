@@ -17,10 +17,12 @@
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
-
   }
 }
-
+.tag-box {
+  display: flex;
+  flex-wrap: wrap;
+}
 .tag {
   margin: 3px 4px;
   padding: 3px;

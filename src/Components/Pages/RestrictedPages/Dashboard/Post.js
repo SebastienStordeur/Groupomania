@@ -188,12 +188,7 @@ const Post = () => {
             setComments(comments.data); 
           };
 
-/*           const tagDistribution = async() => {
-            let array = [];
-            const tagList = tags.split(" ").join(",");
-            array.push(tagList);
-            console.log(array);
-          } */
+          const tagList = tags.split(" ");
 
           return (
             <div className="post-content" key={id}>
@@ -215,7 +210,13 @@ const Post = () => {
                 <div className="tag-box">
                   <span>Tags : </span>
                   {
-                    /* tagDistribution() */
+                    tagList.map((tag) => {
+                      return (
+                        <div className="tag">
+                          <span>{tag}</span>
+                        </div>
+                      );
+                    })
                   }
                 </div>
               </div>
