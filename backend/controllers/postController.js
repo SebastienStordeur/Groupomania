@@ -8,9 +8,11 @@ const fs = require("fs");
 
 //Create a post
 exports.createPost = (req,res) => {
+  console.log(req.body)
     const post = {
       ...req.body,
       imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
+      tags: req.body.tags.split(',').join(" ").toString(),
       like: 0,
       dislike: 0,
       userId: req.body.userId

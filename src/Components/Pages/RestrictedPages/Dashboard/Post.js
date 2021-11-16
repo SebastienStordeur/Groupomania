@@ -63,6 +63,7 @@ const Post = () => {
         getPosts();
         setContent(""); 
         setFile("");
+        setTagArray([]);
       })
     };
   };
@@ -100,7 +101,7 @@ const Post = () => {
       
       <div className="post-container">
         {posts.map((post) => {
-          const { id, content, like, dislike, imageUrl, userId, user } = post;
+          const { id, content, like, dislike, imageUrl, userId, user, tags } = post;
           const idPost = post.id;
 
           const deletePost = async(e) => {
@@ -198,6 +199,10 @@ const Post = () => {
                 <p>{content}</p>
                 <div className="post-content__content--image-container">
                   <img src={imageUrl} alt="Image" className="post-image" />
+                </div>
+                <div className="tag-box">
+                  <span>Tags : </span>
+                  {tags}
                 </div>
               </div>
               <div className="post-content__like-box">

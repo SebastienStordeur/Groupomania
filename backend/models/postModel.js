@@ -8,9 +8,9 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       required: true
     },
-/*     tag: {
+    tags: {
       type: Sequelize.STRING(1024)
-    }, */
+    },
     like: {
       type: Sequelize.INTEGER
     },
