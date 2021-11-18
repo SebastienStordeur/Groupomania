@@ -39,7 +39,6 @@ const Post = () => {
     getPosts()
   }, []);
   
-
   const post = (e) => {
     e.preventDefault();
     const user = JSON.parse(rawPayload);
@@ -68,8 +67,6 @@ const Post = () => {
     };
   };
 
-
-
   return (
     <>      
       <form className="post-form" onSubmit={post}>
@@ -80,19 +77,24 @@ const Post = () => {
           <span>Tags</span>
           {tags.map((tag) => {
             const { id, name } = tag;
-            const tagItem = document.querySelector(".tag");
 
-            const addTag = () => {
-              tagArray.push(tag.name)
-              tagItem.classList.toggle("added");
-              if(tagItem.classList.add("added")) {
-                setTagArray(tagArray);
+            const addTag = (element) => {
+              element.target.parentElement.classList.toggle("added");
+              setTagArray(tagArray)
+              if (!tagArray.includes(tag.name)) {
+                tagArray.push(tag.name)
+                setTagArray(tagArray)
+                console.log(tagArray)
+              } 
+              else {
+                tagArray.splice(tagArray.indexOf(tag.name),1)
+                setTagArray(tagArray)
+                console.log(tagArray)
               }
-              console.log(tagArray)
             }
 
             return(
-              <div className="tag" key={id}>
+              <div className="tag" key={id} >
                 <span onClick={addTag}>{name}</span>
               </div>
             )
@@ -190,6 +192,13 @@ const Post = () => {
 
           const tagList = tags.split(" ");
 
+          const filterByTag = (element) => {
+            const filterPost = posts.filter(post => post.tags.includes(tags.name))
+            console.log(element.target.parentElement)
+            console.log(post.tags)
+            console.log(filterPost)
+          }
+
           return (
             <div className="post-content" key={id}>
               <div className="post-content__user-info">
@@ -212,8 +221,8 @@ const Post = () => {
                   {
                     tagList.map((tag) => {
                       return (
-                        <div className="tag">
-                          <span>{tag}</span>
+                        <div className="tag" >
+                          {<span onClick={filterByTag}>{tag || "Aucun tag"}</span>}
                         </div>
                       );
                     })
