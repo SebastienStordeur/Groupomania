@@ -220,10 +220,13 @@ const Post = () => {
                   <span>Tags : </span>
                   {
                     tagList.map((tag) => {
+                      console.log(tag)
                       return (
-                        <div className="tag" >
-                          {<span onClick={filterByTag}>{tag || "Aucun tag"}</span>}
-                        </div>
+                        <Link to={`/filter/${tag}`}>
+                          <div className="tag" >
+                            <span onClick={filterByTag}>{tag || "Aucun tag"}</span>
+                          </div>
+                        </Link>
                       );
                     })
                   }

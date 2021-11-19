@@ -113,3 +113,11 @@ exports.likeManagement = (req, res) => {
     })
     .catch( error => res.status(500).json({ message: "Erreur. " + error }))
 } 
+
+//FilterByTag
+
+exports.filterByTag = (req, res) => {
+  Post.findAll({ where : { tag: req.params}})
+    .then((data) => res.status(201).json(data))
+    .catch(error => res.status(400).json({ message: "Impossible de trouver ces posts. " + error }));
+}

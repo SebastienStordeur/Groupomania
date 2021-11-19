@@ -17,4 +17,7 @@ router.post("/:id/like",  auth, postController.likeManagement);
 router.post("/:id/comment", auth, postController.createComment);
 router.get("/:id/comment",  auth, postController.getComments);
 
+//FilterByTags
+router.get("/:tag", auth, postController.filterByTag);
+
 module.exports = router;
