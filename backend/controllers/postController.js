@@ -5,6 +5,7 @@ const Comment = db.comments;
 const Like = db.likes;
 const { Op } = require("sequelize");
 const fs = require("fs");
+const { tags } = require('../models');
 
 //Create a post
 exports.createPost = (req,res) => {
@@ -112,12 +113,4 @@ exports.likeManagement = (req, res) => {
       }
     })
     .catch( error => res.status(500).json({ message: "Erreur. " + error }))
-} 
-
-//FilterByTag
-
-exports.filterByTag = (req, res) => {
-  Post.findAll({ where : { tag: req.params}})
-    .then((data) => res.status(201).json(data))
-    .catch(error => res.status(400).json({ message: "Impossible de trouver ces posts. " + error }));
 }

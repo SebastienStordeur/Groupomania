@@ -192,12 +192,7 @@ const Post = () => {
 
           const tagList = tags.split(" ");
 
-          const filterByTag = (element) => {
-            const filterPost = posts.filter(post => post.tags.includes(tags.name))
-            console.log(element.target.parentElement)
-            console.log(post.tags)
-            console.log(filterPost)
-          }
+
 
           return (
             <div className="post-content" key={id}>
@@ -220,13 +215,16 @@ const Post = () => {
                   <span>Tags : </span>
                   {
                     tagList.map((tag) => {
-                      console.log(tag)
+
+                    const filterByTag = () => {
+                      const filtre = posts.filter(post => post.tags.includes(tag))
+                      console.log(filtre)
+                    }
+
                       return (
-                        <Link to={`/filter/${tag}`}>
                           <div className="tag" >
                             <span onClick={filterByTag}>{tag || "Aucun tag"}</span>
                           </div>
-                        </Link>
                       );
                     })
                   }
