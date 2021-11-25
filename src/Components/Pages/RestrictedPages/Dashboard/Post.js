@@ -60,13 +60,12 @@ const Post = () => {
         headers: { "Content-Type": "multipart/form-data", Authorization: "Bearer " + authToken  }
       })
       .then(() => {
+        Array.from(document.getElementsByClassName("added")).map(x => x.classList.remove("added"));
         getPosts();
         setContent(""); 
         setFile("");
         setTagArray([]);
-        const TagsList = document.getElementsByClassName("added");
-        console.log(TagsList)
-        //TagsList.classList.remove("added") 
+
       })
     };
   };

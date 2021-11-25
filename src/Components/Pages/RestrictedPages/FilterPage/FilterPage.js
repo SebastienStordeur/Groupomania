@@ -3,8 +3,8 @@ import Axios from "axios";
 import { Link } from "react-router-dom";
 import { useParams } from 'react-router';
 import { BsFillTrashFill } from "react-icons/bs";
-import { FaHeartBroken, FaHeart } from "react-icons/fa";
 import Header from '../Header'
+import { createPortal } from 'react-dom';
 
 const FilterPage = () => {
 
@@ -22,27 +22,19 @@ const FilterPage = () => {
     const response = await fetch("http://localhost:5000/posts/", { headers: { Authorization: "Bearer " + authToken}});
     const posts = await response.json();
     setPosts(posts.data);
+    
+    const filtre = posts.data.filter(post => post.tags.includes(tag))
+    setFilter(filtre)
   };
-  
+
   useEffect(() => {
     getPosts();
   }, [tag])
 
-  const filterByTag = () => {
-    const filtre = posts.filter(post => post.tags.includes(tag))
-    setFilter(filtre)
-  }
-
-  useEffect(() => {
-    filterByTag();
-  }, [tag])
-  
-  console.log(posts)
-  console.log(filter)
-
   return (
     <>
       <Header />
+
       <main className="dashboard-main">
         <section className="main-content-section">
           <div className="filter-title">
@@ -51,6 +43,8 @@ const FilterPage = () => {
           <div className="post-container">
             {filter.map((post) => {
               const { id, content, imageUrl, tags, user, userId } = post;
+
+
 
               const deletePost = async(e) => {
                 e.preventDefault();
