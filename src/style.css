@@ -591,7 +591,11 @@ input {
 }
 .modal {
   display: none;
+  height: 100vh;
+  width: 97vw;
   background-color: #FFFFFF;
+  max-height: calc(100vh - 210px);
+  overflow-y: auto;
 }
 
 .visible {
@@ -600,7 +604,7 @@ input {
   width: 60%;
   display: flex;
   flex-direction: column;
-  position: absolute;
+  position: fixed;
 }
 
 @media (max-width: 900px) {
@@ -623,6 +627,10 @@ input {
   display: flex;
   flex-direction: column-reverse;
   width: 100%;
+}
+
+.filter-main {
+  margin: auto;
 }
 
 .tag-container {

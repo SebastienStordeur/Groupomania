@@ -3,7 +3,6 @@ import Axios from "axios"
 import { Link } from "react-router-dom";
 import { FaHeartBroken, FaHeart } from "react-icons/fa";
 import { BsFillTrashFill } from "react-icons/bs";
-import { AiFillCloseSquare } from "react-icons/ai";
 
 
 const Post = () => {
@@ -15,9 +14,6 @@ const Post = () => {
   const [file, setFile] = useState("");
   const [tags, setTags] = useState([]);
   const [tagArray, setTagArray] = useState([]);
-  const [filter, setFilter] = useState([]);
-
-  const modal = document.querySelector(".modal");
 
   const authToken = JSON.parse(localStorage.getItem("authToken"));
   const tokenPart = authToken.split(".");
@@ -75,13 +71,8 @@ const Post = () => {
     };
   };
 
-  const closeModal = () => {
-    modal.classList.remove("visible");
-    setFilter([]);
-  }
-
   return (
-    <>      
+    <>
       <form className="post-form" onSubmit={post}>
         <div className="post-form__main-input">
           <input className="post-form__content" placeholder="Contenu de votre prochain post.." value={content} onChange={(e) => setContent(e.target.value)}/>
@@ -118,38 +109,6 @@ const Post = () => {
           <button className="post-form__submit btn" type="submit" onClick={post}>Poster</button>
         </div>
       </form>
-
-      <div className="modal">
-          <div className="icn-modal">
-            <AiFillCloseSquare className="close-modal" size={24} onClick={closeModal}/>
-          </div>
-          <div className="modal-post-container">
-            {filter.map((post) => {
-              const { id, content, imageUrl, like, dislike, tags, user, userId } = post;
-              return(
-                <div className="post-content" key={id}>
-                  <div className="post-content__user-info">
-                    <div className="post-content__name">
-                      <Link to={`/profile/${user.id}`}>
-                        <h3>{user.lastName + " " + user.firstName}</h3>
-                      </Link>
-                    </div>
-                    {(userId === userToken.userId || userToken.isAdmin === true ) &&  <div className="post-content__name--delete">
-                    <BsFillTrashFill className="trash-icon" /* onClick={deletePost} */ />
-                    </div>} 
-                  </div>
-                  <div className="post-content__content">
-                    <p>{content}</p>
-                    <div className="post-content__content--image-container">
-                      <img src={imageUrl} alt="Image" className="post-image" />
-                    </div>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-
-        </div>
 
       <div className="post-container">
         {posts.map((post) => {
@@ -232,12 +191,10 @@ const Post = () => {
           const getComments = async() => {
             const response = await fetch(`http://localhost:5000/posts/${id}/comment`, { headers: { Authorization: "Bearer " + authToken}});
             const comments = await response.json();
-            setComments(comments.data); 
+            setComments(comments.data);
           };
 
           const tagList = tags.split(" ");
-
-
 
           return (
             <div className="post-content" key={id}>
@@ -260,18 +217,12 @@ const Post = () => {
                   <span>Tags : </span>
                   {
                     tagList.map((tag) => {
-                      
-                    const filterByTag = () => {
-                      const filtre = posts.filter(post => post.tags.includes(tag))
-                      setFilter(filtre)
-                      modal.classList.add("visible");
-                    }
                       return (
-                        <>
+                        <Link to={`filter/${tag}`}>
                           <div className="tag" >
-                            <span onClick={filterByTag}>{tag || "Aucun tag"}</span>
+                            <span>{tag || "Aucun tag"}</span>
                           </div>
-                        </>
+                        </Link>
                       );
                     })
                   }
@@ -324,7 +275,6 @@ const Post = () => {
             </div>
           )
         })}
-
       </div>
     </>
   )

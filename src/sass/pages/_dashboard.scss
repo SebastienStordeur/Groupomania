@@ -184,7 +184,11 @@
 
 .modal {
   display: none;
+  height: 100vh;
+  width: 97vw;
   background-color: $white;
+  max-height: calc(100vh - 210px);
+  overflow-y: auto;
 }
 
 .visible {
@@ -193,7 +197,7 @@
   width: 60%;
   display: flex;
   flex-direction: column;
-  position: absolute;
+  position: fixed;
 }
 @media(max-width: 900px) {
   .visible {
@@ -214,4 +218,8 @@
   display: flex;
   flex-direction: column-reverse;
   width: 100%;
+}
+
+.filter-main {
+  margin: auto;
 }
