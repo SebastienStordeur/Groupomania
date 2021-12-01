@@ -16,13 +16,6 @@ const SignupForm = () => {
   const confirmPanel = document.querySelector(".confirm-panel");
   const denyPanel = document.querySelector(".deny-panel");
 
-  const showPassword = (e) => {
-    const psw = e.target.parentNode.parentNode.firstChild;
-    e.preventDefault();
-    if (psw.type === "password") psw.type = "text";
-    else psw.type = "password";
-  };
-
   const signup = (e) => {
     e.preventDefault();
 
@@ -129,14 +122,6 @@ const SignupForm = () => {
           onChange={(e) => setPassword1(e.target.value)}
           required
         />
-        <div className="show-hide-icon">
-          <AiFillEye
-            size={20}
-            style={{ cursor: "pointer" }}
-            className="show-psw"
-            onClick={showPassword}
-          />
-        </div>
         <input
           className="input__field password-input password2"
           type="password"
@@ -147,14 +132,6 @@ const SignupForm = () => {
           onChange={(e) => setPassword2(e.target.value)}
           required
         />
-        <div className="show-hide-icon">
-          <AiFillEye
-            size={20}
-            style={{ cursor: "pointer" }}
-            className="show-psw"
-            onClick={showPassword}
-          />
-        </div>
       <div className="btn-box register-box-btn">
         <button
           type="submit"
