@@ -17,7 +17,13 @@ const UpdateForm = () => {
   const regex = /@"^[A-Za-z0-9\s@]*$"/;
   const letterRegex = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
   const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+
   const authToken = JSON.parse(localStorage.getItem("authToken"));
+  const tokenPart = authToken.split(".");
+  const encodedPayload = tokenPart[1];
+  const rawPayload = atob(encodedPayload);
+  const userToken = JSON.parse(rawPayload);
+
   let { id } = useParams();
   const deletePop = document.querySelector(".delete-modal");
   const showDeletePop = () => deletePop.classList.toggle("show-delete");
@@ -154,8 +160,13 @@ const UpdateForm = () => {
         Authorization: "Bearer " + authToken
       }
     }).then(() => {
-      localStorage.removeItem("authToken");
-      history.push("/")
+        if(userToken.isAdmin===true) {
+          history.push("/")
+        }
+        else {
+          localStorage.removeItem("authToken");
+          history.push("/")
+        }
       });
     };
 
