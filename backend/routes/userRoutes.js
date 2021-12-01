@@ -13,7 +13,7 @@ router.post("/login", userController.login);
 
 //Specific routes
 router.get("/:id", auth, userController.getProfile);
-router.put("/:id/updateProfile", auth, userController.updateProfile);
+router.put("/:id/updateProfile", auth, pswChecking, userController.updateProfile);
 router.put("/:id/updateBio", auth, userController.updateBio);
 router.put("/:id/updateJob", auth, userController.updateJob);
 router.delete("/:id", auth, userController.deleteProfile);

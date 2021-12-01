@@ -98,11 +98,14 @@
       height: 15rem;
       width: 20rem;
       margin-left: 2.5rem;
+      overflow: hidden;
       form {
         margin-left: 0;
+        overflow: hidden;
       }
     }
   }
+
   .btn-box-profile {
     margin-top: 2rem;
   }

@@ -271,9 +271,11 @@ input {
     height: 15rem;
     width: 20rem;
     margin-left: 2.5rem;
+    overflow: hidden;
   }
   .profile-section-info__img form {
     margin-left: 0;
+    overflow: hidden;
   }
 
   .btn-box-profile {
@@ -390,7 +392,10 @@ input {
 }
 
 .disconnect {
+  font-family: "Poppins", sans-serif;
   cursor: pointer;
+  background-color: #FD2D01;
+  border: none;
 }
 
 @media (max-width: 600px) {

@@ -19,7 +19,10 @@
 }
 
 .disconnect {
+  font-family: "Poppins", sans-serif;
   cursor: pointer;
+  background-color: $secondary-color;
+  border: none;
 }
 
 @media (max-width: 600px) {

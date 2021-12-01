@@ -53,6 +53,9 @@ const Profile = () => {
               Axios.put(`http://localhost:5000/users/${id}/manageProfilePicture`, formData, {
                 headers: { "Content-Type": "multipart/form-data", Authorization: "Bearer " + authToken }
               })
+              .then(() => {
+                window.location.reload()
+              })
             }
 
             return(

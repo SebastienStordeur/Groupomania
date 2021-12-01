@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Axios from "axios";
 import { useParams } from "react-router";
 import { useHistory } from "react-router-dom"
+import DenyUpdate from "./DenyUpdate";
+import ConfirmUpdate from "./confirmUpdate";
 
 const UpdateForm = () => {
 
@@ -21,7 +23,12 @@ const UpdateForm = () => {
   const showDeletePop = () => deletePop.classList.toggle("show-delete");
   const history = useHistory();
 
-  const updateUser = () => {
+  const confirmPanel = document.querySelector(".confirm-panel");
+  const denyPanel = document.querySelector(".deny-panel");
+
+  const updateUser = (e) => {
+
+    e.preventDefault();
 
     const checkNames = () => {
       if(letterRegex.test(lastName) && letterRegex.test(firstName)) return true;
@@ -62,16 +69,25 @@ const UpdateForm = () => {
           Authorization: "Bearer " + authToken,
         },
       })
-      .then(() => {
-        setLastname(""); 
-        setFirstname("");
-        setEmail("");
-        setPassword("");
-        setConfirmPassword("");
-        window.location.reload(false);
-      })
-    };
-  }
+      .then((res) => {
+        if(res.status === 201) {
+          denyPanel.style.display = "none";
+          confirmPanel.style.display = "flex";
+          setLastname(""); 
+          setFirstname("");
+          setEmail("");
+          setPassword("");
+          setConfirmPassword("");
+          setTimeout(() => {
+            confirmPanel.style.display = "none";
+            window.location.reload(false)
+          }, 1000);
+        }
+      }, () => {
+        denyPanel.style.display = "flex";
+      });
+    }
+  };
 
   const updateBio = (e) => {
     e.preventDefault();
@@ -121,7 +137,7 @@ const UpdateForm = () => {
         },
       })
       .then((res) =>  { 
-        if(res.status ===201) { 
+        if(res.status === 201) { 
           setJob("");
           window.location.reload(false);
         };
@@ -162,6 +178,8 @@ const UpdateForm = () => {
           <input className="job-input input-update" value={job} onChange={(e) => setJob(e.target.value)} placeholder="Rôle au sein de l'entreprise.." />
           <button className="btn" type="submit" onSubmit={updateJob}>Envoyer</button>
         </form>
+        <ConfirmUpdate className="confirm-panel"/>
+        <DenyUpdate className="deny-panel" /> 
         <div className="delete-modal">
           <h1>Êtes-vous sûr de vouloir supprimer votre compte ? Ce processus est irréversible.</h1>
             <div className="delete-btn-box">

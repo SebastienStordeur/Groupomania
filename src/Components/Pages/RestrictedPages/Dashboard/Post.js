@@ -65,7 +65,7 @@ const Post = () => {
         setContent(""); 
         setFile("");
         setTagArray([]);
-
+        document.querySelector(".post-form__file").value = null;
       })
     };
   };

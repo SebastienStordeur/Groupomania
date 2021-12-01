@@ -22,7 +22,7 @@ const Header = () => {
 
   return (
     <header className="restricted-header header">
-      <div className="icons-container">
+      <nav className="icons-container">
         {(user.isAdmin === true) &&
           <Link to="/admin">
             <RiAdminFill size={32} className="admin-icon menu-icon"/>
@@ -34,9 +34,9 @@ const Header = () => {
         <Link to={`/profile/${user.userId}`}>
           <FaUserAlt size={30} className="profile-icon menu-icon" />
         </Link>
-      </div>
+      </nav>
       <div className="disconnect-box">
-        <h2 className="disconnect" onClick={logout}><span>Deconnexion</span> <GiExitDoor size={32}/></h2>
+        <button className="disconnect" onClick={logout}><span>Deconnexion</span> <GiExitDoor size={32}/></button>
       </div>
     </header>
   )

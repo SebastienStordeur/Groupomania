@@ -115,7 +115,7 @@ exports.updateProfile = (req, res) => {
   .then(() => {
     bcrypt.hash(req.body.password, 10)
     .then(hash => {
-      User.update({ ...req.body , password: hash }, { where: { id: req.params.id } });
+      User.update({ ...req.body , email: cryptojs.MD5(req.body.email).toString(), password: hash }, { where: { id: req.params.id } });
       res.status(201).json({ message: "Profil mis à jour avec succès." });
     })
     .catch(error => res.status(500).json({ message: "Impossible de mettre à jour votre profil. " + error }));
