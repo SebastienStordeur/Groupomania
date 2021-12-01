@@ -74,7 +74,7 @@ const Post = () => {
     <>
       <form className="post-form" onSubmit={post}>
         <div className="post-form__main-input">
-          <input className="post-form__content" placeholder="Contenu de votre prochain post.." value={content} onChange={(e) => setContent(e.target.value)}/>
+          <input className="post-form__content" aria-label="Contenu de post" placeholder="Contenu de votre prochain post.." value={content} onChange={(e) => setContent(e.target.value)}/>
         </div>
         <div className="post-form__tags">
           <span>Tags</span>
@@ -97,14 +97,15 @@ const Post = () => {
             }
 
             return(
-              <div className="tag" key={id} >
+              <button className="tag" key={id} >
                 <span onClick={addTag}>{name}</span>
-              </div>
+              </button>
             )
+
           })}
         </div>
         <div className="post-form__secondary-input">
-          <input className="post-form__file" type="file" accept="image/*" onChange={(e) => setFile(e.target.files[0])} />
+          <input className="post-form__file" type="file" aria-label="Ajout de fichier image" accept="image/*" onChange={(e) => setFile(e.target.files[0])} />
           <button className="post-form__submit btn" type="submit" onClick={post}>Poster</button>
         </div>
       </form>
@@ -199,13 +200,13 @@ const Post = () => {
             <div className="post-content" key={id}>
               <div className="post-content__user-info">
                 <div className="post-content__name">
-                  <Link to={`/profile/${user.id}`}>
+                  <Link to={`/profile/${user.id}`} aria-label={`Lien vers le profil de ${user.firstName + " " + user.lastName}`}>
                     <h3>{user.lastName + " " + user.firstName}</h3>
                   </Link>
                 </div>
-                {(userId === userToken.userId || userToken.isAdmin === true ) &&  <div className="post-content__name--delete">
+                {(userId === userToken.userId || userToken.isAdmin === true ) &&  <button className="post-content__name--delete" aria-label="Supprimer le post.">
                   <BsFillTrashFill className="trash-icon" onClick={deletePost} />
-                </div>}
+                </button>}
               </div>
               <div className="post-content__content">
                 <p>{content}</p>
@@ -228,14 +229,18 @@ const Post = () => {
                 </div>
               </div>
               <div className="post-content__like-box">
-                <FaHeart className="like-heart heart like" size={26} onClick={likePost}/>
+                <button className="like-btn" aria-label="Bouton like">
+                  <FaHeart className="like-heart heart like" size={26} onClick={likePost}/>
+                </button>
                 <span className="like-count">{like}</span>
-                <FaHeartBroken className="dislike-heart heart dislike" size={24} onClick={dislikePost}/>
+                <button className="like-btn" aria-label="Bouton dislike">
+                  <FaHeartBroken className="dislike-heart heart dislike" size={24} onClick={dislikePost}/>
+                </button>
                 <span className="dislike-count">{dislike}</span>
               </div>
               <div className="form-comment refresh">
                 <form className="comment-form" onSubmit={createComment}>
-                  <input className="add-comment input" name="comment-input" onChange={(e) => setComment(e.target.value)} placeholder="Votre commentaire"/>
+                  <input className="add-comment input" aria-label="Ajout de commentaire" name="comment-input" onChange={(e) => setComment(e.target.value)} placeholder="Votre commentaire"/>
                 </form>
                 <button className="refresh-btn" onClick={getComments}>Afficher les commentaires</button>
               </div>

@@ -33,7 +33,7 @@ const PostFromUser = () => {
     
       <div className="post-container">
         {posts.map((post) => { 
-           const { id, content, imageUrl, like, dislike, userId, user } = post;
+           const { id, content, imageUrl, like, dislike, userId, user, tags } = post;
            const idPost = post.id;
 
            const deletePost = async(e) => {
@@ -106,6 +106,8 @@ const PostFromUser = () => {
             setComments(comments.data); 
           };
 
+          const tagList = tags.split(" ");
+
            return ( 
             <div className="post-content" key={id}>
             <div className="post-content__user-info">
@@ -114,25 +116,43 @@ const PostFromUser = () => {
                   <h3>{user.lastName + " " + user.firstName}</h3>
                 </Link>
               </div>
-              {(userId === userToken.userId || userToken.isAdmin === true) &&  <div className="post-content__name--delete">
+              {(userId === userToken.userId || userToken.isAdmin === true) &&  <button className="post-content__name--delete" aria-label="Supprimer le poste">
                 <BsFillTrashFill className="trash-icon" onClick={deletePost} />
-              </div>}
+              </button>}
             </div>
             <div className="post-content__content">
               <p>{content}</p>
               <div className="post-content__content--image-container">
-                <img src={imageUrl} alt="" className="post-image" />
+                <img src={imageUrl} alt="" className="post-image"/>
               </div>
+              <div className="tag-box">
+                  <span>Tags : </span>
+                  {
+                    tagList.map((tag) => {
+                      return (
+                        <Link to={`../filter/${tag}`}>
+                          <div className="tag" >
+                            <span>{tag || "Aucun tag"}</span>
+                          </div>
+                        </Link>
+                      );
+                    })
+                  }
+                </div>
             </div>
             <div className="post-content__like-box">
-              <FaHeart className="like-heart heart like" size={26} onClick={likePost}/>
+              <button className="like-btn" aria-label="Bouton like">
+                <FaHeart className="like-heart heart like" size={26} onClick={likePost}/>
+              </button>
               <span className="like-count">{like}</span>
-              <FaHeartBroken className="dislike-heart heart dislike" size={24} onClick={dislikePost}/>
+              <button className="like-btn" aria-label="Bouton dislike">
+                <FaHeartBroken className="dislike-heart heart dislike" size={24} onClick={dislikePost}/>
+              </button>
               <span className="dislike-count">{dislike}</span>
             </div>
             <div className="form-comment refresh">
               <form className="comment-form" onSubmit={createComment}>
-                <input className="add-comment input" name="comment-input" onChange={(e) => setComment(e.target.value)} placeholder="Votre commentaire"/>
+                <input className="add-comment input" aria-label="Ajout de commentaire" name="comment-input" onChange={(e) => setComment(e.target.value)} placeholder="Votre commentaire"/>
               </form>
               <button className="refresh-btn" onClick={getComments}>Afficher les commentaires</button>
             </div>

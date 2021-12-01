@@ -55,7 +55,8 @@ const TagManagement = () => {
                 <form onSubmit={createNewTag}>
                     <input type="text"
                         className="add-tag-input"
-                        placeholder="Nouveau Tag" 
+                        placeholder="Nouveau Tag"
+                        aria-label="Ajout de tag"
                         autoComplete="none" 
                         value={newTag} 
                         onChange={(e) => {setNewTag(e.target.value)}}

@@ -163,20 +163,20 @@ const UpdateForm = () => {
     <div className="update-forms-container">
       <div>
         <form className="update-user-form" onSubmit={updateUser}>
-          <input className="lastname-input input-update" value={lastName} placeholder="Nom de famille" onChange={(e) => setLastname(e.target.value)} />
-          <input className="lastname-input input-update" value={firstName} placeholder="Prénom" onChange={(e) => setFirstname(e.target.value)} />
-          <input className="email-input input-update" value={email} placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-          <input className="password-input input-update" type="password" value={password} placeholder="Nouveau mot de passe" onChange={(e) => setPassword(e.target.value)} />
-          <input className="confirm-password-input input-update" type="password" value={confirmPassword} placeholder="Confirmation du mot de passe" onChange={(e) => setConfirmPassword(e.target.value)} />
-          <button className="btn" type="submit" onSubmit={updateUser}>Envoyer</button>
+          <input className="lastname-input input-update" aria-label="Changement de nom" value={lastName} placeholder="Nom de famille" onChange={(e) => setLastname(e.target.value)} />
+          <input className="lastname-input input-update" aria-label="Changement de prénom" value={firstName} placeholder="Prénom" onChange={(e) => setFirstname(e.target.value)} />
+          <input className="email-input input-update" aria-label="Changement d'email" value={email} placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+          <input className="password-input input-update" aria-label="Nouveau mot de passe" type="password" value={password} placeholder="Nouveau mot de passe" onChange={(e) => setPassword(e.target.value)} />
+          <input className="confirm-password-input input-update" aria-label="Confirmation du mot de passe" type="password" value={confirmPassword} placeholder="Confirmation du mot de passe" onChange={(e) => setConfirmPassword(e.target.value)} />
+          <button className="btn" aria-label="Envoyer le formulaire" type="submit" onSubmit={updateUser}>Envoyer</button>
         </form>
         <form className="update-bio" onSubmit={updateBio}>
-          <input className="bio-input input-update" value={bio} onChange={(e) => setBio(e.target.value)} placeholder="Votre nouvelle bio" />
-          <button className="btn" type="submit"  onSubmit={updateBio}>Envoyer</button>
+          <input className="bio-input input-update" aria-label="Changement de bio" value={bio} onChange={(e) => setBio(e.target.value)} placeholder="Votre nouvelle bio" />
+          <button className="btn" type="submit" aria-label="Envoyer la nouvelle bio" onSubmit={updateBio}>Envoyer</button>
         </form>
         <form className="update-job" onSubmit={updateJob}>
-          <input className="job-input input-update" value={job} onChange={(e) => setJob(e.target.value)} placeholder="Rôle au sein de l'entreprise.." />
-          <button className="btn" type="submit" onSubmit={updateJob}>Envoyer</button>
+          <input className="job-input input-update" aria-label="Changement de poste" value={job} onChange={(e) => setJob(e.target.value)} placeholder="Rôle au sein de l'entreprise.." />
+          <button className="btn" type="submit" aria-label="Envoyer le nouveau poste" onSubmit={updateJob}>Envoyer</button>
         </form>
         <ConfirmUpdate className="confirm-panel"/>
         <DenyUpdate className="deny-panel" /> 

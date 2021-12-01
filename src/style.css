@@ -152,6 +152,7 @@ input {
   color: #FFFFFF;
   font-family: "Poppins", sans-serif;
   font-size: 22px;
+  font-weight: 600;
 }
 
 .modify-btn {
@@ -295,6 +296,12 @@ input {
     display: flex;
   }
 }
+.update-profile-btn {
+  width: 1.5rem;
+  background-color: white;
+  border: none;
+}
+
 .comment-box {
   display: flex;
   flex-direction: column-reverse;
@@ -502,6 +509,7 @@ input {
   background-color: lightgray;
   border-radius: 3px;
   cursor: pointer;
+  border: none;
 }
 .post-content__content {
   font-family: "Roboto", sans-serif;
@@ -525,6 +533,8 @@ input {
 }
 .post-content__like-box {
   display: flex;
+  margin-left: 4px;
+  margin-bottom: 0.7rem;
 }
 .post-content__like-box .heart {
   color: grey;
@@ -541,7 +551,6 @@ input {
 }
 
 .like-heart {
-  margin: 0 0.1rem 0.75rem 0.5rem;
   background-color: #FFFFFF;
   cursor: pointer;
 }
@@ -636,6 +645,16 @@ input {
 
 .filter-main {
   margin: auto;
+}
+
+.like-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.5rem;
+  margin-left: 0.25rem;
+  background-color: white;
+  border: none;
 }
 
 .tag-container {

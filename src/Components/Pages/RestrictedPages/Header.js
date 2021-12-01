@@ -24,19 +24,19 @@ const Header = () => {
     <header className="restricted-header header">
       <nav className="icons-container">
         {(user.isAdmin === true) &&
-          <Link to="/admin">
+          <Link to="/admin" aria-label="Lien vers la page admin">
             <RiAdminFill size={32} className="admin-icon menu-icon"/>
           </Link>
         }
-        <Link to="/dashboard">
+        <Link to="/dashboard" aria-label="Lien vers le dashboard">
           <AiFillHome size={32} className="home-icon menu-icon" />
         </Link>
-        <Link to={`/profile/${user.userId}`}>
+        <Link to={`/profile/${user.userId}`} aria-label="Lien vers votre profil">
           <FaUserAlt size={30} className="profile-icon menu-icon" />
         </Link>
       </nav>
       <div className="disconnect-box">
-        <button className="disconnect" onClick={logout}><span>Deconnexion</span> <GiExitDoor size={32}/></button>
+        <button className="disconnect" onClick={logout} aria-label="Bouton de déconnexion"><span>Deconnexion</span> <GiExitDoor size={32}/></button>
       </div>
     </header>
   )

@@ -90,6 +90,7 @@
       background-color: lightgray;
       border-radius: 3px;
       cursor: pointer;
+      border: none;
     }
   }
   &__content {
@@ -114,6 +115,8 @@
   }
   &__like-box {
     display: flex;
+    margin-left: 4px;
+    margin-bottom: 0.7rem;
     .heart {
       color: grey;
     }
@@ -132,7 +135,7 @@
 
 //Like dislike posts
 .like-heart {
-  margin: 0 0.1rem 0.75rem 0.5rem;
+  
   background-color: $white;
   cursor: pointer;
   &:active {
@@ -222,4 +225,14 @@
 
 .filter-main {
   margin: auto;
+}
+
+.like-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.5rem;
+  margin-left: 0.25rem;
+  background-color: white;
+  border: none;
 }

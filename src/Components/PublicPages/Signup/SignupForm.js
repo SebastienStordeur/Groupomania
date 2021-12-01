@@ -89,33 +89,29 @@ const SignupForm = () => {
 
   return (
     <form className="register-form" onSubmit={signup}>
-      <label
-        className="input"
-        value="Nom de famille"
-        htmlFor="lastname"
-      ></label>
       <input
         className="input__field lastname-input"
         type="text"
+        aria-label="Nom de famille"
         placeholder="Nom de famille"
         name="lastname"
         value={lastname}
         onChange={(e) => setLastname(e.target.value)}
         required
       />
-      <label className="input" htmlFor="firstname"></label>
       <input
         className="input__field firstname-input"
         type="text"
+        aria-label="Prénom"
         placeholder="Prénom"
         name="firstname"
         value={firstname}
         onChange={(e) => setFirstname(e.target.value)}
         required
       />
-      <label className="input" htmlFor="email"></label>
       <input
         className="input__field email-input"
+        aria-label="email"
         type="text"
         placeholder="Email"
         name="email"
@@ -123,11 +119,10 @@ const SignupForm = () => {
         onChange={(e) => setEmail(e.target.value)}
         required
       />
-
-      <label className="input">
         <input
           className="input__field password-input password1"
           type="password"
+          aria-label="Mot de passe"
           placeholder="Mot de passe"
           name="password1"
           value={password1}
@@ -142,11 +137,10 @@ const SignupForm = () => {
             onClick={showPassword}
           />
         </div>
-      </label>
-      <label className="input">
         <input
           className="input__field password-input password2"
           type="password"
+          aria-label="Confirmation du mot de passe"
           placeholder="Confirmez le mot de passe"
           name="password2"
           value={password2}
@@ -161,11 +155,11 @@ const SignupForm = () => {
             onClick={showPassword}
           />
         </div>
-      </label>
       <div className="btn-box register-box-btn">
         <button
           type="submit"
           className="register-btn btn"
+          aria-label="Envoyer le formulaire"
           onClick={signup}
         >
           S'inscrire

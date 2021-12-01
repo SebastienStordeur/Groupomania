@@ -43,26 +43,26 @@ const LoginForm = () => {
 
   return (
     <form className="login-form" onSubmit={login}>
-      <label className="input" value="Adresse mail"></label>
         <input
           className="input__field email-input"
           type="text"
+          aria-label="Email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-      <label className="input" value="Mot de passe"></label>
         <input
           className="input__field password-input" 
           type="password"
+          aria-label="Mot de passe"
           placeholder="Mot de passe"
           value={password} 
           onChange={(e) => setPassword(e.target.value)}
           required
         />
       <div className="btn-box">
-        <button className="btn signup-button" onClick={login}>Se connecter</button>
+        <button className="btn signup-button" aria-label="Login" onClick={login}>Se connecter</button>
       </div>
       <FailLogin className="fail-login-panel" />
     </form>

@@ -65,17 +65,17 @@ const Profile = () => {
                     <img className="profile-section-info__img--ctn__img" src={imageUrl} alt={firstName + lastName} />
                   </div>
                   {(id === userToken.userId || userToken.isAdmin === true) && <form className="post-form-profile">
-                    <input className="post-form__file" type="file" accept="image/*" onChange={(e) => setFile(e.target.files[0])} />
-                    <button className="send-btn btn" type="submit" onClick={addProfilePicture}>Envoyer</button>
+                    <input className="post-form__file" type="file" aria-label="Ajouter une photo" accept="image/*" onChange={(e) => setFile(e.target.files[0])} />
+                    <button className="send-btn btn" aria-label="Envoyer votre nouvelle photo de profil" type="submit" onClick={addProfilePicture}>Envoyer</button>
                   </form>}
                 </div>
                 <div className="profile-section-info__details">
                   <h1>{firstName + ' ' + lastName}</h1>
-                  <h3><span className="text">Poste occupé : {job}</span> {(id === userToken.userId || userToken.isAdmin === true) && <span><GrUpdate className="update" onClick={showJobForm} /></span>}</h3>
-                  <h3><span className="text">Bio : {bio}</span> {(id === userToken.userId || userToken.isAdmin === true) && <span><GrUpdate className="update" onClick={showBioForm} /></span>}</h3>
+                  <h3><span className="text">Poste occupé : {job}</span> {(id === userToken.userId || userToken.isAdmin === true) && <button className="update-profile-btn" aria-label="Modifier le poste"><GrUpdate className="update" onClick={showJobForm} /></button>}</h3>
+                  <h3><span className="text">Bio : {bio}</span> {(id === userToken.userId || userToken.isAdmin === true) && <button className="update-profile-btn" aria-label="Modifier la bio"><GrUpdate className="update" onClick={showBioForm} /></button>}</h3>
                   {(id === userToken.userId || userToken.isAdmin === true) && <div className="btn-box-profile">
-                    <button className="btn modify-btn" onClick={showUpdateForm}>Modifier</button>
-                    <button className="btn delete-btn" onClick={showDeletePop}>Suppression</button>
+                    <button className="btn modify-btn" aria-label="Modifier vos infos de comptes" onClick={showUpdateForm}>Modifier</button>
+                    <button className="btn delete-btn" aria-label="Supprimer votre compte" onClick={showDeletePop}>Suppression</button>
                   </div>}
                 </div> 
               </section>
