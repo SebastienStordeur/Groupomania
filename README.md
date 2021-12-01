@@ -2,7 +2,7 @@ Dernier projet de la formation "Développeur web" de chez OpenClassrooms.
 
 Démarrer le projet : 
 
-Frontend =>
+Frontend (racine)=>
 -npm install
 -npm start
 
