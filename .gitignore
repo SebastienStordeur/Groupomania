@@ -22,6 +22,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-/backend/config/.env
+/backend/config/.env.local
 /backend/node_modules
-/backend/images
+/backend/images/*
+!/backend/images/default_image.jpg
