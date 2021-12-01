@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { useParams } from 'react-router';
 import { BsFillTrashFill } from "react-icons/bs";
 import Header from '../Header'
-import { createPortal } from 'react-dom';
 
 const FilterPage = () => {
 
@@ -74,7 +73,7 @@ const FilterPage = () => {
                   <div className="post-content__content">
                     <p>{content}</p>
                     <div className="post-content__content--image-container">
-                      <img src={imageUrl} alt="Image" className="post-image" />
+                      <img src={imageUrl} alt="" className="post-image" />
                     </div>
                     <div className="tag-box">
                       <span>Tags : </span>

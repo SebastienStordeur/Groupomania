@@ -210,7 +210,7 @@ const Post = () => {
               <div className="post-content__content">
                 <p>{content}</p>
                 <div className="post-content__content--image-container">
-                  <img src={imageUrl} alt="Image" className="post-image" />
+                  <img src={imageUrl} alt="" className="post-image" />
                 </div>
                 <div className="tag-box">
                   <span>Tags : </span>
