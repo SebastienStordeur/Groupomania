@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Axios from "axios";
 import Confirmation from "./Confirmation";
 import Deny from "./Deny";
-import { AiFillEye } from "react-icons/ai";
 import { useHistory } from "react-router";
 
 const SignupForm = () => {

@@ -269,9 +269,9 @@ const Post = () => {
                         </Link>
                         <p>{content}</p>
                       </div>
-                      {((userId === userToken.userId || userToken.isAdmin === true) && <div className="post-content__name--delete">
+                      {((userId === userToken.userId || userToken.isAdmin === true) && <button className="post-content__name--delete">
                         <BsFillTrashFill className="trash-icon" onClick={deleteComment} />
-                      </div>)}
+                      </button>)}
                     </div>
                   )};
                 })}
