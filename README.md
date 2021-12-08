@@ -2,6 +2,11 @@ Dernier projet de la formation "Développeur web" de chez OpenClassrooms.
 
 Démarrer le projet : 
 
+Modifier le .env dans le dossier backend/config avec les informations de base de données (DB_NAME et DB_PASSWORD) correspondant à votre machine.
+
+Creet la base de données "groupomania".
+Importer la base de données fournie dans l'archive. (tables + contenu)
+
 Frontend (racine)=>
 -npm install
 -npm start

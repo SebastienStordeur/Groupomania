@@ -2,8 +2,8 @@ require("dotenv").config({ path: "./config/.env" })
 
 module.exports = {
   HOST: process.env.DB_HOST,
-  USER: 'root',
-  PASSWORD: '',
+  USER: process.env.DB_USER,
+  PASSWORD: process.env.DB_PASSWORD,
   DB: process.env.DB_NAME,
   dialect: process.env.DB_DIALECT,
   pool: {

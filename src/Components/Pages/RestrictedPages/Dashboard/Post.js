@@ -82,6 +82,7 @@ const Post = () => {
             const { id, name } = tag;
 
             const addTag = (element) => {
+              element.preventDefault();
               element.target.parentElement.classList.toggle("added");
               setTagArray(tagArray)
               if (!tagArray.includes(tag.name)) {
@@ -211,7 +212,7 @@ const Post = () => {
               <div className="post-content__content">
                 <p>{content}</p>
                 <div className="post-content__content--image-container">
-                  <img src={imageUrl} alt="" className="post-image" />
+                  <img src={imageUrl} alt={`Contenu visuel du post {id}`} className="post-image" />
                 </div>
                 <div className="tag-box">
                   <span>Tags : </span>

@@ -121,6 +121,7 @@ const SignupForm = () => {
           onChange={(e) => setPassword1(e.target.value)}
           required
         />
+        <span className="prerequis">Requis: Maj, min, chiffre, car spécial</span>
         <input
           className="input__field password-input password2"
           type="password"
