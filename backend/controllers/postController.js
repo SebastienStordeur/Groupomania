@@ -23,7 +23,7 @@ exports.createPost = (req,res) => {
     .catch(error => res.status(400).json({ message: "Impossible de créer ce post. " + error }));
 };
 
-exports.deletePost = (req,res) => {
+/* exports.deletePost = (req,res) => {
   Post.findOne({ where: { id: req.params.id } })
     .then((post) => {
       const filename = post.imageUrl.split("/images/")[1];
@@ -34,7 +34,24 @@ exports.deletePost = (req,res) => {
       });
     })
     .catch(error => res.status(500).json({ message: "Erreur. " + error }));
-};
+}; */
+
+exports.deletePost = (req,res) => {
+  Post.findOne({ where: { id: req.params.id } })
+    .then((post) => {
+      const filename = post.imageUrl.split("/images/")[1];
+          fs.unlink(`images/${filename}`, () => {
+            Post.destroy({ where: { id: req.params.id } })
+              .then(() => {
+                res.status(201).json({ message: "Post supprimé."})
+                Like.destroy({ where: { postId: null } })
+              })
+              .catch(error => res.status(400).json({ message: "Impossible de supprimer ce post. " + error}));
+          
+        })
+    })
+    .catch(error => res.status(500).json({ message: "Erreur. " + error }));
+}
 
 exports.getAllPost = (req,res) => {
   Post.findAll({ where: req.body.id , include:User })
