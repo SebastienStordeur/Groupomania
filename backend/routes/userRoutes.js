@@ -7,7 +7,7 @@ const multer = require("../middleware/multer-config");
 const passport = require('passport');
 
 //Basic routes
-router.post("/signup", pswChecking, userController.signup);
+router.post("/signup", /* pswChecking, */ userController.signup);
 //router.post("/login", passport.authenticate('local'/* , { successRedirect: '/dashboard', failureRedirect:'/login' }  */), userController.login);
 router.post("/login", userController.login);
 

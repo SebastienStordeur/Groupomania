@@ -1,5 +1,5 @@
 const PasswordValidator = require("password-validator");
-const pswSchema = new PasswordValidator;
+const pswSchema = new PasswordValidator();
 
 pswSchema
 .is().min(8)

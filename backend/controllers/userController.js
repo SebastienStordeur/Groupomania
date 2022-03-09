@@ -6,14 +6,13 @@ const Like = db.likes;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cryptojs = require("crypto-js");
-const passport = require("passport");
 const fs = require("fs");
 
 require("dotenv").config();
 
 //Register a new User
 exports.signup = (req, res) => {
-  bcrypt.hash(req.body.password, 10).then((hash) => {
+  bcrypt.hash(req.body.password1, 10).then((hash) => {
     const user = {
       lastName: req.body.lastName,
       firstName: req.body.firstName,
@@ -25,24 +24,6 @@ exports.signup = (req, res) => {
       .catch((error) => res.status(500).json({ message: "Impossible de créer l'utilisateur. " + error }));
   });
 };
-
-//Login
-/* exports.login = (req, res, next) => {
-  passport.authenticate("local", (err, user, info) => {
-    if (err) throw err;
-    if (!user) res.send("Impossible de trouver cet utilisateur");
-    else {
-      req.logIn(user, (err) => {
-        if (err) throw err;
-        //res.send('Authentification réussie.');
-        const session = req.session;
-        session.user = req.user;
-        res.send(user);
-        console.log(req.session)
-      });
-    }
-  })(req, res, next);
-}; */
 
 exports.login = (req, res) => {
   let encryptedEmail = cryptojs.MD5(req.body.email).toString();

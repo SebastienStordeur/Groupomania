@@ -88,12 +88,10 @@ const Post = () => {
               if (!tagArray.includes(tag.name)) {
                 tagArray.push(tag.name)
                 setTagArray(tagArray)
-                console.log(tagArray)
               } 
               else {
                 tagArray.splice(tagArray.indexOf(tag.name),1)
                 setTagArray(tagArray)
-                console.log(tagArray)
               }
             }
 

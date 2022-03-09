@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import FailLogin from "./FailLogin";
-import Axios from "axios";
+import axios from "axios";
 import { useHistory } from "react-router";
-
 
 const LoginForm = () => {
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [user, setUser] = useState({
+    email:"",
+    password:"",
+  })
   let history = useHistory();
 
   const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
@@ -15,7 +16,7 @@ const LoginForm = () => {
   const login = (e) => {
     e.preventDefault();
     const emailChecking = () => {
-      if (emailRegex.test(email)) return true;
+      if (emailRegex.test(user.email)) return true;
       else {
         alert("Veuillez vérifier votre email.");
         return false;
@@ -23,15 +24,7 @@ const LoginForm = () => {
     };
 
     if(emailChecking) {
-      Axios({
-        method: "POST",
-        data: {
-          email: email,
-          password: password
-        },
-        withCredentials: true, 
-        url: "http://localhost:5000/users/login",
-      })
+      axios.post("http://localhost:5000/users/login", user)
       .then((res) =>  {
         if(res.status === 200) {
           localStorage.setItem("authToken", JSON.stringify(res.data.token));
@@ -41,6 +34,10 @@ const LoginForm = () => {
     };
   };
 
+  const handleChange = (e) => {
+    setUser({ ...user, [e.target.name]:e.target.value})
+  }
+
   return (
     <form className="login-form" onSubmit={login}>
         <input
@@ -48,8 +45,9 @@ const LoginForm = () => {
           type="text"
           aria-label="Email"
           placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          name="email"
+          value={user.email}
+          onChange={handleChange}
           required
         />
         <input
@@ -57,8 +55,9 @@ const LoginForm = () => {
           type="password"
           aria-label="Mot de passe"
           placeholder="Mot de passe"
-          value={password} 
-          onChange={(e) => setPassword(e.target.value)}
+          name="password"
+          value={user.password} 
+          onChange={handleChange}
           required
         />
       <div className="btn-box">

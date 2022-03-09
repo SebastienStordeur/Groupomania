@@ -3,14 +3,22 @@ import Axios from "axios";
 import Confirmation from "./Confirmation";
 import Deny from "./Deny";
 import { useHistory } from "react-router";
+import axios from "axios";
 
 const SignupForm = () => {
   
-  const [lastname, setLastname] = useState("");
+  const [newUser, setNewUser] = useState({
+    lastname: "",
+    firstname: "",
+    email: "",
+    password1: "",
+    password2: "",
+  })
+/*   const [lastname, setLastname] = useState("");
   const [firstname, setFirstname] = useState("");
   const [email, setEmail] = useState("");
   const [password1, setPassword1] = useState("");
-  const [password2, setPassword2] = useState("");
+  const [password2, setPassword2] = useState(""); */
   const history = useHistory();
   const confirmPanel = document.querySelector(".confirm-panel");
   const denyPanel = document.querySelector(".deny-panel");
@@ -23,7 +31,7 @@ const SignupForm = () => {
       const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
 
       const letterChecking = () => {
-        if(letterRegex.test(lastname) && letterRegex.test(firstname))
+        if(letterRegex.test(newUser.lastname) && letterRegex.test(newUser.firstname))
           return true;
         else {
           alert("Caractère(s) interdit(s) dans les champs Nom et/ou Prénom"); //Will be changed for something more visual
@@ -31,14 +39,14 @@ const SignupForm = () => {
         }
       };
       const emailChecking = () => {
-        if (emailRegex.test(email)) return true;
+        if (emailRegex.test(newUser.email)) return true;
         else {
           alert("Veuillez vérifier votre email");
           return false;
         }
       };
       const passwordChecking = () => {
-        if (password1 === password2) return true;
+        if (newUser.password1 === newUser.password2) return true;
         else {
           alert("Les mots de passe ne correspondent pas");
           return false;
@@ -48,26 +56,18 @@ const SignupForm = () => {
     };
 
     if (checkRegisterForm()) {
-      Axios({
-        method: "POST",
-        data: {
-          lastName: lastname,
-          firstName: firstname,
-          email: email,
-          password: password2
-        },
-        withCredentials: true,
-        url: "http://localhost:5000/users/signup",
-      })
+      axios.post("http://localhost:5000/users/signup", newUser)
       .then((res) => {
         if(res.status === 201) {
           denyPanel.style.display = "none";
           confirmPanel.style.display = "flex";
-          setLastname("");
-          setFirstname("");
-          setEmail("");
-          setPassword1("");
-          setPassword2("");
+          setNewUser({
+            lastname: "",
+            firstname: "",
+            email: "",
+            password1: "",
+            password2: "",
+          })
           setTimeout(() => { 
             confirmPanel.style.display = "none"
             history.push("/login");
@@ -79,6 +79,10 @@ const SignupForm = () => {
     } 
   };
 
+  const handleChange = (e) => {
+    setNewUser({ ...newUser, [e.target.name]:e.target.value})
+  }
+
   return (
     <form className="register-form" onSubmit={signup}>
       <input
@@ -87,8 +91,8 @@ const SignupForm = () => {
         aria-label="Nom de famille"
         placeholder="Nom de famille"
         name="lastname"
-        value={lastname}
-        onChange={(e) => setLastname(e.target.value)}
+        value={newUser.lastname}
+        onChange={handleChange}
         required
       />
       <input
@@ -97,8 +101,8 @@ const SignupForm = () => {
         aria-label="Prénom"
         placeholder="Prénom"
         name="firstname"
-        value={firstname}
-        onChange={(e) => setFirstname(e.target.value)}
+        value={newUser.firstname}
+        onChange={handleChange}
         required
       />
       <input
@@ -107,8 +111,8 @@ const SignupForm = () => {
         type="text"
         placeholder="Email"
         name="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        value={newUser.email}
+        onChange={handleChange}
         required
       />
         <input
@@ -117,8 +121,8 @@ const SignupForm = () => {
           aria-label="Mot de passe"
           placeholder="Mot de passe"
           name="password1"
-          value={password1}
-          onChange={(e) => setPassword1(e.target.value)}
+          value={newUser.password1}
+          onChange={handleChange}
           required
         />
         <span className="prerequis">Requis: Maj, min, chiffre, car spécial</span>
@@ -128,8 +132,8 @@ const SignupForm = () => {
           aria-label="Confirmation du mot de passe"
           placeholder="Confirmez le mot de passe"
           name="password2"
-          value={password2}
-          onChange={(e) => setPassword2(e.target.value)}
+          value={newUser.password2}
+          onChange={handleChange}
           required
         />
       <div className="btn-box register-box-btn">
